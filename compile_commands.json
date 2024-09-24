@@ -1,0 +1,248 @@
+[
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/main.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/main.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/main.c",
+        "output": ".pio/build/kitro/src/Core/Src/main.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/stm32f4xx_hal_msp.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/stm32f4xx_hal_msp.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/stm32f4xx_hal_msp.c",
+        "output": ".pio/build/kitro/src/Core/Src/stm32f4xx_hal_msp.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/stm32f4xx_it.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/stm32f4xx_it.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/stm32f4xx_it.c",
+        "output": ".pio/build/kitro/src/Core/Src/stm32f4xx_it.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/syscalls.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/syscalls.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/syscalls.c",
+        "output": ".pio/build/kitro/src/Core/Src/syscalls.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/sysmem.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/sysmem.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/sysmem.c",
+        "output": ".pio/build/kitro/src/Core/Src/sysmem.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Core/Src/system_stm32f4xx.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Core/Src/system_stm32f4xx.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Src/system_stm32f4xx.c",
+        "output": ".pio/build/kitro/src/Core/Src/system_stm32f4xx.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -mthumb -mcpu=cortex-m4 -x assembler-with-cpp -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include -c -o .pio/build/kitro/src/Core/Startup/startup_stm32f411ceux.o Core/Startup/startup_stm32f411ceux.S",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Core/Startup/startup_stm32f411ceux.S",
+        "output": ".pio/build/kitro/src/Core/Startup/startup_stm32f411ceux.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/SSD1306/Src/ssd1306.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/SSD1306/Src/ssd1306.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/SSD1306/Src/ssd1306.c",
+        "output": ".pio/build/kitro/src/Drivers/SSD1306/Src/ssd1306.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/SSD1306/Src/ssd1306_fonts.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/SSD1306/Src/ssd1306_fonts.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/SSD1306/Src/ssd1306_fonts.c",
+        "output": ".pio/build/kitro/src/Drivers/SSD1306/Src/ssd1306_fonts.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c",
+        "output": ".pio/build/kitro/src/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/L3GD20.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/L3GD20.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/L3GD20.c",
+        "output": ".pio/build/kitro/src/Library/Src/L3GD20.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/PD.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/PD.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/PD.c",
+        "output": ".pio/build/kitro/src/Library/Src/PD.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/adc.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/adc.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/adc.c",
+        "output": ".pio/build/kitro/src/Library/Src/adc.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/buzzer.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/buzzer.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/buzzer.c",
+        "output": ".pio/build/kitro/src/Library/Src/buzzer.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/display.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/display.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/display.c",
+        "output": ".pio/build/kitro/src/Library/Src/display.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/encoder.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/encoder.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/encoder.c",
+        "output": ".pio/build/kitro/src/Library/Src/encoder.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/melody.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/melody.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/melody.c",
+        "output": ".pio/build/kitro/src/Library/Src/melody.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/motor.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/motor.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/motor.c",
+        "output": ".pio/build/kitro/src/Library/Src/motor.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc -o .pio/build/kitro/src/Library/Src/read_sensors.o -c -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Library/Src/read_sensors.c",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Library/Src/read_sensors.c",
+        "output": ".pio/build/kitro/src/Library/Src/read_sensors.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-g++ -o .pio/build/kitro/src/Program/Src/algo.o -c -fno-rtti -fno-exceptions -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Program/Src/algo.cpp",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Program/Src/algo.cpp",
+        "output": ".pio/build/kitro/src/Program/Src/algo.o"
+    },
+    {
+        "command": "/Users/tony/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-g++ -o .pio/build/kitro/src/Program/Src/entry.o -c -fno-rtti -fno-exceptions -Os -ffunction-sections -fdata-sections -Wall -mthumb -mcpu=cortex-m4 -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DF_CPU=100000000L -DPLATFORMIO=60115 -DSTM32F4 -DSTM32F4xx -DSTM32F411xE -I. -Ilib/STLinkedResources -IDrivers/SSD1306/Inc -ILibrary/Inc -IProgram/Inc -ICore/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F4xx/Include -IDrivers/CMSIS/Include Program/Src/entry.cpp",
+        "directory": "/Users/tony/Documents/stm32cubeide/kitro",
+        "file": "Program/Src/entry.cpp",
+        "output": ".pio/build/kitro/src/Program/Src/entry.o"
+    }
+]
