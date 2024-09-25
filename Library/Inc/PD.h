@@ -4,12 +4,12 @@
 #include "motor.h"
 #include "typedefs.h"
 #include "encoder.h"
-#include "L3GD20.h"
 #include "parameters_.h"
 #include "led.h"
 #include "main.h"
 #include "read_sensors.h"
 #include <math.h>
+#include <MPU6050.h>
 
 extern bool align_select;
 extern u32 l_start;

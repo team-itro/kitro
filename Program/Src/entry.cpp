@@ -42,6 +42,10 @@
 
 // void mouseRun();
 
+void print(const char *str){
+	printf(str);
+}
+
 int greymatter(void) {
   //	initialization_block();
   //	HAL_Delay(1000);
@@ -62,17 +66,23 @@ int greymatter(void) {
   //
   //	XY_prev.y = 0;
   //	XY_prev.x = 0;
+	gyroInit();
+	gyroCalibration();
 
   while (1) {
     //		mouseRun();
     //		i++;
-    HAL_GPIO_TogglePin(ONB_LED_GPIO_Port, ONB_LED_Pin);
-    ssd1306_Fill(Black);
-    ssd1306_UpdateScreen();
-    HAL_Delay(500);
-    ssd1306_Fill(White);
-    ssd1306_UpdateScreen();
-    HAL_Delay(500);
+//    HAL_GPIO_TogglePin(ONB_LED_GPIO_Port, ONB_LED_Pin);
+//    ssd1306_Fill(Black);
+//    ssd1306_UpdateScreen();
+//    HAL_Delay(500);
+//    ssd1306_Fill(White);
+//    ssd1306_UpdateScreen();
+//    HAL_Delay(500);
+	  print("a\n\r");
+//	  gyroUpdate();
+	  HAL_Delay(500);
+
   }
 }
 

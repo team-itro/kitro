@@ -25,7 +25,7 @@ extern "C" {
 // #include "motor.h"
 // #include "encoder.h"
 // #include "display.h"
-// #include "L3GD20.h"
+ #include <MPU6050.h>
 
 // #include "read_sensors.h"
 
@@ -57,6 +57,7 @@ int greymatter(void);
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
+extern I2C_HandleTypeDef hi2c2;
 
 // INTERRUPTS
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
