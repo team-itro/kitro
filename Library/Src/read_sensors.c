@@ -1,45 +1,47 @@
-//#include "read_sensors.h"
+// #include "read_sensors.h"
+
+// int reflectionRate = REFLECTION_RATE_;
+// const float LOW_BAT_TH = LOW_BAT_TH_;
+
+// int32_t volMeter=0;
+// float voltage = 0;
+// int32_t LFSensor = 0;
+// int32_t RFSensor = 0;
+// int32_t DLSensor=0;
+// int32_t DRSensor=0;
+////int32_t SHARP1=0;
 //
-//int reflectionRate = REFLECTION_RATE_;
-//const float LOW_BAT_TH = LOW_BAT_TH_;
+// static int32_t LBuff[15] = {0};
+// static int32_t RBuff[15] = {0};
+// static int32_t FLBuff[15] = {0};
+// static int32_t FRBuff[15] = {0};
+////static int32_t SHARP1BUFFER[15] = {0};
 //
-//int32_t volMeter=0;
-//float voltage = 0;
-//int32_t LFSensor = 0;
-//int32_t RFSensor = 0;
-//int32_t DLSensor=0;
-//int32_t DRSensor=0;
+// float averageL = 0;
+// float averageR = 0;
+// float averageFL = 0;
+// float averageFR = 0;
+// float SHARP1AVG = 0;
 //
-//static int32_t LBuff[15] = {0};
-//static int32_t RBuff[15] = {0};
-//static int32_t FLBuff[15] = {0};
-//static int32_t FRBuff[15] = {0};
+// bool L = false;
+// bool R = false;
+// bool F = false;
 //
-//float averageL = 0;
-//float averageR = 0;
-//float averageFL = 0;
-//float averageFR = 0;
-//
-//bool L = false;
-//bool R = false;
-//bool F = false;
-//
-//static int point = 0;
-//
-///*read IR sensors*/
-//void readSensor(void)
-//{
+// static int point = 0;
+
+/*read IR sensors*/
+// void readSensor(void) {
 //	LED7_ON;
-//
+
 //	__HAL_TIM_SET_COUNTER(&htim1,0);
-//	//read DC value
+// read DC value
 //	LFSensor = read_LF_Sensor;
 //	RFSensor = read_RF_Sensor;
 //	DLSensor = read_DL_Sensor;
 //	DRSensor = read_DR_Sensor;
-//
-//
-//    //left front sensor
+//	SHARP1 = read_sharp1;
+
+// left front sensor
 //	LF_EM_ON;
 //	LFSensor = read_LF_Sensor - LFSensor;
 //	while(__HAL_TIM_GET_COUNTER(&htim1)<60);
@@ -47,10 +49,16 @@
 //	if(LFSensor < 0)//error check
 //		LFSensor = 0;
 //	while(__HAL_TIM_GET_COUNTER(&htim1)<140);
-//
-//	//right front sensor
+
+// right front sensor
 //	RF_EM_ON;
 //	RFSensor = read_RF_Sensor - RFSensor;
+//	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
+//	RF_EM_OFF;
+//	if(RFSensor < 0)
+//		RFSensor = 0;
+//	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
+//	SHARP1 = read_sharp1 - SHARP1;
 //	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
 //	RF_EM_OFF;
 //	if(RFSensor < 0)
@@ -69,7 +77,7 @@
 //		DRSensor = 0;
 //	// while(__HAL_TIM_GET_COUNTER(&htim1)<500);
 //
-//	readVolMeter();
+////	readVolMeter();
 //
 //	LFSensor = LFSensor*reflectionRate/1000;
 //	RFSensor = RFSensor*reflectionRate/1000;
@@ -88,21 +96,11 @@
 //	FRBuff[point] = RFSensor;
 //
 //	LED7_OFF;
-//}
-//
-//
-//
-//
-///*read voltage meter*/
-//void readVolMeter(void)
-//{          //3240 = 7.85V
-//	volMeter = read_Vol_Meter;//raw value
-//	voltage = (volMeter*ADC_REF_VOL/4095)* 2.8;//actual voltage value  ex) 8.2V = 8200
-//	// if (voltage<LOW_BAT_TH)
-//	// 	stop_it_all();
-//}
-//
-//void stop_it_all(void){
+// }
+
+/*read voltage meter*/
+
+// void stop_it_all(void){
 //	disp_state=LOW_BAT;
 //	displayUpdate();
 //	OFF_BUZZ;
@@ -112,53 +110,48 @@
 //	TIM13_IT_STOP;
 //	TIM14_IT_STOP;
 //	return;
-//}
-//
-//
-//
-//
-//bool irBlink() {
+// }
+
+// bool irBlink() {
 //	static uint32_t t3 = 1000;
 //	if (LFSensor > t3 || RFSensor > t3) {
 //			return true;
 //		}
 //	return false;
-//}
+// }
 //
-//bool rightIrBlink(){
+// bool rightIrBlink(){
 //	static uint32_t t2 = 3000;
 //	if (DRSensor > t2) {
 //			return true;
 //		}
 //	return false;
-//}
+// }
 //
-//bool leftIrBlink(){
+// bool leftIrBlink(){
 //	static uint32_t t1 = 3000;
 //	if (DLSensor > t1) {
 //			return true;
 //		}
 //	return false;
-//}
+// }
+// void calculateAndSaveAverages() {
+//     int i;
+//     // Calculate the average for each buffer
+//     for (i = 0; i < 15; i++) {
+//         averageL += LBuff[i];
+//         averageR += RBuff[i];
+//         averageFL += FLBuff[i];
+//         averageFR += FRBuff[i];
+//     }
 //
-//void calculateAndSaveAverages() {
-//    int i;
-//    // Calculate the average for each buffer
-//    for (i = 0; i < 15; i++) {
-//        averageL += LBuff[i];
-//        averageR += RBuff[i];
-//        averageFL += FLBuff[i];
-//        averageFR += FRBuff[i];
-//    }
-//
-//    // Divide the sums by 15 to get the average
-//    averageL = averageL/15;
-//    averageR = averageR/15;
-//    averageFL = averageFL/15;
-//    averageFR = averageFR/15;
-//}
-//
-//void getSensorReadings() {
+//     // Divide the sums by 15 to get the average
+//     averageL = averageL/15;
+//     averageR = averageR/15;
+//     averageFL = averageFL/15;
+//     averageFR = averageFR/15;
+// }
+// void getSensorReadings() {
 //
 //	calculateAndSaveAverages();
 //
@@ -190,7 +183,8 @@
 //		LED11_OFF;
 //	}
 //
-//	// if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor > t1){
+//	// if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor >
+//t1){
 //	// 	F = true;
 //	// 	R = true;
 //	// 	L = true;
@@ -223,6 +217,4 @@
 //	// 	R = false;
 //	// 	L = false;
 //	// }
-//}
-//
-//
+// }

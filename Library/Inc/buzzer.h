@@ -16,9 +16,4 @@ int setBuzz(u16 freq, float amp);
 // SELECTING SOUND PATTERN TO PLAY IN BUZZER
 void playSound(BUZZ_Tones tone_index);
 
-
-
-
-
-
 #endif /* INC_BUZZER_H_ */

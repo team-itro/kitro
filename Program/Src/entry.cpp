@@ -6,7 +6,6 @@
  */
 
 #include "entry.h"
-#include "ssd1306.h"
 
 // u32 i;
 // u32 DELAY_MID = 1;
@@ -42,11 +41,9 @@
 
 // void mouseRun();
 
-int greymatter(void) {
-  //	initialization_block();
-  //	HAL_Delay(1000);
-  //	disp_state = DEFAULT;
-  //
+int greymatter(void)
+{
+  wakeup();
   //	if (orient == 1)
   //	{
   //		XY.x = 1;
@@ -66,14 +63,25 @@ int greymatter(void) {
   while (1) {
     //		mouseRun();
     //		i++;
-    HAL_GPIO_TogglePin(ONB_LED_GPIO_Port, ONB_LED_Pin);
-    ssd1306_Fill(Black);
-    ssd1306_UpdateScreen();
-    HAL_Delay(500);
-    ssd1306_Fill(White);
-    ssd1306_UpdateScreen();
-    HAL_Delay(500);
+    led_blink(ONB, 100);
+    screen_writefl(sharp_readdist(SHARP_FR), 80, 16, SMALL);
+    screen_writestr("cm", 104, 16, SMALL);
+    screen_writefl(sharp_readdist(SHARP_FL), 0, 16, SMALL);
+    screen_writestr("cm", 24, 16, SMALL);
+    screen_writefl(sharp_readv(SHARP_FR), 80, 32, SMALL);
+    screen_writestr("V", 104, 32, SMALL);
+    screen_writefl(sharp_readv(SHARP_FL), 0, 32, SMALL);
+    screen_writestr("V", 24, 32, SMALL);
+    delay(100);
+    screen_clear();
   }
+}
+
+int wakeup(void)
+{
+  screen_init();
+  delay(1000);
+  return 0;
 }
 
 // int initialization_block(void)

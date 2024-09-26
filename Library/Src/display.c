@@ -2,71 +2,142 @@
 
 DISP_State disp_state;
 
-void displayInit(void){
-	ssd1306_Init();
-	disp_state = INIT;
-	displayUpdate();
-}
+#define MAX_LINES 5
+#define LINE_HEIGHT 8
+#define MAX_CHARS_PER_LINE 21
 
-void clearScreen()
+void screen_log(const char *text, uint8_t scroll_offset)
 {
-	ssd1306_Fill(Black);
+  //	static char buffer[MAX_LINES][MAX_CHARS_PER_LINE + 1];
+  //	static uint8_t current_line = 0;
+  //	static uint8_t total_lines = 0;
+  //
+  //	// Split the input text into lines
+  //	char *line = strtok((char*) text, "\n");
+  //	while (line != NULL && total_lines < MAX_LINES) {
+  //		strncpy(buffer[total_lines], line, MAX_CHARS_PER_LINE);
+  //		buffer[total_lines][MAX_CHARS_PER_LINE] = '\0';
+  //		total_lines++;
+  //		line = strtok(NULL, "\n");
+  //	}
+  //
+  //	// Clear the screen
+  //	ssd1306_Fill(Black);
+  //
+  //	// Print lines and scroll if necessary
+  //	for (uint8_t i = 0; i < MAX_LINES && i < total_lines; i++) {
+  //		uint8_t y_pos = i * LINE_HEIGHT;
+  //		if (total_lines > MAX_LINES && current_line + i >= total_lines)
+  //{ 			y_pos = (i + MAX_LINES - total_lines) * LINE_HEIGHT;
+  //		}
+  //		ssd1306_SetCursor(0, y_pos);
+  //		ssd1306_WriteString(buffer[(current_line + i) % total_lines],
+  // Font_7x10, 				White);
+  //	}
+  //
+  //	// Update the screen
+  //	ssd1306_UpdateScreen();
+  //
+  //	// Increment current_line if we've reached the scroll offset
+  //	if (total_lines > MAX_LINES && ++current_line >= scroll_offset) {
+  //		current_line = 0;
+  //	}
 }
 
-//void writeString(char *str, FONT_Size font_size)
+void screen_init(void)
+{
+  disp_state = DEFAULT;
+  ssd1306_Init();
+  ssd1306_Fill(White);
+  ssd1306_UpdateScreen();
+  HAL_Delay(100);
+  screen_clear();
+  disp_state = INIT;
+  //	displayUpdate();
+}
+
+void screen_clear()
+{
+  ssd1306_Fill(Black);
+  ssd1306_UpdateScreen();
+}
+
+void screen_writestr(char *str, int x, int y, FONT_Size font_size)
+{
+  //	screen_clear();
+  ssd1306_SetCursor(x, y);
+  switch (font_size) {
+  case SMALL:
+    ssd1306_WriteString(str, Font_6x8, White);
+    ssd1306_UpdateScreen();
+    break;
+  case MEDIUM:
+    ssd1306_WriteString(str, Font_7x10, White);
+    ssd1306_UpdateScreen();
+    break;
+  case LARGE:
+    ssd1306_WriteString(str, Font_11x18, White);
+    ssd1306_UpdateScreen();
+    break;
+  case HUGE:
+    ssd1306_WriteString(str, Font_16x24, White);
+    ssd1306_UpdateScreen();
+    break;
+  }
+}
+
+void screen_writeint(int INT, int x, int y, FONT_Size font_size)
+{
+  //	screen_clear();
+  char buff[64];
+  snprintf(buff, sizeof(buff), "%d", INT);
+  // ssd1306_SetCursor(x, y);
+  screen_writestr(buff, x, y, font_size);
+}
+
+void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size)
+{
+  //	screen_clear();
+  char buff[64];
+  snprintf(buff, sizeof(buff), "%.2f",
+           FLOAT); // Change %.2f to adjust precision
+  // ssd1306_SetCursor(x, y);
+  screen_writestr(buff, x, y, font_size);
+}
+
+// void putString(char *str, int x, int y, FONT_Size font_size)
 //{
-//	switch (font_size)
-//	{
-//	case SMALL:
-//		ssd1306_WriteString(str, Font_6x8, White);
-//		break;
-//	case MEDIUM:
-//		ssd1306_WriteString(str, Font_7x10, White);
-//		break;
-//	case LARGE:
-//		ssd1306_WriteString(str, Font_11x18, White);
-//		break;
-//	case HUGE:
-//		ssd1306_WriteString(str, Font_16x24, White);
-//		break;
-//	}
-//}
+//	ssd1306_SetCursor(x, y);
+//	writeString(str, font_size);
+// }
 
-void putString(char *str, int x, int y, FONT_Size font_size)
-{
-	ssd1306_SetCursor(x, y);
-	writeString(str, font_size);
-}
+// void putChar(char chr, int x, int y, FONT_Size font_size)
+//{
+//	char str[2];
+//	// Copy the character into the string
+//	str[0] = chr;
+//	// Null-terminate the string
+//	str[1] = '\0';
+//	ssd1306_SetCursor(x, y);
+//	writeString(str, font_size);
+// }
 
-void putChar(char chr, int x, int y, FONT_Size font_size)
-{
-	char str[2];
-	// Copy the character into the string
-	str[0] = chr;
-	// Null-terminate the string
-	str[1] = '\0';
-	ssd1306_SetCursor(x, y);
-	writeString(str, font_size);
-}
+// void putInt(int INT, int x, int y, FONT_Size font_size)
+//{
+//	char buff[64];
+//	snprintf(buff, sizeof(buff), "%d", INT);
+//	ssd1306_SetCursor(x, y);
+//	writeString(buff, font_size);
+// }
 
-void putInt(int INT, int x, int y, FONT_Size font_size)
-{
-	char buff[64];
-	snprintf(buff, sizeof(buff), "%d", INT);
-	ssd1306_SetCursor(x, y);
-	writeString(buff, font_size);
-}
+// void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
+//{
+//	char buff[64];
+//	snprintf(buff, sizeof(buff), "%.2f", FLOAT); // Change %.2f to adjust
+// precision 	ssd1306_SetCursor(x, y); 	writeString(buff, font_size);
+// }
 
-void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
-{
-	char buff[64];
-	snprintf(buff, sizeof(buff), "%.2f", FLOAT); // Change %.2f to adjust precision
-	ssd1306_SetCursor(x, y);
-	writeString(buff, font_size);
-}
-
-
-//void displayUpdate(void)
+// void displayUpdate(void)
 //{
 //	clearScreen();
 //	switch (disp_state)
@@ -167,4 +238,4 @@ void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
 //	}
 //	ssd1306_UpdateScreen();
 //	LED6_TOG;
-//}
+// }
