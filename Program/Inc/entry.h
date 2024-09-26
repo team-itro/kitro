@@ -24,6 +24,9 @@ extern "C" {
 #include "sensors.h"
 #include "stm32f4xx_hal.h"
 
+extern volatile bool BTN1_PRESSED;
+extern Mouse kitro;
+// extern bool BTN2_PRESSED;
 // extern bool buttonPress;
 // extern int mouseState;
 // extern int runState;
@@ -38,33 +41,11 @@ extern "C" {
 // extern int backPtr;
 // extern int fwdPtr;
 
-static Mouse kitro;
-
-static void handle_init_idle(void);
-static void handle_init_config(void);
-static void handle_init_reset(void);
-static void handle_search_idle(void);
-static void handle_search_forward(void);
-static void handle_search_back(void);
-static void handle_fast_idle(void);
-static void handle_fast_forward(void);
-static void handle_fast_back(void);
-
-static const StateHandler state_handlers[] = {
-    handle_init_idle,   handle_init_config,    handle_init_reset,
-    handle_search_idle, handle_search_forward, handle_search_back,
-    handle_fast_idle,   handle_fast_forward,   handle_fast_back,
-};
-
 // INFO: KITRO MAIN FUNCTION
 int greymatter(void);
 
 // INFO: KITRO INIT FUNCTION
 void wakeup(void);
-
-// INTERRUPTS
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 #ifdef __cplusplus
 }

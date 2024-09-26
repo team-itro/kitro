@@ -10,10 +10,8 @@
 #define u16 uint16_t
 #define u8 uint8_t
 
-#define SHARP_FR_CH ADC_CHANNEL_2
-#define SHARP_FL_CH ADC_CHANNEL_3
-#define SHARP_AR_CH ADC_CHANNEL_4
-#define SHARP_AL_CH ADC_CHANNEL_5
+#define UART_DEBUG 1
+#define BTN1 ONB_KEY_Pin
 
 #define REFLECTION_RATE_ 1000
 #define LOW_BAT_TH_ 7.4
@@ -35,6 +33,10 @@
 
 /////////////////////////////////Buzzer.h /////////////////////////////////
 #define BUZZ_LOUDNESS_ .2
+
+extern bool LEFT_WALL;
+extern bool RIGH_WALL;
+extern bool FRON_WALL;
 
 typedef enum {
   MOUSE_STATE_INIT_IDLE,
@@ -64,13 +66,21 @@ typedef struct {
 
 typedef void (*StateHandler)(void);
 
+#define ADC_BUFFER_SIZE 8
+#define ADC_NUM_CHANNELS 4
+
+#define SHARP_FR_CH ADC_CHANNEL_2
+#define SHARP_FL_CH ADC_CHANNEL_3
+#define SHARP_AR_CH ADC_CHANNEL_4
+#define SHARP_AL_CH ADC_CHANNEL_5
+
 typedef enum {
   SHARP_FR,
   SHARP_FL,
   SHARP_AR,
   SHARP_AL,
   //	BAT_VOL
-} adc_channels;
+} AdcChannels;
 
 // typedef enum { WIN_TONE = 0, TONE1, TONE2, TONE3, TONE4 } BUZZ_Tones;
 
@@ -82,14 +92,14 @@ typedef enum {
 } FONT_Size;
 
 typedef enum {
-  INIT = 0,
+  INIT,
   DEFAULT,
   GYRO_CALIB,
   SENSOR_READ,
   LOW_BAT,
-  SUCESS_MSG,
-  SPEED_ADJ
-} DISP_State;
+  SUCESS_MSG
+  // SPEED_ADJ
+} ScreenConfig;
 
 // typedef enum { IDLE, STRAIGHT_RUN, POINT_TURN, FRONT_ALIGN } MV_Type;
 

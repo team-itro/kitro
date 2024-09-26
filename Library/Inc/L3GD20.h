@@ -1,14 +1,13 @@
 #ifndef __L3GD20_H
 #define __L3GD20_H
 
-#include "led.h"
-#include "typedefs.h"
-#include <stdint.h>
-#include "main.h"
-#include "parameters_.h"
+#include "CONSTANTS.h"
+// #include "led.h"
+// #include "main.h"
 #include <math.h>
+#include <stdint.h>
 
-#define BUFFER_LENGTH ((u32)1000u)  // 1000u
+#define BUFFER_LENGTH ((u32)1000u) // 1000u
 
 extern float angle_z;
 extern uint8_t gyro_identity;

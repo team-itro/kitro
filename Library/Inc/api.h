@@ -7,17 +7,29 @@
 #ifndef INC_API_H_
 #define INC_API_H_
 
+#include "CONSTANTS.h"
 #include "main.h"
-#include <typedefs.h>
 
-uint16_t adc_read(adc_channels channel, uint8_t timeout);
+// #define TIM1_START HAL_TIM_Base_Start(&htim1)
+#define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
+#define TIM10_IT_START HAL_TIM_Base_Start_IT(&htim10)
+#define TIM10_IT_STOP HAL_TIM_Base_Stop_IT(&htim10)
+#define TIM11_IT_START HAL_TIM_Base_Start_IT(&htim11)
+#define TIM11_IT_STOP HAL_TIM_Base_Stop_IT(&htim11)
+
+uint16_t adc_read(AdcChannels channel, uint8_t timeout);
 void delay(int hal_delay);
-void print(char *str);
 void led_blink(LEDS led, uint8_t duration);
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+
+extern ADC_HandleTypeDef hadc1;
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
-extern ADC_HandleTypeDef hadc1;
+extern TIM_HandleTypeDef htim10;
+extern TIM_HandleTypeDef htim11;
 
 #endif /* INC_API_H_ */

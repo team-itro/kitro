@@ -23,15 +23,15 @@ extern int backFlood[ROWS][COLUMNS];
 extern int cells[ROWS][COLUMNS];
 
 struct coordinate {
-	int y;
-	int x;
+  int y;
+  int x;
 };
 
 struct surroundCoor {
-	struct coordinate N;
-	struct coordinate S;
-	struct coordinate W;
-	struct coordinate E;
+  struct coordinate N;
+  struct coordinate S;
+  struct coordinate W;
+  struct coordinate E;
 };
 
 void updateWalls(struct coordinate point, int orient, bool L, bool R, bool F);
@@ -42,7 +42,7 @@ void backtrack();
 int orientation(int orient, char turning);
 struct coordinate updateCoordinates(struct coordinate coordi, int orient);
 void forwardtrack(struct coordinate dumXY, struct coordinate dumXY_prev,
-		int dumOrient);
+                  int dumOrient);
 
 #ifdef __cplusplus
 }

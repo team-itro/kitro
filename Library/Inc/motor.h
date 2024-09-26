@@ -1,15 +1,14 @@
 #ifndef INC_MOTOR_H_
 #define INC_MOTOR_H_
 
-#include "main.h"
+// #include "CONSTANTS.h"
+// #include "main.h"
 #include "stdlib.h"
-#include "parameters_.h"
-#include "typedefs.h"
 
-#define STOP_ROBOT \
-    l_speed = 0;   \
-    r_speed = 0;   \
-    setWheels()
+#define STOP_ROBOT                                                             \
+  l_speed = 0;                                                                 \
+  r_speed = 0;                                                                 \
+  setWheels()
 
 // GLOBAL VARIABLES
 extern float l_speed, r_speed;

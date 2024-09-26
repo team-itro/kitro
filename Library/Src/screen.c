@@ -1,6 +1,6 @@
 #include "screen.h"
 
-DISP_State disp_state;
+ScreenConfig screen_conf;
 
 #define MAX_LINES 5
 #define LINE_HEIGHT 8
@@ -8,22 +8,14 @@ DISP_State disp_state;
 
 void screen_init(void)
 {
-  disp_state = DEFAULT;
   ssd1306_Init();
-  ssd1306_Fill(White);
-  ssd1306_UpdateScreen();
-  HAL_Delay(100);
+  screen_conf = INIT;
   screen_clear();
-  disp_state = INIT;
 }
 
-void screen_clear()
-{
-  ssd1306_Fill(Black);
-  ssd1306_UpdateScreen();
-}
+inline void screen_clear() { ssd1306_Fill(Black); }
 
-void screen_update() { ssd1306_UpdateScreen(); }
+inline void screen_update() { ssd1306_UpdateScreen(); }
 
 void screen_writestr(const char *str, int x, int y, FONT_Size font_size)
 {
@@ -70,144 +62,118 @@ void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size)
 //	writeString(str, font_size);
 // }
 
-void screen_log(const char *text, uint8_t scroll_offset)
+void screen_iteration(void)
 {
-  //	static char buffer[MAX_LINES][MAX_CHARS_PER_LINE + 1];
-  //	static uint8_t current_line = 0;
-  //	static uint8_t total_lines = 0;
-  //
-  //	// Split the input text into lines
-  //	char *line = strtok((char*) text, "\n");
-  //	while (line != NULL && total_lines < MAX_LINES) {
-  //		strncpy(buffer[total_lines], line, MAX_CHARS_PER_LINE);
-  //		buffer[total_lines][MAX_CHARS_PER_LINE] = '\0';
-  //		total_lines++;
-  //		line = strtok(NULL, "\n");
-  //	}
-  //
-  //	// Clear the screen
-  //	ssd1306_Fill(Black);
-  //
-  //	// Print lines and scroll if necessary
-  //	for (uint8_t i = 0; i < MAX_LINES && i < total_lines; i++) {
-  //		uint8_t y_pos = i * LINE_HEIGHT;
-  //		if (total_lines > MAX_LINES && current_line + i >= total_lines)
-  //{ 			y_pos = (i + MAX_LINES - total_lines) * LINE_HEIGHT;
-  //		}
-  //		ssd1306_SetCursor(0, y_pos);
-  //		ssd1306_WriteString(buffer[(current_line + i) % total_lines],
-  // Font_7x10, 				White);
-  //	}
-  //
-  //	// Update the screen
-  //	ssd1306_UpdateScreen();
-  //
-  //	// Increment current_line if we've reached the scroll offset
-  //	if (total_lines > MAX_LINES && ++current_line >= scroll_offset) {
-  //		current_line = 0;
-  //	}
+  screen_clear();
+  switch (screen_conf) {
+  case (INIT):
+    for (int delta = 0; delta < 5; delta++)
+      ssd1306_DrawCircle(16 * delta + 35, 15, 10, White);
+    break;
+
+  case (DEFAULT):
+    // DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
+    // DISPLAYING BATTERY VOLTAGE
+    screen_writestr("V:", 86, 24, SMALL);
+    // screen_writefl(voltage, 104, 24, SMALL);
+
+    // putString(turn,44,16,MEDIUM);
+    switch (kitro.current_state) {
+    case (MOUSE_STATE_INIT_IDLE):
+      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_INIT_CONFIG):
+      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_INIT_RESET):
+      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_SEARCH_IDLE):
+      screen_writestr("SEARCH_IDLE", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_SEARCH_FORWARD):
+      screen_writestr("SEARCH_FOR", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_SEARCH_BACK):
+      screen_writestr("SEARCH_BCK", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_FAST_IDLE):
+      screen_writestr("SEARCH_IDLE", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_FAST_FORWARD):
+      screen_writestr("SEARCH_FOR", 42, 2, SMALL);
+      break;
+    case (MOUSE_STATE_FAST_BACK):
+      screen_writestr("SEARCH_BCK", 42, 2, SMALL);
+      break;
+    }
+
+    // switch (runState) {
+    // case (0):
+    //   putString("STARTING", 42, 12, SMALL);
+    //   break;
+    // case (1):
+    //   putString("DECISION", 42, 12, SMALL);
+    //   break;
+    // case (2):
+    //   putString("MV_CENTER", 42, 12, SMALL);
+    //   break;
+    // case (3):
+    //   putString("TURNING", 42, 12, SMALL);
+    //   break;
+    // case (4):
+    //   putString("MV_EDGE", 42, 12, SMALL);
+    //   break;
+    // }
+
+    // putString("O:", 2, 24, SMALL);
+    // putInt(ORIENT, 20, 24, SMALL);
+    //
+    // putString("S:", 30, 24, SMALL);
+    // putFloat(st_speed, 48, 24, SMALL);
+    break;
+
+  case (GYRO_CALIB):
+    // putString("NOISE: ", 2, 2, SMALL);
+    // putFloat(noise, 64, 2, SMALL);
+    //
+    // putString("OFFSET: ", 2, 11, SMALL);
+    // putInt(offset, 64, 11, SMALL);
+    //
+    // putString("ANGLE: ", 2, 22, SMALL);
+    // putFloat(angle_z, 64, 22, SMALL);
+    break;
+
+  case (SENSOR_READ):
+    // putString("RF:", 2, 2, SMALL);
+    // putFloat(averageFR, 26, 2, SMALL);
+    //
+    // putString("LF:", 76, 2, SMALL);
+    // putFloat(averageFL, 100, 2, SMALL);
+    //
+    // putString("DR:", 2, 13, SMALL);
+    // putFloat(averageR, 26, 13, SMALL);
+    //
+    // putString("DL:", 76, 13, SMALL);
+    // putFloat(averageL, 100, 13, SMALL);
+    //
+    // putString("ANGLE:", 22, 24, SMALL);
+    // putFloat(angle_z, 70, 22, SMALL);
+    screen_sharpir_test();
+    break;
+
+  case (LOW_BAT):
+    screen_writestr("BAT LOW...!", 2, 7, LARGE);
+    break;
+
+  case (SUCESS_MSG):
+    screen_writestr("BOOM", 2, 2, LARGE);
+    screen_writestr("kitro 4 life", 2, 22, SMALL);
+    break;
+  }
+  screen_update();
 }
-// void displayUpdate(void)
-//{
-//	clearScreen();
-//	switch (disp_state)
-//	{
-//	// INITIALIZATION BLOCK: AUDI CAR EXPECTED
-//	case (INIT):
-//		for (int delta = 0; delta < 5; delta++)
-//			ssd1306_DrawCircle(16 * delta + 35, 15, 10, White);
-//		break;
-//
-//	// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
-//	case (DEFAULT):
-//		// DISPLAYING BATTERY VOLTAGE
-//		putString("V:",86,24,SMALL);
-//		putFloat(voltage,104 , 24, SMALL);
-//
-//		// putString(turn,44,16,MEDIUM);
-//		switch (mouseState) {
-//		case (0):
-//			putString("IDLE", 42, 2, SMALL);break;
-//		case (1):
-//			putString("SEARCH IDLE", 42, 2, SMALL);break;
-//		case (2):
-//			putString("SEARCH FWD", 42, 2, SMALL);break;
-//		case (3):
-//			putString("SEARCH BWD", 42, 2, SMALL);break;
-//		case (4):
-//			putString("FAST IDLE", 42, 2, SMALL);break;
-//		case (5):
-//			putString("FAST FWD", 42, 2, SMALL);break;
-//		case (6):
-//			putString("FAST BWD", 42, 2, SMALL);break;
-//		case (7):
-//			putString("SPEED ADJ", 42, 2, SMALL);break;
-//		case (8):
-//			putString("SET INITIAL", 42, 2, SMALL);break;
-//		}
-//
-//
-//		switch (runState) {
-//		case (0):
-//			putString("STARTING", 42, 12, SMALL);break;
-//		case (1):
-//			putString("DECISION", 42, 12, SMALL);break;
-//		case (2):
-//			putString("MV_CENTER", 42, 12, SMALL);break;
-//		case (3):
-//			putString("TURNING", 42, 12, SMALL);break;
-//		case (4):
-//			putString("MV_EDGE", 42, 12, SMALL);break;
-//		}
-//
-//		putString("O:",2,24,SMALL);
-//		putInt(ORIENT,20 , 24, SMALL);
-//
-//
-//		putString("S:",30,24,SMALL);
-//		putFloat(st_speed,48,24, SMALL);
-//		break;
-//
-//	case (GYRO_CALIB):
-//		putString("NOISE: ",2,2,SMALL);
-//		putFloat(noise,64, 2, SMALL);
-//
-//		putString("OFFSET: ",2,11,SMALL);
-//		putInt(offset,64,11,SMALL);
-//
-//		putString("ANGLE: ",2,22,SMALL);
-//		putFloat(angle_z,64,22,SMALL);
-//		break;
-//
-//	case (SENSOR_READ):
-//
-//		putString("RF:",2,2,SMALL);
-//		putFloat(averageFR,26,2, SMALL);
-//
-//		putString("LF:",76,2,SMALL);
-//		putFloat(averageFL,100,2, SMALL);
-//
-//		putString("DR:",2,13,SMALL);
-//		putFloat(averageR,26,13, SMALL);
-//
-//		putString("DL:",76,13,SMALL);
-//		putFloat(averageL,100,13, SMALL);
-//
-//		putString("ANGLE:",22,24,SMALL);
-//		putFloat(angle_z,70,22, SMALL); break;
-//
-//	case (LOW_BAT):
-//		putString("BAT LOW...!",2,7,LARGE);
-//		break;
-//
-//	case (SUCESS_MSG):
-//		putString("HURRAYYYY!!!",2,2,LARGE);
-//		putString("SINDiB na kokka",2,22,SMALL);
-//		break;
-//	}
-//	ssd1306_UpdateScreen();
-//	LED6_TOG;
-// }
+
 void screen_sharpir_test()
 {
   screen_writestr("testing sharp ir", 0, 0, SMALL);
@@ -219,5 +185,13 @@ void screen_sharpir_test()
   screen_writestr("V", 104, 32, SMALL);
   screen_writefl(sharp_readv(SHARP_FL), 0, 32, SMALL);
   screen_writestr("V", 24, 32, SMALL);
-  screen_update();
+  // screen_update();
 };
+
+void print(char *str)
+{
+#if defined(UART_DEBUG) && UART_DEBUG == 1
+  printf("%s", str);
+#endif
+  screen_writestr(str, 0, 0, SMALL);
+}

@@ -1,17 +1,16 @@
 #include "sensors.h"
-#include <math.h>
 
-// #define SHARP_CONST_A 28.51f
+// int reflectionRate = REFLECTION_RATE_;
 #define SHARP_CONST_A 35.93f
 #define SHARP_CONST_B -2.1995f
 #define SHARP_CONST_C 1.7021f
 
-float sharp_readv(adc_channels sharp_id)
+float sharp_readv(AdcChannels sharp_id)
 {
   return (((float)adc_read(sharp_id, 1) * (3.3f / 4095.0f)));
 }
 
-float sharp_readdist(adc_channels sharp_id)
+float sharp_readdist(AdcChannels sharp_id)
 {
   float distance =
       SHARP_CONST_A * exp(SHARP_CONST_B *
@@ -24,24 +23,57 @@ float sharp_readdist(adc_channels sharp_id)
   return distance;
 }
 
-// #include "read_sensors.h"
+// void stop_it_all(void){
+//	disp_state=LOW_BAT;
+//	displayUpdate();
+//	OFF_BUZZ;
+//	STOP_ROBOT;
+//	ALL_LED_OFF;
+//	TIM6_IT_STOP;
+//	TIM13_IT_STOP;
+//	TIM14_IT_STOP;
+//	return;
+// }
 
-// int reflectionRate = REFLECTION_RATE_;
+// bool irBlink() {
+//	static uint32_t t3 = 1000;
+//	if (LFSensor > t3 || RFSensor > t3) {
+//			return true;
+//		}
+//	return false;
+// }
+//
+// bool rightIrBlink(){
+//	static uint32_t t2 = 3000;
+//	if (DRSensor > t2) {
+//			return true;
+//		}
+//	return false;
+// }
+//
+// bool leftIrBlink(){
+//	static uint32_t t1 = 3000;
+//	if (DLSensor > t1) {
+//			return true;
+//		}
+//	return false;
+// }
+
+// TODO: implement battery voltage monitoring
+
 // const float LOW_BAT_TH = LOW_BAT_TH_;
-
 // int32_t volMeter=0;
 // float voltage = 0;
+
 // int32_t LFSensor = 0;
 // int32_t RFSensor = 0;
 // int32_t DLSensor=0;
 // int32_t DRSensor=0;
-////int32_t SHARP1=0;
 //
 // static int32_t LBuff[15] = {0};
 // static int32_t RBuff[15] = {0};
 // static int32_t FLBuff[15] = {0};
 // static int32_t FRBuff[15] = {0};
-////static int32_t SHARP1BUFFER[15] = {0};
 //
 // float averageL = 0;
 // float averageR = 0;
@@ -49,23 +81,18 @@ float sharp_readdist(adc_channels sharp_id)
 // float averageFR = 0;
 // float SHARP1AVG = 0;
 //
-// bool L = false;
-// bool R = false;
-// bool F = false;
 //
 // static int point = 0;
 
 /*read IR sensors*/
 // void readSensor(void) {
 //	LED7_ON;
-
 //	__HAL_TIM_SET_COUNTER(&htim1,0);
 // read DC value
 //	LFSensor = read_LF_Sensor;
 //	RFSensor = read_RF_Sensor;
 //	DLSensor = read_DL_Sensor;
 //	DRSensor = read_DR_Sensor;
-//	SHARP1 = read_sharp1;
 
 // left front sensor
 //	LF_EM_ON;
@@ -126,41 +153,6 @@ float sharp_readdist(adc_channels sharp_id)
 
 /*read voltage meter*/
 
-// void stop_it_all(void){
-//	disp_state=LOW_BAT;
-//	displayUpdate();
-//	OFF_BUZZ;
-//	STOP_ROBOT;
-//	ALL_LED_OFF;
-//	TIM6_IT_STOP;
-//	TIM13_IT_STOP;
-//	TIM14_IT_STOP;
-//	return;
-// }
-
-// bool irBlink() {
-//	static uint32_t t3 = 1000;
-//	if (LFSensor > t3 || RFSensor > t3) {
-//			return true;
-//		}
-//	return false;
-// }
-//
-// bool rightIrBlink(){
-//	static uint32_t t2 = 3000;
-//	if (DRSensor > t2) {
-//			return true;
-//		}
-//	return false;
-// }
-//
-// bool leftIrBlink(){
-//	static uint32_t t1 = 3000;
-//	if (DLSensor > t1) {
-//			return true;
-//		}
-//	return false;
-// }
 // void calculateAndSaveAverages() {
 //     int i;
 //     // Calculate the average for each buffer
