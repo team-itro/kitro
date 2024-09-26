@@ -22,14 +22,14 @@ extern "C" {
 #include "algo.h"
 // #include "adc.h"
 // #include "led.h"
-// #include "motor.h"
-// #include "encoder.h"
+#include "motor.h"
+#include "encoder.h"
 // #include "display.h"
- #include <MPU6050.h>
+#include <MPU6050.h>
 
 // #include "read_sensors.h"
 
-// #include "typedefs.h"
+#include "typedefs.h"
 #include "ssd1306.h"
 // #include "buzzer.h"
  #include "PD.h"
@@ -53,15 +53,19 @@ int greymatter(void);
 
 // INITIALIZATION OF HARDWARE
 //extern TIM_HandleTypeDef htim4;
-// int initialization_block(void);
+int initialization_block(void);
+
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim10;
+extern TIM_HandleTypeDef htim11;
 extern I2C_HandleTypeDef hi2c2;
 
 // INTERRUPTS
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
- void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 #ifdef __cplusplus
 }

@@ -47,7 +47,7 @@ void print(const char *str){
 }
 
 int greymatter(void) {
-  //	initialization_block();
+  initialization_block();
   //	HAL_Delay(1000);
   //	disp_state = DEFAULT;
   //
@@ -66,10 +66,6 @@ int greymatter(void) {
   //
   //	XY_prev.y = 0;
   //	XY_prev.x = 0;
-	gyroInit();
-	gyroCalibration();
-	encoderInit();
-	motorInit();
 
   while (1) {
     //		mouseRun();
@@ -85,7 +81,7 @@ int greymatter(void) {
 //	  printf("%lu \n\r",r_position);
 //	  printf("%u \n\r",r_position);
 //	  HAL_Delay(5);
-//	  finishMove(STRAIGHT_RUN, 0);
+	  finishMove(STRAIGHT_RUN, 100);
 //	  setLeftWheel(1);
 //	  setRightWheel(1);
 
@@ -93,42 +89,38 @@ int greymatter(void) {
   }
 }
 
-// int initialization_block(void)
-//{
+int initialization_block(void)
+{
 //	ALL_LED_ON;
-//	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF
-///////////////////////////// 	TIM6_IT_START;
-//
-//	motorInit();
-//	encoderInit();
-//	gyroInit();
+	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF
+/////////////////////////// 	TIM6_IT_START;
+
+	motorInit();
+	encoderInit();
+	gyroInit();
 //	displayInit();
 //	buzzerInit();
-//
+
 //	ALL_LED_OFF;
-//	HAL_Delay(1000);
-//	gyroCalibration();
+	HAL_Delay(1000);
+	gyroCalibration();
 //	disp_state = DEFAULT;
-//	TIM13_IT_START;
-//	// TIM14_IT_START;
-//
-//	return 0;
-// }
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+	TIM10_IT_START;
+	// TIM14_IT_START;
+
+	return 0;
+ }
+
+ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim == &htim4)
-		gyroUpdate();
-}
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-//{
-//	if (htim == &htim14)
-//		;
-//	else if (htim == &htim13)
-//		gyroUpdate(),
-//			readSensor();
+	if (htim == &htim11)
+		;
+	else if (htim == &htim10)
+		gyroUpdate(),
+			readSensor();
 //	else if (htim == &htim6)
 //		displayUpdate();
-// }
+ }
 //
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 //{

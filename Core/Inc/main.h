@@ -89,7 +89,14 @@ void Error_Handler(void);
 #define PWM_CH4_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-
+#define TIM1_START HAL_TIM_Base_Start(&htim1)
+#define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
+#define TIM6_IT_START HAL_TIM_Base_Start_IT(&htim6)
+#define TIM6_IT_STOP HAL_TIM_Base_Stop_IT(&htim6)
+#define TIM10_IT_START HAL_TIM_Base_Start_IT(&htim10)
+#define TIM10_IT_STOP HAL_TIM_Base_Stop_IT(&htim10)
+#define TIM11_IT_START HAL_TIM_Base_Start_IT(&htim11)
+#define TIM11_IT_STOP HAL_TIM_Base_Stop_IT(&htim11)
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
