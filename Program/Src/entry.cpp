@@ -68,6 +68,8 @@ int greymatter(void) {
   //	XY_prev.x = 0;
 	gyroInit();
 	gyroCalibration();
+	encoderInit();
+	motorInit();
 
   while (1) {
     //		mouseRun();
@@ -79,9 +81,14 @@ int greymatter(void) {
 //    ssd1306_Fill(White);
 //    ssd1306_UpdateScreen();
 //    HAL_Delay(500);
-	  print("a\n\r");
-//	  gyroUpdate();
-	  HAL_Delay(500);
+//	  print("a\n\r");
+//	  printf("%lu \n\r",r_position);
+//	  printf("%u \n\r",r_position);
+//	  HAL_Delay(5);
+//	  finishMove(STRAIGHT_RUN, 0);
+//	  setLeftWheel(1);
+//	  setRightWheel(1);
+
 
   }
 }
@@ -107,7 +114,11 @@ int greymatter(void) {
 //
 //	return 0;
 // }
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == &htim4)
+		gyroUpdate();
+}
 // void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //{
 //	if (htim == &htim14)

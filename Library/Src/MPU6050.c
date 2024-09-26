@@ -4,10 +4,11 @@
 #define GYRO_CONFIG_REG 0x1B
 #define PWR_MGMT_1_REG 0x6B
 #define GYRO_ZOUT_H_REG 0x47
-#define GYRO_SENSITIVITY 131.0 // Sensitivity for 250dps
+#define GYRO_SENSITIVITY 131.0 * 6 // Sensitivity for 250dps
 
 const float timeDifference = 2e-3; // 2ms time step
 const float NOISE_THRESHOLD = 0.05; // Noise threshold
+
 
 float angle_z = 0;
 float last_angle_rate = 0, angle_rate = 0;
@@ -56,28 +57,26 @@ int16_t readGyro(void)
 // Function to calibrate the gyroscope
 void gyroCalibration(void)
 {
-    int16_t gyroZ;
+	int16_t calibration_buffer[BUFFER_LENGTH];
     int32_t calibrationSum = 0;
 
-    for (uint32_t i = 0; i < BUFFER_LENGTH; i++)
+    for (u32 i = 0; i < BUFFER_LENGTH; i++)
     {
-        gyroZ = readGyro();
-        calibrationSum += gyroZ;
+    	calibration_buffer[i] = readGyro();
         HAL_Delay(2);
+        calibrationSum += calibration_buffer[i];
     }
 
     offset = (float)calibrationSum / BUFFER_LENGTH;
 
     // Calculate noise level
-    for (u32 i = 0; i < BUFFER_LENGTH; i++)
-    {
-        gyroZ = readGyro();
-        noise += pow((gyroZ - offset), 2);
-    }
-    noise = sqrt(noise / BUFFER_LENGTH) / 2.0 * GYRO_SENSITIVITY;
+	for (u32 i = 0; i < BUFFER_LENGTH; i++)
+		noise += pow(calibration_buffer[i] - offset, 2);
+	noise = pow(noise, .5) / 2 / GYRO_SENSITIVITY;
 
     printf("Calibration complete. Offset: %f, Noise: %f\r\n", offset, noise);
 }
+
 
 // Function to update gyroscope data
 int gyroUpdate(void)
@@ -86,7 +85,7 @@ int gyroUpdate(void)
     angle_rate = ((float)(gyroZ - offset)) / GYRO_SENSITIVITY;
 
     // Apply noise filtering
-    if (fabs(angle_rate) < NOISE_THRESHOLD)
+    if (fabs(angle_rate) < NOISE_THRESHOLD && fabs(angle_rate) < noise)
     {
         angle_rate = 0;
     }

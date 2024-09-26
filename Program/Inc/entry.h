@@ -32,7 +32,7 @@ extern "C" {
 // #include "typedefs.h"
 #include "ssd1306.h"
 // #include "buzzer.h"
-// #include "PD.h"
+ #include "PD.h"
 
 // extern bool buttonPress;
 // extern int mouseState;
@@ -61,7 +61,7 @@ extern I2C_HandleTypeDef hi2c2;
 
 // INTERRUPTS
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 #ifdef __cplusplus
 }
