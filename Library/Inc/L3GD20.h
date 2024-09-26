@@ -8,7 +8,6 @@
 #include "parameters_.h"
 #include <math.h>
 
-
 #define BUFFER_LENGTH ((u32)1000u)  // 1000u
 
 extern float angle_z;
@@ -26,6 +25,5 @@ int16_t readGyro(void);
 
 // CALIBRATION IN THE BEGINNING
 void gyroCalibration(void);
-
 
 #endif

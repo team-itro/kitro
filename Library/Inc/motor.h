@@ -12,13 +12,10 @@
     setWheels()
 
 // GLOBAL VARIABLES
-extern float l_speed,
-    r_speed;
+extern float l_speed, r_speed;
 
 // BASE SPEEDS
-extern float st_speed,
-    rt_speed,
-    al_speed;
+extern float st_speed, rt_speed, al_speed;
 
 // INITIALIZATION OF MOTOR
 void motorInit(void);

@@ -16,21 +16,17 @@ extern "C" {
 #include <stdio.h>
 #include <string.h>
 
-
+#include "algo.h"
+#include "api.h"
+#include "display.h"
 #include "main.h"
 #include "stm32f4xx_hal.h"
-#include "algo.h"
-// #include "adc.h"
+// #include "L3GD20.h"
 // #include "led.h"
 // #include "motor.h"
 // #include "encoder.h"
-// #include "display.h"
-// #include "L3GD20.h"
-
-// #include "read_sensors.h"
-
-// #include "typedefs.h"
-#include "ssd1306.h"
+#include "sensors.h"
+#include "typedefs.h"
 // #include "buzzer.h"
 // #include "PD.h"
 
@@ -48,15 +44,11 @@ extern "C" {
 // extern int backPtr;
 // extern int fwdPtr;
 
-// MAIN LOOP
+// INFO: KITRO MAIN FUNCTION
 int greymatter(void);
 
-// INITIALIZATION OF HARDWARE
-//extern TIM_HandleTypeDef htim4;
-// int initialization_block(void);
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim4;
+// INFO: KITRO INIT FUNCTION
+int wakeup(void);
 
 // INTERRUPTS
 // void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
