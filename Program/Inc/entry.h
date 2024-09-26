@@ -1,4 +1,5 @@
-/*
+/*Enne sanna Thalei suthutha??..
+ * Ippo suthum paaru.
  * entry.h
  *
  *  Created on: Sep 14, 2024
