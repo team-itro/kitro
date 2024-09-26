@@ -1,5 +1,5 @@
-#ifndef INC_DISPLAY_H_
-#define INC_DISPLAY_H_
+#ifndef INC_SCREEN_H_
+#define INC_SCREEN_H_
 
 /*
  SCREEN SIZE => 128x64
@@ -18,8 +18,8 @@
  HUGE		// 16x24
  */
 
-#include "read_sensors.h"
-#include "typedefs.h"
+#include "CONSTANTS.h"
+#include "sensors.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -31,12 +31,12 @@ extern DISP_State disp_state;
 void screen_init(void);
 
 void screen_clear();
+void screen_update();
 
-// void screen_writestr(char *str, FONT_Size font_size);
-void screen_writestr(char *str, int x, int y, FONT_Size font_size);
-
+void screen_writestr(const char *str, int x, int y, FONT_Size font_size);
 void screen_writeint(int INT, int x, int y, FONT_Size font_size);
 void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size);
 void screen_log(const char *text, uint8_t scroll_offset);
+void screen_sharpir_test();
 
-#endif /* INC_DISPLAY_H_ */
+#endif /* INC_SCREEN_H_ */
