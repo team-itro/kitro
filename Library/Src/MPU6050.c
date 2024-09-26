@@ -94,6 +94,6 @@ int gyroUpdate(void)
     angle_z += ((angle_rate + last_angle_rate) * timeDifference) / 2.0f;
     last_angle_rate = angle_rate;
 
-    printf("Angle Z: %f\r\n", angle_z);
+//    printf("Angle Z: %f\r\n", angle_z);
     return 0;
 }
