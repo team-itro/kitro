@@ -16,26 +16,19 @@ extern "C" {
 #include <stdio.h>
 #include <string.h>
 
-
-#include "main.h"
-#include "stm32f4xx_hal.h"
+#include "CONSTANTS.h"
 #include "algo.h"
-// #include "adc.h"
-// #include "led.h"
-// #include "motor.h"
-// #include "encoder.h"
-// #include "display.h"
-// #include "L3GD20.h"
+#include "api.h"
+#include "main.h"
+#include "screen.h"
+#include "sensors.h"
+#include "stm32f4xx_hal.h"
 
-// #include "read_sensors.h"
+extern volatile bool BTN1_PRESSED;
+extern volatile bool BTN0_PRESSED;
+extern Mouse kitro;
+extern ConfigStates config_state;
 
-// #include "typedefs.h"
-#include "ssd1306.h"
-// #include "buzzer.h"
-// #include "PD.h"
-
-// extern bool buttonPress;
-// extern int mouseState;
 // extern int runState;
 // extern int ORIENT;
 // extern char direction;
@@ -48,19 +41,11 @@ extern "C" {
 // extern int backPtr;
 // extern int fwdPtr;
 
-// MAIN LOOP
+// INFO: KITRO MAIN FUNCTION
 int greymatter(void);
 
-// INITIALIZATION OF HARDWARE
-//extern TIM_HandleTypeDef htim4;
-// int initialization_block(void);
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim4;
-
-// INTERRUPTS
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+// INFO: KITRO INIT FUNCTION
+void wakeup(void);
 
 #ifdef __cplusplus
 }
