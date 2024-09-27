@@ -1,0 +1,57 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/SSD1306/Inc",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Library/Inc",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Program/Inc",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Core/Inc",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/CMSIS/Include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/SSD1306/Inc",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Library/Inc",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Program/Inc",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Core/Inc",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/STM32F4xx_HAL_Driver/Inc",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                    "C:/Users/Bavan2002.DESKTOP-TITUVCT/Desktop/robot/kitro/Drivers/CMSIS/Include",
+                    ""
+                ]
+            },
+            "defines": [
+                "F_CPU=100000000L",
+                "PLATFORMIO=60115",
+                "STM32F4xx",
+                "STM32F411xE",
+                ""
+            ],
+            "compilerPath": "C:/Users/Bavan2002.DESKTOP-TITUVCT/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m4",
+                "-mthumb",
+                "-mcpu=cortex-m4",
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

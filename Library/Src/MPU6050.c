@@ -6,7 +6,7 @@
 #define GYRO_ZOUT_H_REG 0x47
 #define GYRO_SENSITIVITY 131.0  // Sensitivity for 250dps
 
-const float timeDifference = 2e-3; // 2ms time step
+const float timeDifference = 2e-1; // 2ms time step
 const float NOISE_THRESHOLD = 0.05; // Noise threshold
 
 

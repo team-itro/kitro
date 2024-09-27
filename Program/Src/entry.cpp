@@ -78,16 +78,23 @@ int greymatter(void) {
 //    ssd1306_UpdateScreen();
 //    HAL_Delay(500);
 //	  print("a\n\r");
-//	  printf("%d \n",l_position);
-//	  printf("%d \n",r_position);;
+//	  printf("l %d \n",l_position);
+//	  printf("r %d \n",r_position);;
 //	  HAL_TIM_PeriodElapsedCallback(&htim10);
-//	  printf("%u \n", readGyro());
-//	  HAL_Delay(50);
-	  if (l_position < 4000){
-		  setLeftWheel(0.5);
-	  } else {
-		  setLeftWheel(0);
-	  }
+	  printf("%f \n", angle_z);
+	  HAL_Delay(100);
+//	  if (r_position < 5000){
+//		  setRightWheel(1);
+//	  } else {
+//		  setRightWheel(0);
+//	  }
+//
+//	  if (l_position < 5000){
+//		  setLeftWheel(1);
+//	  } else {
+//		  setLeftWheel(0);
+//	  }
+
 //	  finishMove(STRAIGHT_RUN, 100);
 //	  setLeftWheel(1);
 //	  setRightWheel(1);

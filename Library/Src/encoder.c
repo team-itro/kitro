@@ -10,6 +10,6 @@ void encoderInit(void){
 
 void resetEncoder(void){
 	TIM2->CNT = _ENCODER_START + 1;
-	TIM3->CNT = u16_max-_ENCODER_START;
+	TIM3->CNT = _ENCODER_START + 1 ;//u16_max-_ENCODER_START;
 }
 

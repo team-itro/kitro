@@ -4,9 +4,9 @@
 #include "main.h"
 #include "typedefs.h"
 
-#define _ENCODER_START (u16)u16_max/1e4
-#define l_position TIM2-> CNT
-#define r_position (u16_max-TIM3-> CNT)
+#define _ENCODER_START 1000   //(u16)u16_max/1e2
+#define r_position TIM2-> CNT
+#define l_position  TIM3-> CNT // (u16_max-TIM3-> CNT)
 
 
 void encoderInit(void);

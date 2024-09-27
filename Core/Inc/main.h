@@ -63,10 +63,6 @@ void Error_Handler(void);
 #define ONB_LED_GPIO_Port GPIOC
 #define ONB_KEY_Pin GPIO_PIN_0
 #define ONB_KEY_GPIO_Port GPIOA
-#define SHARP_1_Pin GPIO_PIN_2
-#define SHARP_1_GPIO_Port GPIOA
-#define SHARP_2_Pin GPIO_PIN_3
-#define SHARP_2_GPIO_Port GPIOA
 #define SHARP_3_Pin GPIO_PIN_4
 #define SHARP_3_GPIO_Port GPIOA
 #define SHARP_4_Pin GPIO_PIN_5
