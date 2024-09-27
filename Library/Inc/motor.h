@@ -33,7 +33,7 @@ int setWheelsSpeed(float l_speed, float r_speed);
 
 // void drive_fw(void);
 void drive_fw(uint8_t distance);
-void drive_bk(void);
+void drive_bk(uint8_t distance);
 void drive_tr(void);
 void drive_tl(void);
 
