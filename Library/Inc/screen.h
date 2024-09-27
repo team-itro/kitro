@@ -12,10 +12,10 @@
 
  FONT SIZES
  ----------
- SMALL    	// 6x8
- MEDIUM		// 7x10
- LARGE		// 11x18
- HUGE		// 16x24
+ SMALL 6x8
+ MEDIUM 7x10
+ LARGE 11x18
+ HUGE 16x24
  */
 
 #include "CONSTANTS.h"
@@ -25,8 +25,6 @@
 
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
-
-extern ScreenConfig screen_conf;
 
 void screen_init(void);
 void screen_clear();

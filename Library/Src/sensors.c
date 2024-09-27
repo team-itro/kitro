@@ -60,95 +60,103 @@ void sharps_update()
   SHARP_AL_VAL = sharp_readraw(SHARP_AL);
 }
 
+bool buffer_check(int buffer[], int threshold)
+{
+  int count = 0;
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+    if (buffer[i] > threshold) {
+      count++;
+    }
+  }
+  return count >= SWIPE_THRESHOLD;
+}
+
+void update_buffer(int buffer[], int new_value)
+{
+  for (int i = 0; i < BUFFER_SIZE - 1; i++) {
+    buffer[i] = buffer[i + 1];
+  }
+  buffer[BUFFER_SIZE - 1] = new_value;
+}
+
 bool sharp_front_gesture()
 {
-  if (SHARP_FL_VAL > ADC_THRESHOLD3 || SHARP_FR_VAL > ADC_THRESHOLD3) {
-    return true;
-  }
-  return false;
+  static int fl_buffer[BUFFER_SIZE] = {0};
+  static int fr_buffer[BUFFER_SIZE] = {0};
+
+  update_buffer(fl_buffer, SHARP_FL_VAL);
+  update_buffer(fr_buffer, SHARP_FR_VAL);
+
+  return buffer_check(fl_buffer, ADC_THRESHOLD3) ||
+         buffer_check(fr_buffer, ADC_THRESHOLD3);
 }
 
 bool sharp_fr_gesture()
 {
-  if (SHARP_FR_VAL > ADC_THRESHOLD3) {
-    return true;
-  }
-  return false;
+  static int fr_buffer[BUFFER_SIZE] = {0};
+
+  update_buffer(fr_buffer, SHARP_FR_VAL);
+
+  return buffer_check(fr_buffer, ADC_THRESHOLD3);
 }
 
 bool sharp_fl_gesture()
 {
-  if (SHARP_FL_VAL > ADC_THRESHOLD3) {
+  static int fl_buffer[BUFFER_SIZE] = {0};
+
+  update_buffer(fl_buffer, SHARP_FL_VAL);
+
+  return buffer_check(fl_buffer, ADC_THRESHOLD3);
+}
+
+bool right_swipe()
+{
+  static int fl_buffer[BUFFER_SIZE] = {0};
+  static int fr_buffer[BUFFER_SIZE] = {0};
+  static int swipe_state = 0;
+
+  update_buffer(fl_buffer, SHARP_FL_VAL);
+  update_buffer(fr_buffer, SHARP_FR_VAL);
+
+  if (buffer_check(fl_buffer, ADC_THRESHOLD3) && swipe_state == 0) {
+    swipe_state = 1;
+  } else if (buffer_check(fr_buffer, ADC_THRESHOLD3) && swipe_state == 1) {
+    swipe_state = 0;
     return true;
   }
+
   return false;
 }
 
+bool left_swipe()
+{
+  static int fl_buffer[BUFFER_SIZE] = {0};
+  static int fr_buffer[BUFFER_SIZE] = {0};
+  static int swipe_state = 0;
+
+  update_buffer(fl_buffer, SHARP_FL_VAL);
+  update_buffer(fr_buffer, SHARP_FR_VAL);
+
+  if (buffer_check(fr_buffer, ADC_THRESHOLD3) && swipe_state == 0) {
+    swipe_state = 1;
+  } else if (buffer_check(fl_buffer, ADC_THRESHOLD3) && swipe_state == 1) {
+    swipe_state = 0;
+    return true;
+  }
+
+  return false;
+}
 // TODO: implement battery voltage monitoring
 
 // const float LOW_BAT_TH = LOW_BAT_TH_;
 // int8_t volMeter=0;
 // float voltage = 0;
 //
-// static int8_t LBuff[15] = {0};
-// static int8_t RBuff[15] = {0};
-// static int8_t FLBuff[15] = {0};
-// static int8_t FRBuff[15] = {0};
-//
-// static int point = 0;
 
-/*read IR sensors*/
-// void readSensor(void) {
-//	LED7_ON;
-//	__HAL_TIM_SET_COUNTER(&htim1,0);
-// read DC value
-//	LFSensor = read_LF_Sensor;
-//	RFSensor = read_RF_Sensor;
-//	DLSensor = read_DL_Sensor;
-//	DRSensor = read_DR_Sensor;
-
-//
-//	LFSensor = LFSensor*reflectionRate/1000;
-//	RFSensor = RFSensor*reflectionRate/1000;
-//	DLSensor = DLSensor*reflectionRate/1000;
-//	DRSensor = DRSensor*reflectionRate/1000;
-//
-//	point++;
-//	if (point>=15){
-//		point = 0;
-//	}
-//
-//
-//	LBuff[point] = DLSensor;
-//	RBuff[point] = DRSensor;
-//	FLBuff[point] = LFSensor;
-//	FRBuff[point] = RFSensor;
-//
-//	LED7_OFF;
-// }
-
-/*read voltage meter*/
-
-// void calculateAndSaveAverages() {
-//     int i;
-//     // Calculate the average for each buffer
-//     for (i = 0; i < 15; i++) {
-//         averageL += LBuff[i];
-//         averageR += RBuff[i];
-//         averageFL += FLBuff[i];
-//         averageFR += FRBuff[i];
-//     }
-//
-//     // Divide the sums by 15 to get the average
-//     averageL = averageL/15;
-//     averageR = averageR/15;
-//     averageFL = averageFL/15;
-//     averageFR = averageFR/15;
-// }
-//
+// TODO: implement with average sharp ir values and dma
+// FIX: angle sharp ir consideration and paramatrizing
 void determine_walls()
 {
-  // TODO: update all avg sharp ir readings
   // if (SHARP_AR_AVG > ADC_THRESHOLD1) {
   //   RIGH_WALL = true;
   // } else {

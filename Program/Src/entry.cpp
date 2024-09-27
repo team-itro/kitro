@@ -6,12 +6,12 @@
  */
 
 #include "entry.h"
-#include "sensors.h"
 
 volatile bool BTN1_PRESSED = false;
-bool irBlink();
 #define STOP_ROBOT
 
+ConfigStates config_state;
+Mouse kitro;
 // u32 i;
 // u32 DELAY_MID = 1;
 // int runState = 0;
@@ -41,8 +41,6 @@ bool irBlink();
 //
 // int backPtr = 0;
 // int fwdPtr;
-
-Mouse kitro;
 
 static void handle_init_idle(void);
 static void handle_init_config(void);
@@ -89,40 +87,28 @@ void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
   interrupt_tim10_start; // starting interrupt timer for sensors
+  screen_init();
+  delay(1000);
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
   kitro.x = 0;
   kitro.y = 0;
   kitro.orientation = NORTH;
-  screen_init();
-  delay(1000);
-  screen_conf = DEFAULT;
-  // led_blink(ONB, 100);
-  // transform to screen_loop() and call with timer
-  // screen_writestr("initializing", 0, 0, SMALL);
-  // screen_update();
-  // delay(1000);
-  // test all leds
-  // timer config?
-  //	TIM1_START;
-  // TIM6_IT_START;
   //	motorInit();
   //	encoderInit();
   //	gyroInit();
   //	buzzerInit();
   //	gyroCalibration();
-  //	TIM13_IT_START;
-  //	// TIM14_IT_START;
   // turn off all the shit you checked on initialization
 }
 
-void handle_state_transition()
+void handle_state_transition(bool trigger)
 {
   // STOP_ROBOT;
   // signal that we are transitioning
   // playSound(TONE4);
   // led_blink(ONB, 100);
   delay(100);
-  BTN1_PRESSED = false;
+  trigger = false;
   // encoder reset
   // l_start = 0;
 }
@@ -136,61 +122,48 @@ static void handle_init_idle(void)
   // screen_writestr("init_idle", 0, 0, SMALL);
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_CONFIG;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
   }
 
-  if (sharp_front_gesture()) {
-    led_blink(ONB, 100);
-  }
+  // if (right_swipe()) {
+  //   led_blink(ONB, 100);
+  // }
+  // if (left_swipe()) {
+  //   led_blink(ONB, 100);
+  //   led_blink(ONB, 100);
+  // }
+  // if (sharp_front_gesture()) {
+  // }
 };
 
 static void handle_init_config(void)
 {
+  config_state = INIT;
   // short switch to search idle
   // move to config menu on ir confirm
   // then short switch through config options
   // then run the options via confirm through ir gesture
   // go back to config when done
   //
-  //		//			mouseState = speedAdjust();
-  //		if (rightIrBlink()){
-  //			playSound(TONE1);
-  //			st_speed += 0.1;
-  //			HAL_Delay(500);
-  //		}
-  //		if (leftIrBlink()){
-  //			playSound(TONE1);
-  //			st_speed -= 0.1;
-  //			HAL_Delay(500);
-  //		}
+  if (sharp_front_gesture()) {
+    switch (config_state) {
+    case INIT:
+      config_state = SENSOR_READ;
+    case SENSOR_READ:
+      config_state = INIT;
+    }
+  }
+  if (left_swipe()) {
+    led_blink(ONB, 100);
+    led_blink(ONB, 100);
+  }
+  // speed configuration
   //
-  // if (BTN1_PRESSED) {
-  //   STOP_ROBOT;
-  //   // playSound(TONE4);
-  //   delay(500);
-  //   kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
-  //   BTN1_PRESSED = false;
-  //   // encoder reset
-  //   // l_start = 0;
-  // }
-  //
-  // if (BTN2_PRESSED) {
-  //   STOP_ROBOT;
-  //   // playSound(TONE4);
-  //   delay(500);
-  //   BTN2_PRESSED = false;
-  //   // encoder reset
-  //   // l_start = 0;
-  // }
 
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
   }
-  if (sharp_front_gesture()) {
-    led_blink(ONB, 100);
-  }
-  // screen_writestr("init_config", 0, 0, SMALL);
 };
 
 static void handle_init_reset(void)
@@ -232,7 +205,7 @@ static void handle_init_reset(void)
   //
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_IDLE;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
   }
 };
 static void handle_search_idle(void)
@@ -265,7 +238,7 @@ static void handle_search_idle(void)
   //		}
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
     //			runState = 0;
   }
 };
@@ -397,7 +370,7 @@ static void handle_search_forward(void)
   //
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
   }
 };
 
@@ -528,7 +501,7 @@ static void handle_search_back(void)
   //		}
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
-    handle_state_transition();
+    handle_state_transition(BTN1_PRESSED);
   }
 };
 
@@ -563,8 +536,8 @@ static void handle_fast_idle(void)
   //		}
   //
   if (BTN1_PRESSED) {
-    kitro.current_state = MOUSE_STATE_INIT_CONFIG;
-    handle_state_transition();
+    kitro.current_state = MOUSE_STATE_INIT_IDLE;
+    handle_state_transition(BTN1_PRESSED);
   }
 };
 

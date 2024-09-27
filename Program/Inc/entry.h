@@ -26,6 +26,7 @@ extern "C" {
 
 extern volatile bool BTN1_PRESSED;
 extern Mouse kitro;
+extern ConfigStates config_state;
 // extern bool BTN2_PRESSED;
 // extern bool buttonPress;
 // extern int mouseState;
