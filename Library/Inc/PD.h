@@ -2,7 +2,6 @@
 // #define INC_PD_H_
 //
 // #include "motor.h"
-#include "CONSTANTS.h"
 // #include "encoder.h"
 // #include "L3GD20.h"
 // #include "led.h"
@@ -21,3 +20,27 @@
 // bool irController(void);
 //
 // #endif /* INC_PD_H_ */
+
+#ifndef PD_H
+#define PD_H
+
+#include <stdint.h>
+#include "motor.h"
+
+// PD controller gains
+extern float Kp;
+extern float Kd;
+
+// Function to compute the PD control output based on sharp sensor readings
+float compute_pd_control(float error, float previous_error);
+
+// Function to control the robot using PD control logic
+void wall_follow_control(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
+void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
+void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float sharp_front_right_dist);
+void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
+
+// Function to set motor speeds
+
+#endif // PD_H
+

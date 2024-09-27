@@ -1,4 +1,134 @@
 #include "PD.h"
+#include "sensors.h"  // Assuming this is where sharp sensor reading functions are located
+
+// Define PD constants (These values may need to be tuned)
+float Kp = 0.1f;
+float Kd = 0.05f;
+
+// Set motor speed limits
+const float MAX_SPEED = 0.8;
+const float MIN_SPEED = 0.5;
+const float REF = 10;
+
+// Variables to store error and previous error
+float previous_error = 0.0;
+
+// Function to compute the PD control output
+float compute_pd_control(float error, float previous_error)
+{
+    float derivative = error - previous_error;
+    float output = (Kp * error) + (Kd * derivative);
+    return output;
+}
+
+void wall_follow_control(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+	determine_walls();
+	if (RIGH_WALL & LEFT_WALL){
+		wall_follow(sharp_left_dist, sharp_right_dist, sharp_front_left_dist, sharp_front_right_dist);
+	}else if (RIGH_WALL){
+		right_wall_follow(sharp_right_dist, sharp_front_left_dist, sharp_front_right_dist);
+	}else if (LEFT_WALL){
+		left_wall_follow(sharp_left_dist, sharp_front_left_dist, sharp_front_right_dist);
+	}else{
+		drive_fw(18);
+	}
+}
+
+// Function to follow the wall and maintain the robot at the center
+void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist)
+{
+    // Compute error between the left and right walls
+    float error = (sharp_left_dist - sharp_right_dist);
+
+    // Compute the PD control output
+    float control_signal = compute_pd_control(error, previous_error);
+
+    // Update previous error for the next cycle
+    previous_error = error;
+
+    // Set motor speeds based on the control signal
+    float left_motor_speed = 0.7 - control_signal;
+    float right_motor_speed = 0.7 + control_signal;
+
+    // Front wall avoidance check
+    if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+        // Obstacle detected in front, slow down or stop
+        left_motor_speed = 0;
+        right_motor_speed = 0;
+    }
+
+    // Ensure motor speeds stay within limits
+    if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
+    if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
+    if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
+    if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+
+    // Set the motor speeds
+    setWheelsSpeed(left_motor_speed, right_motor_speed);
+}
+
+void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+	// Compute error between the left and right walls
+	float error = (sharp_left_dist - REF);
+
+	// Compute the PD control output
+	float control_signal = compute_pd_control(error, previous_error);
+
+	// Update previous error for the next cycle
+	previous_error = error;
+
+	// Set motor speeds based on the control signal
+	float left_motor_speed = 0.7 - control_signal;
+	float right_motor_speed = 0.7 + control_signal;
+
+	// Front wall avoidance check
+	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+		// Obstacle detected in front, slow down or stop
+		left_motor_speed = 0;
+		right_motor_speed = 0;
+	}
+
+	// Ensure motor speeds stay within limits
+	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
+	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
+	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
+	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+
+	// Set the motor speeds
+	setWheelsSpeed(left_motor_speed, right_motor_speed);
+}
+
+void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+	// Compute error between the left and right walls
+	float error = (sharp_right_dist - REF);
+
+	// Compute the PD control output
+	float control_signal = compute_pd_control(error, previous_error);
+
+	// Update previous error for the next cycle
+	previous_error = error;
+
+	// Set motor speeds based on the control signal
+	float left_motor_speed = 0.7 - control_signal;
+	float right_motor_speed = 0.7 + control_signal;
+
+	// Front wall avoidance check
+	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+		// Obstacle detected in front, slow down or stop
+		left_motor_speed = 0;
+		right_motor_speed = 0;
+	}
+
+	// Ensure motor speeds stay within limits
+	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
+	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
+	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
+	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+
+	// Set the motor speeds
+	setWheelsSpeed(left_motor_speed, right_motor_speed);
+}
+
 
 // VARIABLES
 // u32 l_start = 0;

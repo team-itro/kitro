@@ -23,6 +23,9 @@ extern "C" {
 #include "screen.h"
 #include "sensors.h"
 #include "stm32f4xx_hal.h"
+#include "PD.h"
+#include "motor.h"
+#include "encoder.h"
 
 extern volatile bool BTN1_PRESSED;
 extern volatile bool BTN0_PRESSED;
