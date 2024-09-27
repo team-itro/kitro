@@ -28,8 +28,11 @@ void setRightWheel(float r_speed);
 // SET SPEED OF BOTH MOTOR
 int setWheels();
 
-void drive_fw(int8_t distance);
-void drive_bk(int8_t distance);
+// SET SPEED OF BOTH MOTOR
+int setWheelsSpeed(float l_speed, float r_speed);
+
+void drive_fw(uint8_t distance);
+void drive_bk(uint8_t distance);
 void drive_tr(void);
 void drive_tl(void);
 

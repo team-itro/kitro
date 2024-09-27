@@ -2,7 +2,7 @@
 #define INC_ENCODER_H_
 
 #include "CONSTANTS.h"
-// #include "main.h"
+#include "api.h"
 
  #define _ENCODER_START (u16) 1000 //(u32) u32_max / 1e4
  #define l_position TIM3->CNT

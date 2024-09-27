@@ -81,6 +81,7 @@ int greymatter(void)
   //
   //	XY_prev.y = 0;
   //	XY_prev.x = 0;
+	delay(1000);
   drive_fw(50);
 //	drive_bw(20);
 //	drive_tr();
@@ -89,6 +90,7 @@ int greymatter(void)
 //    state_handlers[kitro.current_state]();
 //    determine_walls();
 //	drive_fw(20);
+//	 setWheelsSpeed(1,1);
 
   }
 }
