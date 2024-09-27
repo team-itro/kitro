@@ -23,6 +23,7 @@ extern "C" {
 #include "screen.h"
 #include "sensors.h"
 #include "stm32f4xx_hal.h"
+#include "motor.h"
 
 extern volatile bool BTN1_PRESSED;
 extern Mouse kitro;

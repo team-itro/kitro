@@ -5,7 +5,7 @@ const float SPEED_THRESHOLD = SPEED_THRESHOLD_;
 
 uint16_t u12_max = 4095;
 float l_speed, r_speed;
-float st_speed = .5, rt_speed = .3,
+float st_speed = 1, rt_speed = .3,
    al_speed = .2; // ONLY ALLOWED SPEED {.25, .6, .3}
 
  void motorInit(void)
@@ -58,33 +58,34 @@ int setWheelsSpeed(float l_speed, float r_speed)
 	return 0;
 }
 
- void drive_fw(int8_t distance){
-	 uint16_t count = distance * ENC_COUNT_PER_CM;
+void drive_fw(uint8_t distance){
+	uint16_t count = (uint16_t)distance * ENC_COUNT_PER_CM;
 	 resetEncoder();
 	 while(l_position < count){
-		 setWheelSpeed(st_speed, st_speed);
+		 setWheelsSpeed(st_speed, st_speed);
 	 }
+	 setWheelsSpeed(0, 0);
  }
 
- void drive_bw(int8_t distance){
-	 uint16_t count = distance * ENC_COUNT_PER_CM;
+void drive_bw(uint8_t distance){
+	uint16_t count = (uint16_t)distance * ENC_COUNT_PER_CM;
 	 resetEncoder();
 	 while(l_position < count){
-		 setWheelSpeed(-st_speed, -st_speed);
+		 setWheelsSpeed(-st_speed, -st_speed);
 	 }
  }
 
  void drive_tr(void){
 	 resetEncoder();
 	 while(l_position < TURN_COUNT_90){
-		 setWheelSpeed(st_speed, -st_speed);
+		 setWheelsSpeed(st_speed, -st_speed);
 	 }
  }
 
  void drive_tl(void){
 	 resetEncoder();
 	 while(l_position < TURN_COUNT_90){
-		 setWheelSpeed(-st_speed, st_speed);
+		 setWheelsSpeed(-st_speed, st_speed);
 	 }
  }
 

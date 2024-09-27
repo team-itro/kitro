@@ -27,17 +27,18 @@ void setRightWheel(float r_speed);
 
 // SET SPEED OF BOTH MOTOR
 int setWheels();
+int setWheelsSpeed(float l_speed, float r_speed);
 
-void drive_fw(int8_t distance);
-void drive_bk(int8_t distance);
+void drive_fw(uint8_t distance);
+void drive_bw(uint8_t distance);
 void drive_tr(void);
 void drive_tl(void);
 
-DriveHandler drive_handlers[] = {
-    drive_fw,
-    drive_bk,
-    drive_tr,
-    drive_tl,
-};
+//DriveHandler drive_handlers[] = {
+//    drive_fw,
+//    drive_bk,
+//    drive_tr,
+//    drive_tl,
+//};
 
 #endif /* INC_MOTOR_H_ */

@@ -2,6 +2,7 @@
 #define INC_ENCODER_H_
 
 #include "CONSTANTS.h"
+#include "api.h"
 // #include "main.h"
 
  #define _ENCODER_START (u16) 1000 //(u32) u32_max / 1e4
