@@ -10,7 +10,6 @@ void screen_init(void)
 {
   ssd1306_Init();
   screen_conf = INIT;
-  screen_clear();
 }
 
 inline void screen_clear() { ssd1306_Fill(Black); }
@@ -67,44 +66,46 @@ void screen_iteration(void)
   screen_clear();
   switch (screen_conf) {
   case (INIT):
+
+    screen_writestr("KITRO", 38, 12, LARGE);
     for (int delta = 0; delta < 5; delta++)
-      ssd1306_DrawCircle(16 * delta + 35, 15, 10, White);
+      ssd1306_DrawCircle(16 * delta + 32, 44, 10, White);
     break;
 
   case (DEFAULT):
     // DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
     // DISPLAYING BATTERY VOLTAGE
-    screen_writestr("V:", 86, 24, SMALL);
+    // screen_writestr("V:", 86, 24, SMALL);
     // screen_writefl(voltage, 104, 24, SMALL);
-
     // putString(turn,44,16,MEDIUM);
     switch (kitro.current_state) {
     case (MOUSE_STATE_INIT_IDLE):
-      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      screen_writestr("INIT_IDLE", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_INIT_CONFIG):
-      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      screen_writestr("INIT_CONF", 38, 0, SMALL);
+      screen_sharpir_test();
       break;
     case (MOUSE_STATE_INIT_RESET):
-      screen_writestr("INIT_IDLE", 42, 2, SMALL);
+      screen_writestr("INIT_RSTT", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_SEARCH_IDLE):
-      screen_writestr("SEARCH_IDLE", 42, 2, SMALL);
+      screen_writestr("SRCH_IDLE", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_SEARCH_FORWARD):
-      screen_writestr("SEARCH_FOR", 42, 2, SMALL);
+      screen_writestr("SRCH_FORW", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_SEARCH_BACK):
-      screen_writestr("SEARCH_BCK", 42, 2, SMALL);
+      screen_writestr("SRCH_BACK", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_FAST_IDLE):
-      screen_writestr("SEARCH_IDLE", 42, 2, SMALL);
+      screen_writestr("FAST_IDLE", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_FAST_FORWARD):
-      screen_writestr("SEARCH_FOR", 42, 2, SMALL);
+      screen_writestr("FAST_FORW", 38, 0, SMALL);
       break;
     case (MOUSE_STATE_FAST_BACK):
-      screen_writestr("SEARCH_BCK", 42, 2, SMALL);
+      screen_writestr("FAST_BACK", 38, 0, SMALL);
       break;
     }
 
@@ -176,7 +177,7 @@ void screen_iteration(void)
 
 void screen_sharpir_test()
 {
-  screen_writestr("testing sharp ir", 0, 0, SMALL);
+  // screen_writestr("testing sharp ir", 0, 0, SMALL);
   screen_writefl(sharp_readdist(SHARP_FR), 80, 16, SMALL);
   screen_writestr("cm", 104, 16, SMALL);
   screen_writefl(sharp_readdist(SHARP_FL), 0, 16, SMALL);

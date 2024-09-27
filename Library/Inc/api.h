@@ -11,11 +11,11 @@
 #include "main.h"
 
 // #define TIM1_START HAL_TIM_Base_Start(&htim1)
-#define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
-#define TIM10_IT_START HAL_TIM_Base_Start_IT(&htim10)
-#define TIM10_IT_STOP HAL_TIM_Base_Stop_IT(&htim10)
-#define TIM11_IT_START HAL_TIM_Base_Start_IT(&htim11)
-#define TIM11_IT_STOP HAL_TIM_Base_Stop_IT(&htim11)
+// #define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
+#define interrupt_tim10_start HAL_TIM_Base_Start_IT(&htim10)
+#define interrupt_tim10_stop HAL_TIM_Base_Stop_IT(&htim10)
+#define interrupt_tim11_start HAL_TIM_Base_Start_IT(&htim11)
+#define interrupt_tim11_stop HAL_TIM_Base_Stop_IT(&htim11)
 
 uint16_t adc_read(AdcChannels channel, uint8_t timeout);
 void delay(int hal_delay);

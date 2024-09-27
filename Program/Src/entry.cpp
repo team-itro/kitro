@@ -10,6 +10,8 @@
 // make ir_right gesture
 // make ir_left gesture
 // make button presses with interrupts
+// FIX:
+// timer interrupts
 
 volatile bool BTN1_PRESSED = false;
 bool irBlink();
@@ -83,14 +85,13 @@ int greymatter(void)
   //	XY_prev.x = 0;
   while (1) {
     state_handlers[kitro.current_state]();
-    delay(1);
+    delay(10);
   }
 }
 
 void wakeup(void)
 {
-  // TIM1_START;
-  TIM11_IT_START;
+  interrupt_tim11_start; // starting interrupt timer for display
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
   kitro.x = 0;
   kitro.y = 0;
@@ -187,7 +188,6 @@ static void handle_init_config(void)
   }
   // screen_writestr("init_config", 0, 0, SMALL);
   led_blink(ONB, 100);
-  screen_sharpir_test();
 };
 
 static void handle_init_reset(void)
@@ -266,6 +266,14 @@ static void handle_search_idle(void)
     //			runState = 0;
   }
 };
+
+typedef enum {
+  START,
+  DECIDE,
+  CENTER__,
+  FRONT
+
+} RunState;
 
 static void handle_search_forward(void)
 {

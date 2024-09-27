@@ -1,9 +1,15 @@
 #include "sensors.h"
+#include "CONSTANTS.h"
 
 // int reflectionRate = REFLECTION_RATE_;
-#define SHARP_CONST_A 35.93f
-#define SHARP_CONST_B -2.1995f
-#define SHARP_CONST_C 1.7021f
+volatile int8_t SHARP_FR_VAL = 0;
+volatile int8_t SHARP_FL_VAL = 0;
+volatile int8_t SHARP_AR_VAL = 0;
+volatile int8_t SHARP_AL_VAL = 0;
+volatile int8_t SHARP_FR_AVG = 0;
+volatile int8_t SHARP_FL_AVG = 0;
+volatile int8_t SHARP_AR_AVG = 0;
+volatile int8_t SHARP_AL_AVG = 0;
 
 float sharp_readv(AdcChannels sharp_id)
 {
@@ -35,52 +41,40 @@ float sharp_readdist(AdcChannels sharp_id)
 //	return;
 // }
 
-// bool irBlink() {
-//	static uint32_t t3 = 1000;
-//	if (LFSensor > t3 || RFSensor > t3) {
-//			return true;
-//		}
-//	return false;
-// }
-//
-// bool rightIrBlink(){
-//	static uint32_t t2 = 3000;
-//	if (DRSensor > t2) {
-//			return true;
-//		}
-//	return false;
-// }
-//
-// bool leftIrBlink(){
-//	static uint32_t t1 = 3000;
-//	if (DLSensor > t1) {
-//			return true;
-//		}
-//	return false;
-// }
+inline bool sharp_front_gesture()
+{
+  if (SHARP_FL_VAL > ADC_THRESHOLD2 || SHARP_FR_VAL > ADC_THRESHOLD2) {
+    return true;
+  }
+  return false;
+}
+
+inline bool sharp_fr_gesture()
+{
+  if (SHARP_FR_VAL > ADC_THRESHOLD3) {
+    return true;
+  }
+  return false;
+}
+
+inline bool sharp_fl_gesture()
+{
+  if (SHARP_FL_VAL > ADC_THRESHOLD3) {
+    return true;
+  }
+  return false;
+}
 
 // TODO: implement battery voltage monitoring
 
 // const float LOW_BAT_TH = LOW_BAT_TH_;
-// int32_t volMeter=0;
+// int8_t volMeter=0;
 // float voltage = 0;
-
-// int32_t LFSensor = 0;
-// int32_t RFSensor = 0;
-// int32_t DLSensor=0;
-// int32_t DRSensor=0;
 //
-// static int32_t LBuff[15] = {0};
-// static int32_t RBuff[15] = {0};
-// static int32_t FLBuff[15] = {0};
-// static int32_t FRBuff[15] = {0};
-//
-// float averageL = 0;
-// float averageR = 0;
-// float averageFL = 0;
-// float averageFR = 0;
-// float SHARP1AVG = 0;
-//
+// static int8_t LBuff[15] = {0};
+// static int8_t RBuff[15] = {0};
+// static int8_t FLBuff[15] = {0};
+// static int8_t FRBuff[15] = {0};
 //
 // static int point = 0;
 
@@ -94,43 +88,6 @@ float sharp_readdist(AdcChannels sharp_id)
 //	DLSensor = read_DL_Sensor;
 //	DRSensor = read_DR_Sensor;
 
-// left front sensor
-//	LF_EM_ON;
-//	LFSensor = read_LF_Sensor - LFSensor;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<60);
-//	LF_EM_OFF;
-//	if(LFSensor < 0)//error check
-//		LFSensor = 0;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<140);
-
-// right front sensor
-//	RF_EM_ON;
-//	RFSensor = read_RF_Sensor - RFSensor;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
-//	RF_EM_OFF;
-//	if(RFSensor < 0)
-//		RFSensor = 0;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
-//	SHARP1 = read_sharp1 - SHARP1;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
-//	RF_EM_OFF;
-//	if(RFSensor < 0)
-//		RFSensor = 0;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
-//
-//    //diagonal sensors
-//	SIDE_EM_ON;
-//	while(__HAL_TIM_GET_COUNTER(&htim1)<340);
-//	DLSensor = read_DL_Sensor - DLSensor;
-//	DRSensor = read_DR_Sensor - DRSensor;
-//    SIDE_EM_OFF;
-//	if(DLSensor < 0)
-//		DLSensor = 0;
-//	if(DRSensor < 0)
-//		DRSensor = 0;
-//	// while(__HAL_TIM_GET_COUNTER(&htim1)<500);
-//
-////	readVolMeter();
 //
 //	LFSensor = LFSensor*reflectionRate/1000;
 //	RFSensor = RFSensor*reflectionRate/1000;
@@ -169,70 +126,58 @@ float sharp_readdist(AdcChannels sharp_id)
 //     averageFL = averageFL/15;
 //     averageFR = averageFR/15;
 // }
-// void getSensorReadings() {
 //
-//	calculateAndSaveAverages();
-//
-//	static float t1 = 500.0;
-//	static float t2 = 150.0;
-//
-//
-//	if (averageR > t1){
-//		R = true;
-//		LED10_ON;
-//	} else {
-//		R = false;
-//		LED10_OFF;
-//	}
-//
-//	if (averageL > t1){
-//		LED9_ON;
-//		L = true;
-//	} else {
-//		L = false;
-//		LED9_OFF;
-//	}
-//
-//	if ((averageFL+averageFR)/2 > t2){
-//		LED11_ON;
-//		F = true;
-//	} else {
-//		F = false;
-//		LED11_OFF;
-//	}
-//
-//	// if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor >
-// t1){
-//	// 	F = true;
-//	// 	R = true;
-//	// 	L = true;
-//	// } else if (DLSensor > t1 && DRSensor > t1){
-//	// 	F = false;
-//	// 	R = true;
-//	// 	L = true;
-//	// } else if (LFSensor > t1 && DLSensor > t1){
-//	// 	F = true;
-//	// 	R = false;
-//	// 	L = true;
-//	// } else if (RFSensor > t1 && DRSensor > t1){
-//	// 	F = true;
-//	// 	R = true;
-//	// 	L = false;
-//	// } else if (DLSensor > t1){
-//	// 	F = false;
-//	// 	R = false;
-//	// 	L = true;
-//	// } else if (DRSensor > t1){
-//	// 	F = false;
-//	// 	R = true;
-//	// 	L = false;
-//	// } else if (RFSensor > t2 || LFSensor > t2){
-//	// 	F = true;
-//	// 	R = false;
-//	// 	L = false;
-//	// } else {
-//	// 	F = false;
-//	// 	R = false;
-//	// 	L = false;
-//	// }
-// }
+void determine_walls()
+{
+  // TODO: update all avg sharp ir readings
+  if (SHARP_AR_AVG > ADC_THRESHOLD1) {
+    RIGH_WALL = true;
+  } else {
+    RIGH_WALL = false;
+  }
+
+  if (SHARP_AL_AVG > ADC_THRESHOLD1) {
+    LEFT_WALL = true;
+  } else {
+    LEFT_WALL = false;
+  }
+
+  if ((SHARP_FR_AVG + SHARP_FL_AVG) / 2 > ADC_THRESHOLD0) {
+    FRON_WALL = true;
+  } else {
+    FRON_WALL = false;
+  }
+  // if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor > t1) {
+  //   F = true;
+  //   R = true;
+  //   L = true;
+  // } else if (DLSensor > t1 && DRSensor > t1) {
+  //   F = false;
+  //   R = true;
+  //   L = true;
+  // } else if (LFSensor > t1 && DLSensor > t1) {
+  //   F = true;
+  //   R = false;
+  //   L = true;
+  // } else if (RFSensor > t1 && DRSensor > t1) {
+  //   F = true;
+  //   R = true;
+  //   L = false;
+  // } else if (DLSensor > t1) {
+  //   F = false;
+  //   R = false;
+  //   L = true;
+  // } else if (DRSensor > t1) {
+  //   F = false;
+  //   R = true;
+  //   L = false;
+  // } else if (RFSensor > t2 || LFSensor > t2) {
+  //   F = true;
+  //   R = false;
+  //   L = false;
+  // } else {
+  //   F = false;
+  //   R = false;
+  //   L = false;
+  // }
+}
