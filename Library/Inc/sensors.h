@@ -29,9 +29,9 @@ float sharp_readv(AdcChannels sharp_id);
 uint8_t sharp_readraw(AdcChannels sharp_id);
 // float sharp_readdist(AdcChannels sharp_id);
 float sharp_raw2dist(uint8_t raw);
-inline bool sharp_front_gesture();
-inline bool sharp_fr_gesture();
-inline bool sharp_fl_gesture();
+bool sharp_front_gesture();
+bool sharp_fr_gesture();
+bool sharp_fl_gesture();
 void determine_walls();
 void sharps_update();
 

@@ -50,21 +50,31 @@ typedef enum {
   MOUSE_STATE_FAST_BACK
 } MouseState;
 
+typedef enum { NORTH, EAST, SOUTH, WEST } Compass;
+// typedef enum {
+//   DIR_F,
+//   DIR_R,
+//   DIR_B,
+//   DIR_L,
+// } Compass;
+
 typedef enum {
-  DIR_F,
-  DIR_R,
-  DIR_B,
-  DIR_L,
-} DriveDirection;
+  FW,
+  BK,
+  TR,
+  TL,
+} DriveState;
+
+typedef void (*StateHandler)(void);
+typedef void (*DriveHandler)(void);
 
 typedef struct {
   MouseState current_state;
   int16_t x;
   int16_t y;
-  DriveDirection orientation;
+  DriveState drive_state;
+  Compass orientation;
 } Mouse;
-
-typedef void (*StateHandler)(void);
 
 #define ADC_BUFFER_SIZE 8
 #define ADC_NUM_CHANNELS 4

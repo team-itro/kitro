@@ -3,7 +3,7 @@
 const uint8_t ADC_THRESHOLD0 = 50;
 const uint8_t ADC_THRESHOLD1 = 70;
 const uint8_t ADC_THRESHOLD2 = 80;
-const uint8_t ADC_THRESHOLD3 = 120;
+const uint8_t ADC_THRESHOLD3 = 150;
 
 // int reflectionRate = REFLECTION_RATE_;
 volatile uint8_t SHARP_FR_VAL = 0;
@@ -60,15 +60,15 @@ void sharps_update()
   SHARP_AL_VAL = sharp_readraw(SHARP_AL);
 }
 
-inline bool sharp_front_gesture()
+bool sharp_front_gesture()
 {
-  if (SHARP_FL_VAL > ADC_THRESHOLD2 || SHARP_FR_VAL > ADC_THRESHOLD2) {
+  if (SHARP_FL_VAL > ADC_THRESHOLD3 || SHARP_FR_VAL > ADC_THRESHOLD3) {
     return true;
   }
   return false;
 }
 
-inline bool sharp_fr_gesture()
+bool sharp_fr_gesture()
 {
   if (SHARP_FR_VAL > ADC_THRESHOLD3) {
     return true;
@@ -76,7 +76,7 @@ inline bool sharp_fr_gesture()
   return false;
 }
 
-inline bool sharp_fl_gesture()
+bool sharp_fl_gesture()
 {
   if (SHARP_FL_VAL > ADC_THRESHOLD3) {
     return true;

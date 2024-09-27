@@ -7,6 +7,11 @@
 // float st_speed = .3, rt_speed = .3,
 //       al_speed = .2; // ONLY ALLOWED SPEED {.25, .6, .3}
 
+void drive_fw(void);
+void drive_bk(void);
+void drive_tr(void);
+void drive_tl(void);
+
 // void motorInit(void)
 // {
 // 	// Start PWM for TIM4 channels (you may need to adjust this based on

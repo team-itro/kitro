@@ -7,12 +7,6 @@
 
 #include "entry.h"
 #include "sensors.h"
-// TODO:
-// make ir_right gesture
-// make ir_left gesture
-// make button presses with interrupts
-// FIX:
-// timer interrupts
 
 volatile bool BTN1_PRESSED = false;
 bool irBlink();
@@ -98,7 +92,7 @@ void wakeup(void)
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
   kitro.x = 0;
   kitro.y = 0;
-  kitro.orientation = DIR_F;
+  kitro.orientation = NORTH;
   screen_init();
   delay(1000);
   screen_conf = DEFAULT;
@@ -143,6 +137,10 @@ static void handle_init_idle(void)
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_CONFIG;
     handle_state_transition();
+  }
+
+  if (sharp_front_gesture()) {
+    led_blink(ONB, 100);
   }
 };
 
@@ -189,8 +187,10 @@ static void handle_init_config(void)
     kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
     handle_state_transition();
   }
+  if (sharp_front_gesture()) {
+    led_blink(ONB, 100);
+  }
   // screen_writestr("init_config", 0, 0, SMALL);
-  led_blink(ONB, 100);
 };
 
 static void handle_init_reset(void)

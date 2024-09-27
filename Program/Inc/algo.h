@@ -12,15 +12,15 @@
 extern "C" {
 #endif
 
+#include "entry.h"
 #include "stm32f4xx_hal.h"
-#include <stdbool.h>
 
-#define ROWS 14
-#define COLUMNS 14
+// #define ROWS 16
+// #define COLUMNS 16
 
-extern int flood[ROWS][COLUMNS];
-extern int backFlood[ROWS][COLUMNS];
-extern int cells[ROWS][COLUMNS];
+// extern int flood[ROWS][COLUMNS];
+// extern int backFlood[ROWS][COLUMNS];
+// extern int cells[ROWS][COLUMNS];
 
 struct coordinate {
   int y;
