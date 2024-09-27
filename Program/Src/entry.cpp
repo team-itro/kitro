@@ -10,7 +10,6 @@
 
 volatile bool BTN1_PRESSED = false;
 bool irBlink();
-#define STOP_ROBOT
 
 // u32 i;
 // u32 DELAY_MID = 1;
@@ -64,7 +63,8 @@ int greymatter(void)
 {
 //  wakeup();
 	motorInit();
-
+	encoderInit();
+	delay(100);
 
   //	if (orient == 1)
   //	{
@@ -81,15 +81,15 @@ int greymatter(void)
   //
   //	XY_prev.y = 0;
   //	XY_prev.x = 0;
-//  drive_fw(20);
-	drive_bw(20);
+  drive_fw(50);
+//	drive_bw(20);
 //	drive_tr();
 //  STOP_ROBOT
   while (1) {
 //    state_handlers[kitro.current_state]();
 //    determine_walls();
 //	drive_fw(20);
-    delay(100);
+
   }
 }
 

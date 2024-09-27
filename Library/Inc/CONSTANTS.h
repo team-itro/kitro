@@ -20,7 +20,7 @@
 //#define LINEAR_SENSITIVITY 67.7
 //#define TURN_SENSITIVITY 5
 #define ENC_COUNT_PER_CM 100
-#define TURN_COUNT_90 200
+#define TURN_COUNT_90 2000
 ///////////////////////////// MOTOR.H //////////////////////////////////////////
 #define SPEED_THRESHOLD_ 0.8
 
