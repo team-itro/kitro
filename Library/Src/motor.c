@@ -61,16 +61,18 @@ int setWheelsSpeed(float l_speed, float r_speed)
  void drive_fw(int8_t distance){
 	 uint16_t count = distance * ENC_COUNT_PER_CM;
 	 resetEncoder();
-	 while(l_position < count){
-		 setWheelSpeed(st_speed, st_speed);
+	 while(l_position < count + _ENCODER_START){
+		 setWheelsSpeed(st_speed, st_speed);
 	 }
+	 setWheelsSpeed(0, 0);
+	 resetEncoder();
  }
 
  void drive_bw(int8_t distance){
 	 uint16_t count = distance * ENC_COUNT_PER_CM;
 	 resetEncoder();
-	 while(l_position < count){
-		 setWheelSpeed(-st_speed, -st_speed);
+	 while(l_position < count + _ENCODER_START){
+		 setWheelsSpeed(-st_speed, -st_speed);
 	 }
  }
 
