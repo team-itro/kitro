@@ -47,7 +47,7 @@ void print(const char *str){
 }
 
 int greymatter(void) {
-//  initialization_block();
+  initialization_block();
   //	HAL_Delay(1000);
   //	disp_state = DEFAULT;
   //
@@ -78,10 +78,16 @@ int greymatter(void) {
 //    ssd1306_UpdateScreen();
 //    HAL_Delay(500);
 //	  print("a\n\r");
-//	  printf("%lu \n\r",r_position);
-//	  printf("%u \n\r",r_position);
-	  printf("Hello");
-	  HAL_Delay(50);
+//	  printf("%d \n",l_position);
+//	  printf("%d \n",r_position);;
+//	  HAL_TIM_PeriodElapsedCallback(&htim10);
+//	  printf("%u \n", readGyro());
+//	  HAL_Delay(50);
+	  if (l_position < 4000){
+		  setLeftWheel(0.5);
+	  } else {
+		  setLeftWheel(0);
+	  }
 //	  finishMove(STRAIGHT_RUN, 100);
 //	  setLeftWheel(1);
 //	  setRightWheel(1);
@@ -93,7 +99,7 @@ int greymatter(void) {
 int initialization_block(void)
 {
 //	ALL_LED_ON;
-//	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF
+	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF
 /////////////////////////// 	TIM6_IT_START;
 
 	motorInit();
@@ -104,9 +110,9 @@ int initialization_block(void)
 
 //	ALL_LED_OFF;
 	HAL_Delay(1000);
-//	gyroCalibration();
+	gyroCalibration();
 //	disp_state = DEFAULT;
-//	TIM10_IT_START;
+	TIM10_IT_START;
 	// TIM14_IT_START;
 
 	return 0;

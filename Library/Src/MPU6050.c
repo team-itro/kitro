@@ -4,7 +4,7 @@
 #define GYRO_CONFIG_REG 0x1B
 #define PWR_MGMT_1_REG 0x6B
 #define GYRO_ZOUT_H_REG 0x47
-#define GYRO_SENSITIVITY 131.0 * 6 // Sensitivity for 250dps
+#define GYRO_SENSITIVITY 131.0  // Sensitivity for 250dps
 
 const float timeDifference = 2e-3; // 2ms time step
 const float NOISE_THRESHOLD = 0.05; // Noise threshold
@@ -71,8 +71,8 @@ void gyroCalibration(void)
 
     // Calculate noise level
 	for (u32 i = 0; i < BUFFER_LENGTH; i++)
-		noise += pow(calibration_buffer[i] - offset, 2);
-	noise = pow(noise, .5) / 2 / GYRO_SENSITIVITY;
+		noise += pow((calibration_buffer[i] - offset), 2);
+	noise =( pow(noise, 0.5) / 2) / GYRO_SENSITIVITY ;
 
     printf("Calibration complete. Offset: %f, Noise: %f\r\n", offset, noise);
 }
