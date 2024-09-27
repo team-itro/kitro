@@ -46,8 +46,8 @@ typedef enum {
 } AdcChannels;
 
 // encoder gyro
-#define LINEAR_SENSITIVITY 67.7
-#define TURN_SENSITIVITY 5
+#define ENC_COUNT_PER_CM 37
+#define TURN_COUNT_90 2000
 
 #define SPEED_THRESHOLD_ 0.8
 
