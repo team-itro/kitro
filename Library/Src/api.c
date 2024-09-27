@@ -105,9 +105,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim == &htim10)
-    // sensor_iteration();
-    // gyroUpdate(), readSensor();
-    ;
+    // gyroUpdate();
+    sharps_update();
   else if (htim == &htim11)
     screen_iteration();
 }
+
+// void stop_it_all(void){
+// disp_state=LOW_BAT;
+// displayUpdate();
+// OFF_BUZZ;
+// STOP_ROBOT;
+// ALL_LED_OFF;
+// TIM6_IT_STOP;
+// TIM13_IT_STOP;
+// TIM14_IT_STOP;
+// return;
+// }

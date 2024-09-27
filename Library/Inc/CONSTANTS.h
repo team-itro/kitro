@@ -34,9 +34,9 @@
 /////////////////////////////////Buzzer.h /////////////////////////////////
 #define BUZZ_LOUDNESS_ .2
 
-extern bool LEFT_WALL;
-extern bool RIGH_WALL;
-extern bool FRON_WALL;
+// extern bool LEFT_WALL;
+// extern bool RIGH_WALL;
+// extern bool FRON_WALL;
 
 typedef enum {
   MOUSE_STATE_INIT_IDLE,

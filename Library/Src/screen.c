@@ -2,9 +2,9 @@
 
 ScreenConfig screen_conf;
 
-#define MAX_LINES 5
-#define LINE_HEIGHT 8
-#define MAX_CHARS_PER_LINE 21
+// bool LEFT_WALL = false;
+// bool RIGH_WALL = false;
+// bool FRON_WALL = false;
 
 void screen_init(void)
 {
@@ -84,7 +84,46 @@ void screen_iteration(void)
       break;
     case (MOUSE_STATE_INIT_CONFIG):
       screen_writestr("INIT_CONF", 38, 0, SMALL);
-      screen_sharpir_test();
+      // switch config options within here, don't need stupid display states
+      // screen_writestr("testing sharp ir", 0, 0, SMALL);
+      screen_writefl(sharp_raw2dist(SHARP_FR_VAL), 80, 16, SMALL);
+      screen_writestr("cm", 104, 16, SMALL);
+      screen_writeint(SHARP_FR_VAL, 80, 24, SMALL);
+      // screen_writestr("V", 104, 32, SMALL);
+      screen_writefl(sharp_raw2dist(SHARP_FL_VAL), 0, 16, SMALL);
+      screen_writestr("cm", 24, 16, SMALL);
+      screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
+      // screen_writestr("V", 24, 32, SMALL);
+      screen_writefl(sharp_raw2dist(SHARP_AR_VAL), 80, 40, SMALL);
+      screen_writestr("cm", 104, 40, SMALL);
+      screen_writeint(SHARP_AR_VAL, 80, 48, SMALL);
+      // screen_writestr("V", 104, 32, SMALL);
+      screen_writefl(sharp_raw2dist(SHARP_AL_VAL), 0, 40, SMALL);
+      screen_writestr("cm", 24, 40, SMALL);
+      screen_writeint(SHARP_AL_VAL, 0, 48, SMALL);
+
+      if (RIGH_WALL) {
+        ssd1306_Line(72, 36, 72, 52, White);
+        // ssd1306_Line(56, 36, 56, 52, White);
+        // ssd1306_Line(72, 20, 72, 36, White);
+        // ssd1306_Line(56, 20, 56, 36, White);
+        // ssd1306_Line(56, 36, 72, 36, White);
+      }
+      if (LEFT_WALL) {
+        // ssd1306_Line(72, 36, 72, 52, White);
+        ssd1306_Line(56, 36, 56, 52, White);
+        // ssd1306_Line(72, 20, 72, 36, White);
+        // ssd1306_Line(56, 20, 56, 36, White);
+        // ssd1306_Line(56, 36, 72, 36, White);
+      }
+      if (FRON_WALL) {
+        // ssd1306_Line(72, 36, 72, 52, White);
+        // ssd1306_Line(56, 36, 56, 52, White);
+        // ssd1306_Line(72, 20, 72, 36, White);
+        // ssd1306_Line(56, 20, 56, 36, White);
+        ssd1306_Line(56, 36, 72, 36, White);
+      }
+      // screen_writestr("V", 24, 32, SMALL);
       break;
     case (MOUSE_STATE_INIT_RESET):
       screen_writestr("INIT_RSTT", 38, 0, SMALL);
@@ -160,7 +199,6 @@ void screen_iteration(void)
     //
     // putString("ANGLE:", 22, 24, SMALL);
     // putFloat(angle_z, 70, 22, SMALL);
-    screen_sharpir_test();
     break;
 
   case (LOW_BAT):
@@ -174,20 +212,6 @@ void screen_iteration(void)
   }
   screen_update();
 }
-
-void screen_sharpir_test()
-{
-  // screen_writestr("testing sharp ir", 0, 0, SMALL);
-  screen_writefl(sharp_readdist(SHARP_FR), 80, 16, SMALL);
-  screen_writestr("cm", 104, 16, SMALL);
-  screen_writefl(sharp_readdist(SHARP_FL), 0, 16, SMALL);
-  screen_writestr("cm", 24, 16, SMALL);
-  screen_writefl(sharp_readv(SHARP_FR), 80, 32, SMALL);
-  screen_writestr("V", 104, 32, SMALL);
-  screen_writefl(sharp_readv(SHARP_FL), 0, 32, SMALL);
-  screen_writestr("V", 24, 32, SMALL);
-  // screen_update();
-};
 
 void print(char *str)
 {

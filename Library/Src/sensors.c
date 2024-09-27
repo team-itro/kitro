@@ -1,26 +1,35 @@
 #include "sensors.h"
-#include "CONSTANTS.h"
+
+const uint8_t ADC_THRESHOLD0 = 50;
+const uint8_t ADC_THRESHOLD1 = 70;
+const uint8_t ADC_THRESHOLD2 = 80;
+const uint8_t ADC_THRESHOLD3 = 120;
 
 // int reflectionRate = REFLECTION_RATE_;
-volatile int8_t SHARP_FR_VAL = 0;
-volatile int8_t SHARP_FL_VAL = 0;
-volatile int8_t SHARP_AR_VAL = 0;
-volatile int8_t SHARP_AL_VAL = 0;
-volatile int8_t SHARP_FR_AVG = 0;
-volatile int8_t SHARP_FL_AVG = 0;
-volatile int8_t SHARP_AR_AVG = 0;
-volatile int8_t SHARP_AL_AVG = 0;
+volatile uint8_t SHARP_FR_VAL = 0;
+volatile uint8_t SHARP_FL_VAL = 0;
+volatile uint8_t SHARP_AR_VAL = 0;
+volatile uint8_t SHARP_AL_VAL = 0;
+
+uint8_t SHARP_FR_AVG = 0;
+uint8_t SHARP_FL_AVG = 0;
+uint8_t SHARP_AR_AVG = 0;
+uint8_t SHARP_AL_AVG = 0;
+
+bool LEFT_WALL = false;
+bool RIGH_WALL = false;
+bool FRON_WALL = false;
 
 float sharp_readv(AdcChannels sharp_id)
 {
-  return (((float)adc_read(sharp_id, 1) * (3.3f / 4095.0f)));
+  return (((float)adc_read(sharp_id, 1) * (3.3f / 255.0f)));
 }
 
 float sharp_readdist(AdcChannels sharp_id)
 {
   float distance =
       SHARP_CONST_A * exp(SHARP_CONST_B *
-                          ((float)adc_read(sharp_id, 1) * (3.3f / 4095.0f))) +
+                          ((float)adc_read(sharp_id, 1) * (3.3f / 255.0f))) +
       SHARP_CONST_C;
   if (distance < 2.0f)
     distance = 2.0f;
@@ -29,17 +38,27 @@ float sharp_readdist(AdcChannels sharp_id)
   return distance;
 }
 
-// void stop_it_all(void){
-//	disp_state=LOW_BAT;
-//	displayUpdate();
-//	OFF_BUZZ;
-//	STOP_ROBOT;
-//	ALL_LED_OFF;
-//	TIM6_IT_STOP;
-//	TIM13_IT_STOP;
-//	TIM14_IT_STOP;
-//	return;
-// }
+float sharp_raw2dist(uint8_t raw)
+{
+  float distance =
+      SHARP_CONST_A * exp(SHARP_CONST_B * ((float)raw * (3.3f / 255.0f))) +
+      SHARP_CONST_C;
+  if (distance < 2.0f)
+    distance = 2.0f;
+  if (distance > 15.0f)
+    distance = 15.0f;
+  return distance;
+}
+
+uint8_t sharp_readraw(AdcChannels sharp_id) { return adc_read(sharp_id, 1); }
+
+void sharps_update()
+{
+  SHARP_FR_VAL = sharp_readraw(SHARP_FR);
+  SHARP_FL_VAL = sharp_readraw(SHARP_FL);
+  SHARP_AR_VAL = sharp_readraw(SHARP_AR);
+  SHARP_AL_VAL = sharp_readraw(SHARP_AL);
+}
 
 inline bool sharp_front_gesture()
 {
@@ -130,19 +149,36 @@ inline bool sharp_fl_gesture()
 void determine_walls()
 {
   // TODO: update all avg sharp ir readings
-  if (SHARP_AR_AVG > ADC_THRESHOLD1) {
+  // if (SHARP_AR_AVG > ADC_THRESHOLD1) {
+  //   RIGH_WALL = true;
+  // } else {
+  //   RIGH_WALL = false;
+  // }
+  //
+  // if (SHARP_AL_AVG > ADC_THRESHOLD1) {
+  //   LEFT_WALL = true;
+  // } else {
+  //   LEFT_WALL = false;
+  // }
+  //
+  // if ((SHARP_FR_AVG + SHARP_FL_AVG) / 2 > ADC_THRESHOLD1) {
+  //   FRON_WALL = true;
+  // } else {
+  //   FRON_WALL = false;
+  // }
+  if (SHARP_AR_VAL > ADC_THRESHOLD1) {
     RIGH_WALL = true;
   } else {
     RIGH_WALL = false;
   }
 
-  if (SHARP_AL_AVG > ADC_THRESHOLD1) {
+  if (SHARP_AL_VAL > ADC_THRESHOLD1) {
     LEFT_WALL = true;
   } else {
     LEFT_WALL = false;
   }
 
-  if ((SHARP_FR_AVG + SHARP_FL_AVG) / 2 > ADC_THRESHOLD0) {
+  if ((SHARP_FR_VAL + SHARP_FL_VAL) / 2 > ADC_THRESHOLD1) {
     FRON_WALL = true;
   } else {
     FRON_WALL = false;

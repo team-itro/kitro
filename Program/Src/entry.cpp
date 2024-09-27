@@ -6,6 +6,7 @@
  */
 
 #include "entry.h"
+#include "sensors.h"
 // TODO:
 // make ir_right gesture
 // make ir_left gesture
@@ -85,6 +86,7 @@ int greymatter(void)
   //	XY_prev.x = 0;
   while (1) {
     state_handlers[kitro.current_state]();
+    determine_walls();
     delay(10);
   }
 }
@@ -92,6 +94,7 @@ int greymatter(void)
 void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
+  interrupt_tim10_start; // starting interrupt timer for sensors
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
   kitro.x = 0;
   kitro.y = 0;

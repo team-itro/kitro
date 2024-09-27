@@ -29,15 +29,12 @@
 extern ScreenConfig screen_conf;
 
 void screen_init(void);
-
 void screen_clear();
 void screen_update();
-
 void screen_writestr(const char *str, int x, int y, FONT_Size font_size);
 void screen_writeint(int INT, int x, int y, FONT_Size font_size);
 void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size);
-void screen_log(const char *text, uint8_t scroll_offset);
-void screen_sharpir_test(void);
+
 void screen_iteration(void);
 void print(char *str);
 
