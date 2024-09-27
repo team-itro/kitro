@@ -60,9 +60,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define ONB_LED_Pin GPIO_PIN_13
 #define ONB_LED_GPIO_Port GPIOC
-#define ONB_KEY_Pin GPIO_PIN_0
-#define ONB_KEY_GPIO_Port GPIOA
-#define ONB_KEY_EXTI_IRQn EXTI0_IRQn
 #define SHARP_1_Pin GPIO_PIN_2
 #define SHARP_1_GPIO_Port GPIOA
 #define SHARP_2_Pin GPIO_PIN_3
@@ -71,6 +68,12 @@ void Error_Handler(void);
 #define SHARP_3_GPIO_Port GPIOA
 #define SHARP_4_Pin GPIO_PIN_5
 #define SHARP_4_GPIO_Port GPIOA
+#define BTN0_Pin GPIO_PIN_0
+#define BTN0_GPIO_Port GPIOB
+#define BTN0_EXTI_IRQn EXTI0_IRQn
+#define BTN1_Pin GPIO_PIN_1
+#define BTN1_GPIO_Port GPIOB
+#define BTN1_EXTI_IRQn EXTI1_IRQn
 #define GYRO_SCL_Pin GPIO_PIN_10
 #define GYRO_SCL_GPIO_Port GPIOB
 #define DISPLAY_SCL_Pin GPIO_PIN_8

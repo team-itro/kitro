@@ -8,10 +8,11 @@
 #include "entry.h"
 
 volatile bool BTN1_PRESSED = false;
-#define STOP_ROBOT
+volatile bool BTN0_PRESSED = false;
 
 ConfigStates config_state;
 Mouse kitro;
+
 // u32 i;
 // u32 DELAY_MID = 1;
 // int runState = 0;
@@ -87,6 +88,7 @@ void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
   interrupt_tim10_start; // starting interrupt timer for sensors
+  print("kitro initialized uart\n\r");
   screen_init();
   delay(1000);
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
@@ -174,33 +176,33 @@ static void handle_init_reset(void)
   //
   //		if (irBlink())
   //		{
-  //			HAL_Delay(1000);
-  //			if (ORIENT == 1)
-  //			{
-  //				playSound(TONE1);
-  //				ORIENT = 0;
-  //			}
-  //			else
-  //			{
-  //				playSound(TONE1);
-  //				ORIENT = 1;
-  //			}
+  // HAL_Delay(1000);
+  // if (ORIENT == 1)
+  // {
+  // 	playSound(TONE1);
+  // 	ORIENT = 0;
+  // }
+  // else
+  // {
+  // 	playSound(TONE1);
+  // 	ORIENT = 1;
+  // }
   //
-  //			if (ORIENT == 1)
-  //			{
-  //				XY.x = 1;
-  //				XY.y = 0;
-  //				cells[0][0] = 10;
-  //			}
-  //			else
-  //			{
-  //				XY.x = 0;
-  //				XY.y = 1;
-  //				cells[0][0] = 9;
-  //			}
+  // if (ORIENT == 1)
+  // {
+  // 	XY.x = 1;
+  // 	XY.y = 0;
+  // 	cells[0][0] = 10;
+  // }
+  // else
+  // {
+  // 	XY.x = 0;
+  // 	XY.y = 1;
+  // 	cells[0][0] = 9;
+  // }
   //
-  //			XY_prev.y = 0;
-  //			XY_prev.x = 0;
+  // XY_prev.y = 0;
+  // XY_prev.x = 0;
   //		}
   //
   if (BTN1_PRESSED) {

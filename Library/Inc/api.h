@@ -26,10 +26,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 extern ADC_HandleTypeDef hadc1;
 
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim10;
 extern TIM_HandleTypeDef htim11;
+extern DMA_HandleTypeDef hdma_adc1;
+
+extern UART_HandleTypeDef huart1;
 
 #endif /* INC_API_H_ */

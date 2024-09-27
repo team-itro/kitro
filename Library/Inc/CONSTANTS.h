@@ -11,7 +11,8 @@
 #define UART_DEBUG 1
 
 // connections
-#define BTN1 ONB_KEY_Pin
+#define BTN1 BTN1_Pin
+#define BTN0 BTN0_Pin
 
 // sharp ir n battery
 #define REFLECTION_RATE_ 1000
@@ -32,9 +33,9 @@
 // #define ADC_THRESHOLD3
 
 #define SHARP_FR_CH ADC_CHANNEL_2
-#define SHARP_FL_CH ADC_CHANNEL_3
+#define SHARP_AL_CH ADC_CHANNEL_3
 #define SHARP_AR_CH ADC_CHANNEL_4
-#define SHARP_AL_CH ADC_CHANNEL_5
+#define SHARP_FL_CH ADC_CHANNEL_5
 
 typedef enum {
   SHARP_FR,

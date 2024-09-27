@@ -46,78 +46,76 @@ void flood_neighbors(int row, int col);
 bool is_at_destination(int row, int col);
 
 // Initialize the maze with walls and no accessibility
-// void initialize_maze(void)
-// {
-//   // Initialize all cells with no walls and no accessibility
-//   for (int i = 0; i < MAX_ROWS; i++) {
-//     for (int j = 0; j < MAX_COLS; j++) {
-//       maze[i][j] = 0; // No walls, no accessibility
-//     }
-//   }
-//
-//   // Configurable walls (based on the maze image)
-//
-//   // Outer boundary walls (just an example, add as needed based on the image)
-//   for (int i = 0; i < MAX_COLS; i++) {
-//     set_wall(0, i, NORTH_WALL);            // Top row walls
-//     set_wall(MAX_ROWS - 1, i, SOUTH_WALL); // Bottom row walls
-//   }
-//   for (int i = 0; i < MAX_ROWS; i++) {
-//     set_wall(i, 0, WEST_WALL);            // Leftmost column walls
-//     set_wall(i, MAX_COLS - 1, EAST_WALL); // Rightmost column walls
-//   }
-//
-//   // More specific walls based on the maze structure seen in the image
-//
-//   // (Example setup)
-//   set_wall(0, 1, EAST_WALL);
-//   set_wall(1, 1, NORTH_WALL);
-//   // Add more walls as per the maze structure from the image...
-//
-//   // Destination Area - mark central area as destination
-//   for (int i = destination_row; i < destination_row + dest_size; i++) {
-//     for (int j = destination_col; j < destination_col + dest_size; j++) {
-//       // Mark the destination as a special zone
-//       maze[i][j] |= (NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS |
-//       SOUTH_ACCESS);
-//     }
-//   }
-// }
-//
-// // Set wall in a specific direction for a cell
-// void set_wall(int row, int col, uint8_t wall_mask)
-// {
-//   if (is_valid_cell(row, col)) {
-//     maze[row][col] |= wall_mask;
-//   }
-// }
-//
-// // Check if the cell coordinates are valid
-// bool is_valid_cell(int row, int col)
-// {
-//   return (row >= 0 && row < MAX_ROWS && col >= 0 && col < MAX_COLS);
-// }
-//
-// // Flood fill algorithm to mark accessible cells
-// void flood_fill(int row, int col)
-// {
-//   if (!is_valid_cell(row, col))
-//     return;
-//
-//   // Check if the cell has already been accessed
-//   if (is_cell_accessible(
-//           row, col, NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS | SOUTH_ACCESS))
-//           {
-//     return; // Already visited
-//   }
-//
-//   // Mark current cell as accessible from all directions
-//   set_accessibility(row, col,
-//                     NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS | SOUTH_ACCESS);
-//
-//   // Recursively check neighboring cells
-//   flood_neighbors(row, col);
-// }
+void initialize_maze(void)
+{
+  // Initialize all cells with no walls and no accessibility
+  for (int i = 0; i < MAX_ROWS; i++) {
+    for (int j = 0; j < MAX_COLS; j++) {
+      maze[i][j] = 0; // No walls, no accessibility
+    }
+  }
+
+  // Configurable walls (based on the maze image)
+
+  // Outer boundary walls (just an example, add as needed based on the image)
+  for (int i = 0; i < MAX_COLS; i++) {
+    set_wall(0, i, NORTH_WALL);            // Top row walls
+    set_wall(MAX_ROWS - 1, i, SOUTH_WALL); // Bottom row walls
+  }
+  for (int i = 0; i < MAX_ROWS; i++) {
+    set_wall(i, 0, WEST_WALL);            // Leftmost column walls
+    set_wall(i, MAX_COLS - 1, EAST_WALL); // Rightmost column walls
+  }
+
+  // More specific walls based on the maze structure seen in the image
+
+  // (Example setup)
+  set_wall(0, 1, EAST_WALL);
+  set_wall(1, 1, NORTH_WALL);
+  // Add more walls as per the maze structure from the image...
+
+  // Destination Area - mark central area as destination
+  for (int i = destination_row; i < destination_row + dest_size; i++) {
+    for (int j = destination_col; j < destination_col + dest_size; j++) {
+      // Mark the destination as a special zone
+      maze[i][j] |= (NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS | SOUTH_ACCESS);
+    }
+  }
+}
+
+// Set wall in a specific direction for a cell
+void set_wall(int row, int col, uint8_t wall_mask)
+{
+  if (is_valid_cell(row, col)) {
+    maze[row][col] |= wall_mask;
+  }
+}
+
+// Check if the cell coordinates are valid
+bool is_valid_cell(int row, int col)
+{
+  return (row >= 0 && row < MAX_ROWS && col >= 0 && col < MAX_COLS);
+}
+
+// Flood fill algorithm to mark accessible cells
+void flood_fill(int row, int col)
+{
+  if (!is_valid_cell(row, col))
+    return;
+
+  // Check if the cell has already been accessed
+  if (is_cell_accessible(
+          row, col, NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS | SOUTH_ACCESS)) {
+    return; // Already visited
+  }
+
+  // Mark current cell as accessible from all directions
+  set_accessibility(row, col,
+                    NORTH_ACCESS | EAST_ACCESS | WEST_ACCESS | SOUTH_ACCESS);
+
+  // Recursively check neighboring cells
+  flood_neighbors(row, col);
+}
 //
 // // Helper function to recursively flood neighboring cells
 // void flood_neighbors(int row, int col)
