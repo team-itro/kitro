@@ -109,8 +109,8 @@ void handle_state_transition(bool trigger)
   // signal that we are transitioning
   // playSound(TONE4);
   // led_blink(ONB, 100);
-  delay(100);
   trigger = false;
+  delay(100);
   // encoder reset
   // l_start = 0;
 }
@@ -125,6 +125,10 @@ static void handle_init_idle(void)
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_CONFIG;
     handle_state_transition(BTN1_PRESSED);
+  }
+  if (BTN0_PRESSED) {
+    kitro.current_state = MOUSE_STATE_INIT_CONFIG;
+    handle_state_transition(BTN0_PRESSED);
   }
 
   // if (right_swipe()) {
@@ -147,14 +151,14 @@ static void handle_init_config(void)
   // then run the options via confirm through ir gesture
   // go back to config when done
   //
-  if (sharp_front_gesture()) {
-    switch (config_state) {
-    case INIT:
-      config_state = SENSOR_READ;
-    case SENSOR_READ:
-      config_state = INIT;
-    }
-  }
+  // if (sharp_front_gesture()) {
+  //   switch (config_state) {
+  //   case INIT:
+  //     config_state = SENSOR_READ;
+  //   case SENSOR_READ:
+  //     config_state = INIT;
+  //   }
+  // }
   if (left_swipe()) {
     led_blink(ONB, 100);
     led_blink(ONB, 100);

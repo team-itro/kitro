@@ -97,8 +97,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == BTN1) {
     BTN1_PRESSED = true;
+    print("btn1_pressed\n\r");
   } else if (GPIO_Pin == BTN0) {
     BTN0_PRESSED = true;
+    print("btn0_pressed\n\r");
   } else {
     __NOP();
   }
