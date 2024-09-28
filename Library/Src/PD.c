@@ -11,7 +11,7 @@ float Kd_enc = 0.0f;
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
 const float MIN_SPEED = 0.5;
-const float MAX_SPEED1 = 0.7;
+const float MAX_SPEED1 = 0.7;7
 const float MIN_SPEED1 = 0.7;
 const float REF = 9;
 
