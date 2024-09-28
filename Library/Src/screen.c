@@ -1,12 +1,6 @@
 #include "screen.h"
 
-void screen_init(void)
-{
-  ssd1306_Init();
-  screen_writestr("KITRO", 38, 12, LARGE);
-  for (int delta = 0; delta < 5; delta++)
-    ssd1306_DrawCircle(16 * delta + 32, 44, 10, White);
-}
+void screen_init(void) { ssd1306_Init(); }
 
 inline void screen_clear() { ssd1306_Fill(Black); }
 
@@ -51,7 +45,10 @@ void screen_iteration(void)
   screen_clear();
   switch (kitro.current_state) {
   case (MOUSE_STATE_INIT_IDLE):
-    screen_writestr("INIT_IDLE", 38, 0, SMALL);
+    // screen_writestr("INIT_IDLE", 38, 0, SMALL);
+    screen_writestr("KITRO", 38, 12, LARGE);
+    for (int delta = 0; delta < 5; delta++)
+      ssd1306_DrawCircle(16 * delta + 32, 44, 10, White);
     break;
   case (MOUSE_STATE_INIT_CONFIG):
     switch (config_state) {
