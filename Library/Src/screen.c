@@ -154,3 +154,12 @@ void print(char *str)
 #endif
   // screen_writestr(str, 0, 0, SMALL);
 }
+
+void print_int(int num)
+{
+#if defined(UART_DEBUG) && UART_DEBUG == 1
+  printf("%d", num);
+#endif
+  // screen_writestr(str, 0, 0, SMALL);
+}
+

@@ -39,6 +39,7 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
 void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
 void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
+void drive_fw_encoder(uint8_t distance);
 
 // Function to set motor speeds
 

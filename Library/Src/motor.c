@@ -72,16 +72,6 @@ int setWheelsSpeed(float l_speed, float r_speed)
   return 0;
 }
 
-//void drive_fw(uint8_t distance)
-//{
-//  uint16_t count = (uint16_t)distance * ENC_COUNT_PER_CM;
-//  resetEncoder();
-//  while (l_position < (count + _ENCODER_START)) {
-//    setWheelsSpeed(st_speed, st_speed);
-//  }
-//  setWheelsSpeed(0, 0);
-//  resetEncoder();
-//}
 
 void drive_fw(uint8_t distance)
 {
@@ -91,6 +81,10 @@ void drive_fw(uint8_t distance)
 	  wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
   }
   setWheelsSpeed(0, 0);
+  print_int(l_position);
+  print(" ");
+  print_int(r_position);
+  print("\n");
   resetEncoder();
 }
 

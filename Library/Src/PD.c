@@ -36,9 +36,10 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (LEFT_WALL){
 		left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
-	}else{
-		drive_fw(18);
 	}
+//	}else{
+//		drive_fw(18);
+//	}
 }
 
 void wall_follow_control2(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
@@ -128,6 +129,33 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 
 	// Set the motor speeds
 	setWheelsSpeed(left_motor_speed, right_motor_speed);
+}
+
+void drive_fw_encoder(uint8_t distance)
+{
+  uint16_t count = (uint16_t)distance * ENC_COUNT_PER_CM;
+  resetEncoder();
+  while (l_position < (count + _ENCODER_START)) {
+	float error = l_position - r_position;
+	float control_signal = compute_pd_control(error, previous_error);
+	previous_error = error;
+
+	float left_motor_speed = 0.7 + control_signal;
+	float right_motor_speed = 0.7 - control_signal;
+
+	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
+	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
+	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
+	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+
+	setWheelsSpeed(left_motor_speed, right_motor_speed);
+  }
+  setWheelsSpeed(0, 0);
+  print_int(l_position);
+  print(" ");
+  print_int(r_position);
+  print("\n");
+  resetEncoder();
 }
 
 

@@ -16,6 +16,7 @@
 #define interrupt_tim10_stop HAL_TIM_Base_Stop_IT(&htim10)
 #define interrupt_tim11_start HAL_TIM_Base_Start_IT(&htim11)
 #define interrupt_tim11_stop HAL_TIM_Base_Stop_IT(&htim11)
+#define interrupt_tim5_start HAL_TIM_Base_Start_IT(&htim5)
 
 uint16_t adc_read(AdcChannels channel, uint8_t timeout);
 void delay(int hal_delay);
@@ -30,6 +31,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim10;
 extern TIM_HandleTypeDef htim11;
 extern DMA_HandleTypeDef hdma_adc1;
