@@ -133,7 +133,7 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
 
 	// Set the motor speeds
-	setWheelsSpeed(left_motor_speed, right_motor_speed);+
+	setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
 void drive_fw_encoder(uint8_t distance)
