@@ -2,13 +2,13 @@
 #include "sensors.h"  // Assuming this is where sharp sensor reading functions are located
 
 // Define PD constants (These values may need to be tuned)
-float Kp = 0.6f;
-float Kd = 0.2f;
+float Kp = 0.25f;
+float Kd = 0.05f;
 
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
 const float MIN_SPEED = 0.5;
-const float REF = 45;
+const float REF = 9;
 
 // Variables to store error and previous error
 float previous_error = 0.0;
@@ -24,7 +24,7 @@ float compute_pd_control(float error, float previous_error)
 void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	determine_walls();
 	// Front wall avoidance check
-	if (SHARP_FL_VAL > 40 && SHARP_FR_VAL > 40) {
+	if (sharp_raw2dist_lut(SHARP_FL_VAL) < 12 && sharp_raw2dist_lut(SHARP_FR_VAL) < 12) {
 		// Obstacle detected in front, slow down or stop
 		float left_motor_speed = 0;
 		float right_motor_speed = 0;
@@ -45,7 +45,7 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
 {
     // Compute error between the left and right walls
-    float error = (SHARP_AL_VAL - SHARP_AR_VAL);
+    float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - sharp_raw2dist_lut(SHARP_AR_VAL));
 
     // Compute the PD control output
     float control_signal = compute_pd_control(error, previous_error);
@@ -54,8 +54,8 @@ void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VA
     previous_error = error;
 
     // Set motor speeds based on the control signal
-    float left_motor_speed = 0.7 - control_signal;
-    float right_motor_speed = 0.7 + control_signal;
+    float left_motor_speed = 0.7 + control_signal;
+    float right_motor_speed = 0.7 - control_signal;
 
     // Ensure motor speeds stay within limits
     if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
@@ -69,7 +69,7 @@ void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VA
 
 void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	// Compute error between the left and right walls
-	float error = (SHARP_AL_VAL - REF);
+	float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - REF);
 
 	// Compute the PD control output
 	float control_signal = compute_pd_control(error, previous_error);
@@ -93,7 +93,7 @@ void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_
 
 void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	// Compute error between the left and right walls
-	float error = (SHARP_AR_VAL - REF);
+	float error = (sharp_raw2dist_lut(SHARP_AR_VAL) - REF);
 
 	// Compute the PD control output
 	float control_signal = compute_pd_control(error, previous_error);
@@ -103,7 +103,7 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 
 	// Set motor speeds based on the control signal
 	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 + control_signal;
+	float right_motor_speed = 0.7 +  control_signal;
 
 
 	// Ensure motor speeds stay within limits
