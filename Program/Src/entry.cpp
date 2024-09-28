@@ -34,38 +34,8 @@ int greymatter(void)
 {
   wakeup();
   delay(2000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  about_turn();
-//  drive_fw(18);
-//  delay(1000);
-//  drive_tl();
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_tr();
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_fw(18);
-//  delay(1000);
-//  drive_tl();
-//  delay(1000);
-
-
-
-
-  // drive(20, 20);
   while (1) {
     state_handlers[kitro.current_state]();
-    //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
-    // drive_fw_encoder(18);
     delay(10);
   }
 }
@@ -81,6 +51,7 @@ void wakeup(void)
   delay(1000);
   kitro.current_state = MOUSE_STATE_INIT_IDLE;
   // starting position will be considered north
+  // kitro.orientation = NORTH;
   kitro.orientation = EAST;
   config_state = INIT;
   initialize_maze();
@@ -221,9 +192,11 @@ static void handle_search_forward(void)
       kitro.drive_state =
           toMove(kitro.position, kitro.prev_position, kitro.orientation);
       if (kitro.drive_state == TL) {
-        println("RUN LEFT");
-      } else if (kitro.drive_state == TR) {
+        // println("RUN LEFT");
         println("RUN RIGHT");
+      } else if (kitro.drive_state == TR) {
+        // println("RUN RIGHT");
+        println("RUN LEFT");
       } else if (kitro.drive_state == BK) {
         println("RUN BACK");
       } else if (kitro.drive_state == FW) {
@@ -234,7 +207,21 @@ static void handle_search_forward(void)
       // what to do when in center
       println("!!!unreachable: in center!!!");
     }
-    delay(1000);
+    println("!!!!mazeeee!!!!!");
+    for (int i = 0; i < 16; i++) {
+      for (int j = 0; j < 16; j++) {
+        printf("%d ", cells[i][j]);
+      }
+      printf("\n");
+    }
+    // println("!!!!floodfill!!!!!");
+    // for (int i = 0; i < 16; i++) {
+    //   for (int j = 0; j < 16; j++) {
+    //     printf("%d ", cells[i][j]);
+    //   }
+    //   printf("\n");
+    // }
+    delay(2000);
     // done search_forward?
     // set drive mode
     break;
@@ -242,17 +229,19 @@ static void handle_search_forward(void)
     println("running");
     if (kitro.drive_state == TL) {
       // println("RUN LEFT");
-      drive_tl();
+      drive_tr();
+      kitro.orientation = orientation(kitro.orientation, kitro.drive_state);
     } else if (kitro.drive_state == TR) {
       // println("RUN RIGHT");
-      drive_tr();
+      drive_tl();
+      kitro.orientation = orientation(kitro.orientation, kitro.drive_state);
     } else if (kitro.drive_state == BK) {
       // println("RUN BACK");
       drive_tr();
       drive_tr();
     } else if (kitro.drive_state == FW) {
       // println("RUN FORWARD");
-      drive_fw(18);
+      drive_fw(17);
     }
     // edge handling
     run_state = DECIDE;
