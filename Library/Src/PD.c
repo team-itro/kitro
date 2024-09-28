@@ -2,8 +2,8 @@
 #include "sensors.h"  // Assuming this is where sharp sensor reading functions are located
 
 // Define PD constants (These values may need to be tuned)
-float Kp = 0.1f;
-float Kd = 0.05f;
+float Kp = 0.6f;
+float Kd = 0.2f;
 
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
@@ -24,7 +24,7 @@ float compute_pd_control(float error, float previous_error)
 void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	determine_walls();
 	// Front wall avoidance check
-	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
+	if (SHARP_FL_VAL > 40 && SHARP_FR_VAL > 40) {
 		// Obstacle detected in front, slow down or stop
 		float left_motor_speed = 0;
 		float right_motor_speed = 0;
@@ -54,8 +54,8 @@ void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VA
     previous_error = error;
 
     // Set motor speeds based on the control signal
-    float left_motor_speed = 0.7 + control_signal;
-    float right_motor_speed = 0.7 - control_signal;
+    float left_motor_speed = 0.7 - control_signal;
+    float right_motor_speed = 0.7 + control_signal;
 
     // Ensure motor speeds stay within limits
     if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
@@ -102,8 +102,8 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	previous_error = error;
 
 	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 + control_signal;
-	float right_motor_speed = 0.7 - control_signal;
+	float left_motor_speed = 0.7 - control_signal;
+	float right_motor_speed = 0.7 + control_signal;
 
 
 	// Ensure motor speeds stay within limits
