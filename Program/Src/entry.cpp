@@ -41,7 +41,7 @@ void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
   interrupt_tim10_start; // starting interrupt timer for sensors
-                         //  interrupt_tim5_start;
+  interrupt_tim5_start;                       //  interrupt_tim5_start;
   print("kitro initialized uart\n\r");
   screen_init();
   delay(1000);

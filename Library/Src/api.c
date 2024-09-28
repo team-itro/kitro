@@ -113,6 +113,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     sharps_update();
   else if (htim == &htim11)
     screen_iteration();
+  else if  (htim == &htim5){
+      if (HAL_GetTick() > nextPID) {
+    	  if (pid)
+    		  updatePID();
+          nextPID += PID_INTERVAL;
+      }
+  }
 }
 
 // void stop_it_all(void){

@@ -68,12 +68,9 @@ void Error_Handler(void);
 #define SHARP_3_GPIO_Port GPIOA
 #define SHARP_4_Pin GPIO_PIN_5
 #define SHARP_4_GPIO_Port GPIOA
-#define BTN0_Pin GPIO_PIN_0
-#define BTN0_GPIO_Port GPIOB
-#define BTN0_EXTI_IRQn EXTI0_IRQn
-#define BTN1_Pin GPIO_PIN_1
+#define BTN1_Pin GPIO_PIN_0
 #define BTN1_GPIO_Port GPIOB
-#define BTN1_EXTI_IRQn EXTI1_IRQn
+#define BTN1_EXTI_IRQn EXTI0_IRQn
 #define GYRO_SCL_Pin GPIO_PIN_10
 #define GYRO_SCL_GPIO_Port GPIOB
 #define DISPLAY_SCL_Pin GPIO_PIN_8

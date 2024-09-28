@@ -30,6 +30,9 @@
 // PD controller gains
 extern float Kp;
 extern float Kd;
+extern int pid;
+extern volatile unsigned long nextPID;
+
 
 // Function to compute the PD control output based on sharp sensor readings
 float compute_pd_control(float error, float previous_error, float Kd, float Kp);
