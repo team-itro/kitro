@@ -83,7 +83,8 @@ int greymatter(void)
 	  state_handlers[kitro.current_state]();
 //    determine_walls();
 //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
-	  drive_fw(18);
+//	  drive_fw(18);
+	  setWheelsSpeed(0.8,0.8);
 	  delay(200);
   }
 }
