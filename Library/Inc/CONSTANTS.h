@@ -12,7 +12,6 @@
 
 // connections
 #define BTN1 BTN1_Pin
-#define BTN0 BTN0_Pin
 
 #define PID_RATE 3 // Hz
 #define PID_INTERVAL 1000 / PID_RATE
