@@ -96,9 +96,14 @@ typedef enum {
 typedef void (*DriveHandler)(void);
 
 typedef struct {
+  int8_t x;
+  int8_t y;
+} Coordinate;
+
+typedef struct {
   MouseState current_state;
-  int16_t x;
-  int16_t y;
+  Coordinate position;
+  Coordinate prev_position;
   DriveState drive_state;
   Compass orientation;
 } Mouse;

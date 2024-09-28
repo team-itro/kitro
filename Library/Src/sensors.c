@@ -52,23 +52,24 @@ float sharp_lookup_table[ADC_RESOLUTION] = {
     2.00f,  2.00f,  2.00f,  2.00f,
 };
 
-float sharp_readv(AdcChannels sharp_id)
-{
-  return (((float)adc_read(sharp_id, 1) * (3.3f / 255.0f)));
-}
+// float sharp_readv(AdcChannels sharp_id)
+// {
+//   // return (((float)adc_read(sharp_id, 1) * (3.3f / 255.0f)));
+//   // return 255.0f;
+// }
 
-float sharp_readdist(AdcChannels sharp_id)
-{
-  float distance =
-      SHARP_CONST_A * exp(SHARP_CONST_B *
-                          ((float)adc_read(sharp_id, 1) * (3.3f / 255.0f))) +
-      SHARP_CONST_C;
-  if (distance < 2.0f)
-    distance = 2.0f;
-  if (distance > 15.0f)
-    distance = 15.0f;
-  return distance;
-}
+// float sharp_readdist(AdcChannels sharp_id)
+// {
+//   float distance =
+//       SHARP_CONST_A * exp(SHARP_CONST_B *
+//                           ((float)adc_read(sharp_id, 1) * (3.3f / 255.0f))) +
+//       SHARP_CONST_C;
+//   if (distance < 2.0f)
+//     distance = 2.0f;
+//   if (distance > 15.0f)
+//     distance = 15.0f;
+//   return distance;
+// }
 
 float sharp_raw2dist_lut(uint8_t raw)
 {
@@ -84,17 +85,17 @@ float sharp_raw2dist_lut(uint8_t raw)
   return distance;
 }
 
-float sharp_raw2dist(uint8_t raw)
-{
-  float distance =
-      SHARP_CONST_A * exp(SHARP_CONST_B * ((float)raw * (3.3f / 255.0f))) +
-      SHARP_CONST_C;
-  if (distance < 2.0f)
-    distance = 2.0f;
-  if (distance > 15.0f)
-    distance = 15.0f;
-  return distance;
-}
+// float sharp_raw2dist(uint8_t raw)
+// {
+//   float distance =
+//       SHARP_CONST_A * exp(SHARP_CONST_B * ((float)raw * (3.3f / 255.0f))) +
+//       SHARP_CONST_C;
+//   if (distance < 2.0f)
+//     distance = 2.0f;
+//   if (distance > 15.0f)
+//     distance = 15.0f;
+//   return distance;
+// }
 
 uint8_t sharp_readraw(AdcChannels sharp_id) { return adc_read(sharp_id, 1); }
 

@@ -47,8 +47,8 @@ void screen_iteration(void)
   case (MOUSE_STATE_INIT_IDLE):
     // screen_writestr("INIT_IDLE", 38, 0, SMALL);
     screen_writestr("KITRO", 38, 12, LARGE);
-    for (int delta = 0; delta < 5; delta++)
-      ssd1306_DrawCircle(16 * delta + 32, 44, 10, White);
+    // for (int delta = 0; delta < 5; delta++)
+    //   ssd1306_DrawCircle(16 * delta + 32, 44, 10, White);
     break;
   case (MOUSE_STATE_INIT_CONFIG):
     switch (config_state) {
