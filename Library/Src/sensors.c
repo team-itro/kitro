@@ -208,13 +208,21 @@ bool left_swipe()
 void determine_walls()
 {
   if (SHARP_AR_VAL > ADC_THRESHOLD0) {
-    RIGH_WALL = true;
+    if (SHARP_FR_VAL < ADC_THRESHOLD2 || SHARP_FL_VAL < ADC_THRESHOLD2) {
+      RIGH_WALL = true;
+    } else {
+      RIGH_WALL = false;
+    }
   } else {
     RIGH_WALL = false;
   }
 
   if (SHARP_AL_VAL > ADC_THRESHOLD0) {
-    LEFT_WALL = true;
+    if (SHARP_FR_VAL < ADC_THRESHOLD2 || SHARP_FL_VAL < ADC_THRESHOLD2) {
+      LEFT_WALL = true;
+    } else {
+      LEFT_WALL = false;
+    }
   } else {
     LEFT_WALL = false;
   }

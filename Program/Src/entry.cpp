@@ -221,7 +221,7 @@ static void handle_search_forward(void)
     //   }
     //   printf("\n");
     // }
-    delay(2000);
+    delay(500);
     // done search_forward?
     // set drive mode
     break;
