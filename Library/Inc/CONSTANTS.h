@@ -100,8 +100,8 @@ typedef enum {
 typedef void (*DriveHandler)(void);
 
 typedef struct {
-  int8_t x;
   int8_t y;
+  int8_t x;
 } Coordinate;
 
 typedef struct {
