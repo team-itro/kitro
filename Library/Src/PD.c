@@ -51,7 +51,7 @@ void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_fron
     float right_motor_speed = 0.7 + control_signal;
 
     // Front wall avoidance check
-    if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+    if (sharp_front_left_dist < 10 || sharp_front_right_dist < 10) {
         // Obstacle detected in front, slow down or stop
         left_motor_speed = 0;
         right_motor_speed = 0;
@@ -82,7 +82,7 @@ void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float 
 	float right_motor_speed = 0.7 + control_signal;
 
 	// Front wall avoidance check
-	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+	if (sharp_front_left_dist < 10 || sharp_front_right_dist < 10) {
 		// Obstacle detected in front, slow down or stop
 		left_motor_speed = 0;
 		right_motor_speed = 0;
@@ -109,11 +109,11 @@ void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, floa
 	previous_error = error;
 
 	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 + control_signal;
+	float left_motor_speed = 0.7 + control_signal;
+	float right_motor_speed = 0.7 - control_signal;
 
 	// Front wall avoidance check
-	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+	if (sharp_front_left_dist < 10 || sharp_front_right_dist < 10) {
 		// Obstacle detected in front, slow down or stop
 		left_motor_speed = 0;
 		right_motor_speed = 0;

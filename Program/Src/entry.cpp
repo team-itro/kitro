@@ -81,7 +81,7 @@ int greymatter(void)
     state_handlers[kitro.current_state]();
 //    determine_walls();
     wall_follow_control(sharp_readdist(SHARP_AL),sharp_readdist(SHARP_AR),sharp_readdist(SHARP_FL),sharp_readdist(SHARP_FR));
-    delay(10);
+    delay(20);
   }
 }
 
