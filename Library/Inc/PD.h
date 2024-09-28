@@ -32,7 +32,7 @@ extern float Kp;
 extern float Kd;
 
 // Function to compute the PD control output based on sharp sensor readings
-float compute_pd_control(float error, float previous_error);
+float compute_pd_control(float error, float previous_error, float Kd, float Kp);
 
 // Function to control the robot using PD control logic
 void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);

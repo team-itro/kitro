@@ -5,16 +5,21 @@
 float Kp = 0.01f;
 float Kd = 0.0f;
 
+float Kp_enc = 0.00001f;
+float Kd_enc = 0.0f;
+
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
 const float MIN_SPEED = 0.5;
+const float MAX_SPEED1 = 0.7;
+const float MIN_SPEED1 = 0.7;
 const float REF = 9;
 
 // Variables to store error and previous error
 float previous_error = 0.0;
 
 // Function to compute the PD control output
-float compute_pd_control(float error, float previous_error)
+float compute_pd_control(float error, float previous_error, float Kp, float Kd)
 {
     float derivative = error - previous_error;
     float output = (Kp * error) + (Kd * derivative);
@@ -63,7 +68,7 @@ void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VA
     float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - sharp_raw2dist_lut(SHARP_AR_VAL));
 
     // Compute the PD control output
-    float control_signal = compute_pd_control(error, previous_error);
+    float control_signal = compute_pd_control(error, previous_error, Kp, Kd);
 
     // Update previous error for the next cycle
     previous_error = error;
@@ -87,7 +92,7 @@ void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_
 	float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - REF);
 
 	// Compute the PD control output
-	float control_signal = compute_pd_control(error, previous_error);
+	float control_signal = compute_pd_control(error, previous_error,Kp, Kd);
 
 	// Update previous error for the next cycle
 	previous_error = error;
@@ -111,7 +116,7 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	float error = (sharp_raw2dist_lut(SHARP_AR_VAL) - REF);
 
 	// Compute the PD control output
-	float control_signal = compute_pd_control(error, previous_error);
+	float control_signal = compute_pd_control(error, previous_error,Kp, Kd);
 
 	// Update previous error for the next cycle
 	previous_error = error;
@@ -122,10 +127,10 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 
 
 	// Ensure motor speeds stay within limits
-	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
-	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
-	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
-	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+	if (left_motor_speed > MAX_SPEED1) left_motor_speed = MAX_SPEED1;
+	if (left_motor_speed < MIN_SPEED1) left_motor_speed = MIN_SPEED1;
+	if (right_motor_speed > MAX_SPEED1) right_motor_speed = MAX_SPEED1;
+	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
 
 	// Set the motor speeds
 	setWheelsSpeed(left_motor_speed, right_motor_speed);
@@ -137,11 +142,11 @@ void drive_fw_encoder(uint8_t distance)
   resetEncoder();
   while (l_position < (count + _ENCODER_START)) {
 	float error = l_position - r_position;
-	float control_signal = compute_pd_control(error, previous_error);
+	float control_signal = compute_pd_control(error, previous_error, Kp_enc, Kd_enc);
 	previous_error = error;
 
-	float left_motor_speed = 0.7 + control_signal;
-	float right_motor_speed = 0.7 - control_signal;
+	float left_motor_speed = 0.7 - control_signal;
+	float right_motor_speed = 0.7 + control_signal;
 
 	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
 	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
