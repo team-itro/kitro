@@ -23,7 +23,12 @@ float compute_pd_control(float error, float previous_error)
 
 void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	determine_walls();
-	if (RIGH_WALL & LEFT_WALL){
+	// Front wall avoidance check
+	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
+		// Obstacle detected in front, slow down or stop
+		left_motor_speed = 0;
+		right_motor_speed = 0;
+	}else if (RIGH_WALL & LEFT_WALL){
 		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (RIGH_WALL){
 		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
@@ -49,13 +54,6 @@ void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VA
     // Set motor speeds based on the control signal
     float left_motor_speed = 0.7 + control_signal;
     float right_motor_speed = 0.7 - control_signal;
-
-    // Front wall avoidance check
-    if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
-        // Obstacle detected in front, slow down or stop
-        left_motor_speed = 0;
-        right_motor_speed = 0;
-    }
 
     // Ensure motor speeds stay within limits
     if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
