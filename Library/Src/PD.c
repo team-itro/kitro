@@ -5,14 +5,14 @@
 float Kp = 0.01f;
 float Kd = 0.0f;
 
-float Kp_enc = 0.00001f;
+float Kp_enc = 0.001f;
 float Kd_enc = 0.0f;
 
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
 const float MIN_SPEED = 0.5;
-const float MAX_SPEED1 = 0.7;7
-const float MIN_SPEED1 = 0.7;
+const float MAX_SPEED1 = 0.75;
+const float MIN_SPEED1 = 0.65;
 const float REF = 9;
 
 // Variables to store error and previous error
@@ -133,7 +133,7 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
 
 	// Set the motor speeds
-	setWheelsSpeed(left_motor_speed, right_motor_speed);
+	setWheelsSpeed(left_motor_speed, right_motor_speed);+
 }
 
 void drive_fw_encoder(uint8_t distance)
@@ -148,18 +148,18 @@ void drive_fw_encoder(uint8_t distance)
 	float left_motor_speed = 0.7 - control_signal;
 	float right_motor_speed = 0.7 + control_signal;
 
-	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
-	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
-	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
-	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+	if (left_motor_speed > MAX_SPEED1) left_motor_speed = MAX_SPEED1;
+	if (left_motor_speed < MIN_SPEED1) left_motor_speed = MIN_SPEED1;
+	if (right_motor_speed > MAX_SPEED1) right_motor_speed = MAX_SPEED1;
+	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
 
 	setWheelsSpeed(left_motor_speed, right_motor_speed);
   }
   setWheelsSpeed(0, 0);
-  print_int(l_position);
-  print(" ");
-  print_int(r_position);
-  print("\n");
+//  print_int(l_position);
+//  print(" ");
+//  print_int(r_position);
+//  print("\n");
   resetEncoder();
 }
 
