@@ -109,8 +109,8 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	previous_error = error;
 
 	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 + control_signal;
+	float left_motor_speed = 0.7 + control_signal;
+	float right_motor_speed = 0.7 - control_signal;
 
 	// Front wall avoidance check
 	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
