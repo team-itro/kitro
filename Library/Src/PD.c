@@ -8,7 +8,7 @@ float Kd = 0.05f;
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
 const float MIN_SPEED = 0.5;
-const float REF = 10;
+const float REF = 45;
 
 // Variables to store error and previous error
 float previous_error = 0.0;
@@ -21,24 +21,24 @@ float compute_pd_control(float error, float previous_error)
     return output;
 }
 
-void wall_follow_control(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	determine_walls();
 	if (RIGH_WALL & LEFT_WALL){
-		wall_follow(sharp_left_dist, sharp_right_dist, sharp_front_left_dist, sharp_front_right_dist);
+		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (RIGH_WALL){
-		right_wall_follow(sharp_right_dist, sharp_front_left_dist, sharp_front_right_dist);
+		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (LEFT_WALL){
-		left_wall_follow(sharp_left_dist, sharp_front_left_dist, sharp_front_right_dist);
+		left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else{
 		drive_fw(18);
 	}
 }
 
 // Function to follow the wall and maintain the robot at the center
-void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist)
+void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
 {
     // Compute error between the left and right walls
-    float error = (sharp_left_dist - sharp_right_dist);
+    float error = (SHARP_AL_VAL - SHARP_AR_VAL);
 
     // Compute the PD control output
     float control_signal = compute_pd_control(error, previous_error);
@@ -47,11 +47,11 @@ void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_fron
     previous_error = error;
 
     // Set motor speeds based on the control signal
-    float left_motor_speed = 0.7 - control_signal;
-    float right_motor_speed = 0.7 + control_signal;
+    float left_motor_speed = 0.7 + control_signal;
+    float right_motor_speed = 0.7 - control_signal;
 
     // Front wall avoidance check
-    if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+    if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
         // Obstacle detected in front, slow down or stop
         left_motor_speed = 0;
         right_motor_speed = 0;
@@ -67,9 +67,9 @@ void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_fron
     setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
-void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	// Compute error between the left and right walls
-	float error = (sharp_left_dist - REF);
+	float error = (SHARP_AL_VAL - REF);
 
 	// Compute the PD control output
 	float control_signal = compute_pd_control(error, previous_error);
@@ -78,11 +78,11 @@ void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float 
 	previous_error = error;
 
 	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 + control_signal;
+	float left_motor_speed = 0.7 + control_signal;
+	float right_motor_speed = 0.7 - control_signal;
 
 	// Front wall avoidance check
-	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
 		// Obstacle detected in front, slow down or stop
 		left_motor_speed = 0;
 		right_motor_speed = 0;
@@ -98,9 +98,9 @@ void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float 
 	setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
-void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist){
+void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
 	// Compute error between the left and right walls
-	float error = (sharp_right_dist - REF);
+	float error = (SHARP_AR_VAL - REF);
 
 	// Compute the PD control output
 	float control_signal = compute_pd_control(error, previous_error);
@@ -113,7 +113,7 @@ void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, floa
 	float right_motor_speed = 0.7 + control_signal;
 
 	// Front wall avoidance check
-	if (sharp_front_left_dist < 6 || sharp_front_right_dist < 6) {
+	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
 		// Obstacle detected in front, slow down or stop
 		left_motor_speed = 0;
 		right_motor_speed = 0;

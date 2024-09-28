@@ -35,10 +35,10 @@ extern float Kd;
 float compute_pd_control(float error, float previous_error);
 
 // Function to control the robot using PD control logic
-void wall_follow_control(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
-void wall_follow(float sharp_left_dist, float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
-void left_wall_follow(float sharp_left_dist, float sharp_front_left_dist, float sharp_front_right_dist);
-void right_wall_follow(float sharp_right_dist, float sharp_front_left_dist, float sharp_front_right_dist);
+void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
+void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
+void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
+void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL);
 
 // Function to set motor speeds
 

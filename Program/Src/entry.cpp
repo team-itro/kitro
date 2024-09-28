@@ -77,11 +77,13 @@ int greymatter(void)
   //
   //	XY_prev.y = 0;
   //	XY_prev.x = 0;
+//  drive_tr();
   while (1) {
-    state_handlers[kitro.current_state]();
+//    state_handlers[kitro.current_state]();
 //    determine_walls();
-    wall_follow_control(sharp_readdist(SHARP_AL),sharp_readdist(SHARP_AR),sharp_readdist(SHARP_FL),sharp_readdist(SHARP_FR));
-    delay(10);
+    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
+
+	  delay(10);
   }
 }
 
