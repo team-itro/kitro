@@ -15,6 +15,8 @@ const float MAX_SPEED1 = 0.75;
 const float MIN_SPEED1 = 0.65;
 const float REF = 9;
 
+bool FLAG = false;
+
 // Variables to store error and previous error
 float previous_error = 0.0;
 
@@ -57,16 +59,16 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
                          uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
 {
   determine_walls();
-  // Front wall avoidance check
-  //   if (sharp_raw2dist_lut(SHARP_FL_VAL) < 12 &&
-  //       sharp_raw2dist_lut(SHARP_FR_VAL) < 12) {
-  //     // Obstacle detected in front, slow down or stop
-  //     float left_motor_speed = 0;
-  //     float right_motor_speed = 0;
-  //     setWheelsSpeed(left_motor_speed, right_motor_speed);
+//   Front wall avoidance check
+     if (sharp_raw2dist_lut(SHARP_FL_VAL) < 7 &&
+         sharp_raw2dist_lut(SHARP_FR_VAL) < 7) {
+       // Obstacle detected in front, slow down or stop
+       float left_motor_speed = 0;
+       float right_motor_speed = 0;
+       setWheelsSpeed(left_motor_speed, right_motor_speed);
+       FLAG = true;
 
-  //   } else
-  if (RIGH_WALL & LEFT_WALL) {
+     }else if (RIGH_WALL & LEFT_WALL) {
     wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
   } else if (RIGH_WALL) {
     right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);

@@ -50,8 +50,8 @@ typedef enum {
 } AdcChannels;
 
 // encoder gyro
-#define ENC_COUNT_PER_CM 35
-#define TURN_COUNT_90 1250
+#define ENC_COUNT_PER_CM 34
+#define TURN_COUNT_90 1244
 
 #define SPEED_THRESHOLD_ 0.8
 

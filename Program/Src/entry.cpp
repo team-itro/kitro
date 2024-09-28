@@ -34,6 +34,33 @@ int greymatter(void)
 {
   wakeup();
   delay(2000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  about_turn();
+//  drive_fw(18);
+//  delay(1000);
+//  drive_tl();
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_tr();
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_fw(18);
+//  delay(1000);
+//  drive_tl();
+//  delay(1000);
+
+
+
+
   // drive(20, 20);
   while (1) {
     state_handlers[kitro.current_state]();
