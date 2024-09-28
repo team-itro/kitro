@@ -1,5 +1,4 @@
 #include "entry.h"
-#include "CONSTANTS.h"
 
 volatile bool BTN1_PRESSED = false;
 volatile bool BTN0_PRESSED = false;
@@ -31,7 +30,7 @@ int greymatter(void)
   wakeup();
   while (1) {
     state_handlers[kitro.current_state]();
-//    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
+    //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
     drive_fw_encoder(18);
     delay(1000);
   }
@@ -42,7 +41,7 @@ void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
   interrupt_tim10_start; // starting interrupt timer for sensors
-//  interrupt_tim5_start;
+                         //  interrupt_tim5_start;
   print("kitro initialized uart\n\r");
   screen_init();
   delay(1000);
