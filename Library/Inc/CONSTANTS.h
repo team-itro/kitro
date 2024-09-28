@@ -51,7 +51,7 @@ typedef enum {
 
 // encoder gyro
 #define ENC_COUNT_PER_CM 34
-#define TURN_COUNT_90 1244
+#define TURN_COUNT_90 1240
 
 #define SPEED_THRESHOLD_ 0.8
 

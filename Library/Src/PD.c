@@ -60,8 +60,8 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
 {
   determine_walls();
 //   Front wall avoidance check
-     if (sharp_raw2dist_lut(SHARP_FL_VAL) < 7 &&
-         sharp_raw2dist_lut(SHARP_FR_VAL) < 7) {
+     if (sharp_raw2dist_lut(SHARP_FL_VAL) < 9 &&
+         sharp_raw2dist_lut(SHARP_FR_VAL) < 9) {
        // Obstacle detected in front, slow down or stop
        float left_motor_speed = 0;
        float right_motor_speed = 0;
