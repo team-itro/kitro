@@ -1,4 +1,5 @@
 #include "api.h"
+#include "CONSTANTS.h"
 #include "entry.h"
 #include "main.h"
 
@@ -98,9 +99,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   if (GPIO_Pin == BTN1) {
     BTN1_PRESSED = true;
     print("btn1_pressed\n\r");
+    screen_writestr("d", 0, 0, SMALL);
   } else if (GPIO_Pin == BTN0) {
     BTN0_PRESSED = true;
     print("btn0_pressed\n\r");
+    screen_writestr("d", 0, 0, SMALL);
   } else {
     __NOP();
   }
