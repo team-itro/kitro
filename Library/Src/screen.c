@@ -42,7 +42,7 @@ void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size)
 {
   char buff[64];
   snprintf(buff, sizeof(buff), "%.2f",
-           FLOAT); // Change %.2f to adjust precision
+           FLOAT); // change %.2f to adjust precision
   screen_writestr(buff, x, y, font_size);
 }
 
@@ -51,59 +51,25 @@ void screen_iteration(void)
   screen_clear();
   switch (kitro.current_state) {
   case (MOUSE_STATE_INIT_IDLE):
-    // screen_writestr("INIT_IDLE", 38, 0, SMALL);
-    screen_writestr("SHAP_READ", 38, 0, SMALL);
-    screen_writefl(sharp_raw2dist(SHARP_FR_VAL), 80, 16, SMALL);
-    screen_writestr("cm", 104, 16, SMALL);
-    screen_writeint(SHARP_FR_VAL, 80, 24, SMALL);
-    // screen_writestr("V", 104, 32, SMALL);
-    screen_writefl(sharp_raw2dist(SHARP_FL_VAL), 0, 16, SMALL);
-    screen_writestr("cm", 24, 16, SMALL);
-    screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
-    // screen_writestr("V", 24, 32, SMALL);
-    screen_writefl(sharp_raw2dist(SHARP_AR_VAL), 80, 40, SMALL);
-    screen_writestr("cm", 104, 40, SMALL);
-    screen_writeint(SHARP_AR_VAL, 80, 48, SMALL);
-    // screen_writestr("V", 104, 32, SMALL);
-    screen_writefl(sharp_raw2dist(SHARP_AL_VAL), 0, 40, SMALL);
-    screen_writestr("cm", 24, 40, SMALL);
-    screen_writeint(SHARP_AL_VAL, 0, 48, SMALL);
-
-    if (RIGH_WALL) {
-      ssd1306_Line(72, 36, 72, 52, White);
-    }
-    if (LEFT_WALL) {
-      // ssd1306_Line(72, 36, 72, 52, White);
-      ssd1306_Line(56, 36, 56, 52, White);
-      // ssd1306_Line(72, 20, 72, 36, White);
-      // ssd1306_Line(56, 20, 56, 36, White);
-      // ssd1306_Line(56, 36, 72, 36, White);
-    }
-    if (FRON_WALL) {
-      ssd1306_Line(56, 36, 72, 36, White);
-    }
+    screen_writestr("INIT_IDLE", 38, 0, SMALL);
     break;
   case (MOUSE_STATE_INIT_CONFIG):
     switch (config_state) {
     case (INIT):
       screen_writestr("INIT_CONF", 38, 0, SMALL);
-
       break;
     case (SENSOR_READ):
       screen_writestr("SHAP_READ", 38, 0, SMALL);
-      screen_writefl(sharp_raw2dist(SHARP_FR_VAL), 80, 16, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_FR_VAL), 80, 16, SMALL);
       screen_writestr("cm", 104, 16, SMALL);
-      screen_writeint(SHARP_FR_VAL, 80, 24, SMALL);
-      // screen_writestr("V", 104, 32, SMALL);
-      screen_writefl(sharp_raw2dist(SHARP_FL_VAL), 0, 16, SMALL);
+      screen_writeint(SHARP_FR_VAL, 108, 24, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_FL_VAL), 0, 16, SMALL);
       screen_writestr("cm", 24, 16, SMALL);
       screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
-      // screen_writestr("V", 24, 32, SMALL);
-      screen_writefl(sharp_raw2dist(SHARP_AR_VAL), 80, 40, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_AR_VAL), 80, 40, SMALL);
       screen_writestr("cm", 104, 40, SMALL);
-      screen_writeint(SHARP_AR_VAL, 80, 48, SMALL);
-      // screen_writestr("V", 104, 32, SMALL);
-      screen_writefl(sharp_raw2dist(SHARP_AL_VAL), 0, 40, SMALL);
+      screen_writeint(SHARP_AR_VAL, 108, 48, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_AL_VAL), 0, 40, SMALL);
       screen_writestr("cm", 24, 40, SMALL);
       screen_writeint(SHARP_AL_VAL, 0, 48, SMALL);
 
@@ -179,23 +145,6 @@ void screen_iteration(void)
   //
   // putString("ANGLE: ", 2, 22, SMALL);
   // putFloat(angle_z, 64, 22, SMALL);
-  // break;
-
-  // case (SENSOR_READ):
-  // putString("RF:", 2, 2, SMALL);
-  // putFloat(averageFR, 26, 2, SMALL);
-  //
-  // putString("LF:", 76, 2, SMALL);
-  // putFloat(averageFL, 100, 2, SMALL);
-  //
-  // putString("DR:", 2, 13, SMALL);
-  // putFloat(averageR, 26, 13, SMALL);
-  //
-  // putString("DL:", 76, 13, SMALL);
-  // putFloat(averageL, 100, 13, SMALL);
-  //
-  // putString("ANGLE:", 22, 24, SMALL);
-  // putFloat(angle_z, 70, 22, SMALL);
   // break;
 
   screen_update();

@@ -18,6 +18,8 @@ it should just work when you open the folder as a project in stm32cubeide
 
 - make sure to include new include directories (if added) to both c and cpp compiler options in project properties
 
+- stm32 is a 3.3v operated microcontroller, don't do dumb things trying to connect 5v pushbuttons
+
 ### references
 
 https://github.com/sanjith1999/SINDiB-MicroMouse/tree/master/firmware

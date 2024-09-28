@@ -6,6 +6,7 @@
  */
 
 #include "entry.h"
+#include "CONSTANTS.h"
 
 volatile bool BTN1_PRESSED = false;
 volatile bool BTN0_PRESSED = false;
@@ -87,7 +88,6 @@ int greymatter(void)
   }
 }
 
-
 void wakeup(void)
 {
   interrupt_tim11_start; // starting interrupt timer for display
@@ -95,12 +95,13 @@ void wakeup(void)
   print("kitro initialized uart\n\r");
   screen_init();
   delay(1000);
-  kitro.current_state = MOUSE_STATE_INIT_IDLE;
+  // kitro.current_state = MOUSE_STATE_INIT_IDLE;
+  kitro.current_state = MOUSE_STATE_INIT_CONFIG;
   kitro.x = 0;
   kitro.y = 0;
   kitro.orientation = NORTH;
-  	motorInit();
-  	encoderInit();
+  motorInit();
+  encoderInit();
   //	gyroInit();
   //	buzzerInit();
   //	gyroCalibration();
@@ -148,7 +149,8 @@ static void handle_init_idle(void)
 
 static void handle_init_config(void)
 {
-  config_state = INIT;
+  // config_state = INIT;
+  config_state = SENSOR_READ;
   // short switch to search idle
   // move to config menu on ir confirm
   // then short switch through config options

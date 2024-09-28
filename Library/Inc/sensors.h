@@ -29,6 +29,7 @@ float sharp_readv(AdcChannels sharp_id);
 uint8_t sharp_readraw(AdcChannels sharp_id);
 float sharp_readdist(AdcChannels sharp_id);
 float sharp_raw2dist(uint8_t raw);
+float sharp_raw2dist_lut(uint8_t raw);
 bool sharp_front_gesture();
 bool sharp_fr_gesture();
 bool sharp_fl_gesture();

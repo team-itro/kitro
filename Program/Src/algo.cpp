@@ -1,9 +1,5 @@
-/*
- * algo.cpp
- *
- *  Created on: Sep 14, 2024
- *      Author: thuvasooriya
- */
+// algo.cpp
+// author : thuvasooriya
 
 #include "algo.h"
 #include <iostream>

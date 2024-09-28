@@ -1,7 +1,7 @@
 #include "sensors.h"
 
-const uint8_t ADC_THRESHOLD0 = 50;
-const uint8_t ADC_THRESHOLD1 = 70;
+const uint8_t ADC_THRESHOLD0 = 20;
+const uint8_t ADC_THRESHOLD1 = 40;
 const uint8_t ADC_THRESHOLD2 = 80;
 const uint8_t ADC_THRESHOLD3 = 150;
 
@@ -35,6 +35,57 @@ float sharp_readdist(AdcChannels sharp_id)
     distance = 2.0f;
   if (distance > 15.0f)
     distance = 15.0f;
+  return distance;
+}
+
+#define ADC_RESOLUTION 256 // Assuming an 8-bit ADC (values from 0 to 255)
+#define MIN_DISTANCE 2.0f
+#define MAX_DISTANCE 15.0f
+
+// Lookup table for distances corresponding to ADC values
+float sharp_lookup_table[ADC_RESOLUTION] = {
+    15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f,
+    15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f,
+    15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f,
+    15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 14.97f,
+    14.60f, 14.24f, 13.88f, 13.54f, 13.21f, 12.89f, 12.57f, 12.27f, 11.97f,
+    11.68f, 11.40f, 11.13f, 10.87f, 10.61f, 10.36f, 10.12f, 9.88f,  9.65f,
+    9.43f,  9.21f,  9.00f,  8.80f,  8.60f,  8.40f,  8.21f,  8.03f,  7.85f,
+    7.68f,  7.51f,  7.35f,  7.19f,  7.04f,  6.89f,  6.74f,  6.60f,  6.46f,
+    6.33f,  6.20f,  6.07f,  5.95f,  5.83f,  5.72f,  5.60f,  5.49f,  5.39f,
+    5.28f,  5.18f,  5.09f,  4.99f,  4.90f,  4.81f,  4.72f,  4.64f,  4.55f,
+    4.47f,  4.40f,  4.32f,  4.25f,  4.18f,  4.11f,  4.04f,  3.97f,  3.91f,
+    3.85f,  3.79f,  3.73f,  3.67f,  3.62f,  3.56f,  3.51f,  3.46f,  3.41f,
+    3.36f,  3.32f,  3.27f,  3.23f,  3.18f,  3.14f,  3.10f,  3.06f,  3.02f,
+    2.99f,  2.95f,  2.92f,  2.88f,  2.85f,  2.82f,  2.79f,  2.76f,  2.73f,
+    2.70f,  2.67f,  2.64f,  2.62f,  2.59f,  2.57f,  2.54f,  2.52f,  2.49f,
+    2.47f,  2.45f,  2.43f,  2.41f,  2.39f,  2.37f,  2.35f,  2.33f,  2.32f,
+    2.30f,  2.28f,  2.27f,  2.25f,  2.23f,  2.22f,  2.20f,  2.19f,  2.18f,
+    2.16f,  2.15f,  2.14f,  2.13f,  2.11f,  2.10f,  2.09f,  2.08f,  2.07f,
+    2.06f,  2.05f,  2.04f,  2.03f,  2.02f,  2.01f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
+    2.00f,  2.00f,  2.00f,  2.00f,
+};
+
+float sharp_raw2dist_lut(uint8_t raw)
+{
+
+  float distance = sharp_lookup_table[raw];
+
+  // Clamp the distance between MIN_DISTANCE and MAX_DISTANCE
+  if (distance < MIN_DISTANCE)
+    distance = MIN_DISTANCE;
+  if (distance > MAX_DISTANCE)
+    distance = MAX_DISTANCE;
+
   return distance;
 }
 
@@ -174,13 +225,13 @@ void determine_walls()
   // } else {
   //   FRON_WALL = false;
   // }
-  if (SHARP_AR_VAL > ADC_THRESHOLD1) {
+  if (SHARP_AR_VAL > ADC_THRESHOLD0 && SHARP_FR_VAL < ADC_THRESHOLD1) {
     RIGH_WALL = true;
   } else {
     RIGH_WALL = false;
   }
 
-  if (SHARP_AL_VAL > ADC_THRESHOLD1) {
+  if (SHARP_AL_VAL > ADC_THRESHOLD1 && SHARP_FL_VAL < ADC_THRESHOLD1) {
     LEFT_WALL = true;
   } else {
     LEFT_WALL = false;
