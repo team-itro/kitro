@@ -1,4 +1,5 @@
 #include "entry.h"
+#include "CONSTANTS.h"
 
 volatile bool BTN1_PRESSED = false;
 volatile bool BTN0_PRESSED = false;
@@ -47,10 +48,11 @@ void wakeup(void)
   delay(1000);
   // kitro.current_state = MOUSE_STATE_INIT_IDLE;
   kitro.current_state = MOUSE_STATE_INIT_CONFIG;
-  kitro.x = 0;
-  kitro.y = 0;
+  kitro.position.x = 0;
+  kitro.position.y = 0;
   // starting position will be considered north
   kitro.orientation = NORTH;
+  config_state = SENSOR_READ;
   motorInit();
   encoderInit();
   //	gyroInit();
@@ -63,7 +65,6 @@ void handle_state_transition(bool trigger)
   // STOP_ROBOT;
   led_blink(ONB, 100);
   trigger = false;
-  delay(100);
   // encoder reset
   // l_start = 0;
 }
@@ -73,6 +74,8 @@ static void handle_init_idle(void)
   // INFO:
   // a1 : INIT_CONFIG
   // a2 : NaN
+
+  print("INIT_IDLE\n\r");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_CONFIG;
     handle_state_transition(BTN1_PRESSED);
@@ -93,6 +96,7 @@ static void handle_init_config(void)
   // ir calibration
   // gyro calibration
 
+  print("INIT_CONFIG\n\r");
   // config_state = INIT;
   config_state = SENSOR_READ;
   // if (sharp_front_gesture()) {
@@ -134,6 +138,8 @@ static void handle_search_idle(void)
   // TODO:
   // search forward on ir gesture
   // orientation confirmations?
+
+  print("SEARCH_IDLE\n\r");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
     handle_state_transition(BTN1_PRESSED);
@@ -151,21 +157,49 @@ static void handle_search_forward(void)
   // ignore everything and run like hell
 
   switch (run_state) {
-  case START:;
+  case START:
     // reset motors, encoders
     // initial run
     // go to decide
+    run_state = DECIDE;
     break;
-  case DECIDE:;
+  case DECIDE:
     // get readings?
     // update map
+    update_maze(kitro.position, kitro.orientation, LEFT_WALL, RIGH_WALL,
+                FRON_WALL);
+    if (floodfill[kitro.position.y][kitro.position.x] >= 1) {
+      floodFill(kitro.position, kitro.prev_position);
+      kitro.drive_state =
+          toMove(kitro.position, kitro.prev_position, kitro.orientation);
+      run_state = RUN;
+    } else {
+      // what to do when in center
+      print("DECIDE case todo\n\r");
+    }
     // done search_forward?
-    //
     // set drive mode
-    // go to run state
     break;
-  case RUN:;
+  case RUN:
     // drive mode
+    if (kitro.drive_state == TL) {
+      print("RUN LEFT\n\r");
+      // do point turn
+    } else if (kitro.drive_state == TR) {
+      print("RUN RIGHT\n\r");
+      // do point turn
+    } else if (kitro.drive_state == BK) {
+      print("RUN BACK\n\r");
+      // do point turn
+    } else if (kitro.drive_state == FW) {
+      print("RUN FORWARD\n\r");
+      // do point turn
+    }
+
+    // edge handling
+    run_state = DECIDE;
+    kitro.prev_position = kitro.position;
+    kitro.position = updateCoordinates(kitro.position, kitro.orientation);
     break;
   }
   //

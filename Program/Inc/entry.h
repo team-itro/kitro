@@ -22,7 +22,6 @@ extern volatile bool BTN1_PRESSED;
 extern volatile bool BTN0_PRESSED;
 extern Mouse kitro;
 extern ConfigStates config_state;
-extern DriveState drive_state;
 
 // INFO: KITRO MAIN FUNCTION
 int greymatter(void);

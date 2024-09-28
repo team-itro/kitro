@@ -1,7 +1,4 @@
 #include "api.h"
-#include "CONSTANTS.h"
-#include "entry.h"
-#include "main.h"
 
 static const uint8_t ADC_CHANNELS[ADC_NUM_CHANNELS] = {
     SHARP_FR_CH, SHARP_FL_CH, SHARP_AR_CH, SHARP_AL_CH};
@@ -94,20 +91,20 @@ void led_blink(LEDS led, uint8_t duration)
 }
 
 // interrupt triggers
-//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-//{
-//  if (GPIO_Pin == BTN1) {
-//    BTN1_PRESSED = true;
-//    print("btn1_pressed\n\r");
-//    screen_writestr("d", 0, 0, SMALL);
-//  } else if (GPIO_Pin == BTN0) {
-//    BTN0_PRESSED = true;
-//    print("btn0_pressed\n\r");
-//    screen_writestr("d", 0, 0, SMALL);
-//  } else {
-//    __NOP();
-//  }
-//}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == BTN1) {
+    BTN1_PRESSED = true;
+    print("btn1_pressed\n\r");
+    screen_writestr("d", 0, 0, SMALL);
+  } else if (GPIO_Pin == BTN0) {
+    BTN0_PRESSED = true;
+    print("btn0_pressed\n\r");
+    screen_writestr("d", 0, 0, SMALL);
+  } else {
+    __NOP();
+  }
+}
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
