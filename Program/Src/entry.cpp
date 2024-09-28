@@ -1,5 +1,6 @@
 #include "entry.h"
 #include "CONSTANTS.h"
+#include "api.h"
 #include "sensors.h"
 
 volatile bool BTN1_PRESSED = false;
@@ -37,7 +38,7 @@ int greymatter(void)
     state_handlers[kitro.current_state]();
     //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
     // drive_fw_encoder(18);
-    delay(10);
+    delay(100);
   }
 }
 
@@ -109,18 +110,15 @@ static void handle_init_config(void)
   // speed config
   // ir calibration
   // gyro calibration
-
-  println("INIT_CONF");
   // config_state = INIT;
-  config_state = SENSOR_READ;
-  // if (sharp_front_gesture()) {
-  //   switch (config_state) {
-  //   case INIT:
-  //     config_state = SENSOR_READ;
-  //   case SENSOR_READ:
-  //     config_state = INIT;
-  //   }
-  // }
+  if (sharp_front_gesture()) {
+    switch (config_state) {
+    case INIT:
+      config_state = SENSOR_READ;
+    case SENSOR_READ:
+      config_state = INIT;
+    }
+  }
 
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
@@ -137,7 +135,6 @@ static void handle_init_reset(void)
   // TODO:
   // orientation and cells configure
   // encoder reset?
-  println("INIT_RESET");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_IDLE;
     handle_state_transition(&BTN1_PRESSED);
@@ -153,8 +150,6 @@ static void handle_search_idle(void)
   // TODO:
   // search forward on ir gesture
   // orientation confirmations?
-
-  println("SEARCH_IDLE");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
     handle_state_transition(&BTN1_PRESSED);
@@ -174,13 +169,11 @@ static void handle_search_forward(void)
   // a3 : SEARCH_IDLE
   // TODO:
   // ignore everything and run like hell
-  println("SEARCH_FORWARD");
   switch (run_state) {
   case START:
     // reset motors, encoders
     // initial run
     // go to decide
-
     drive_fw(18);
     println("start run");
     run_state = DECIDE;
@@ -188,16 +181,15 @@ static void handle_search_forward(void)
   case DECIDE:
     // get readings?
     // update map
-    println("updating maze");
     determine_walls();
     update_maze(kitro.position, kitro.orientation, LEFT_WALL, RIGH_WALL,
                 FRON_WALL);
     if (floodfill[kitro.position.y][kitro.position.x] >= 1) {
-      println("doin floodfill");
       floodFill(kitro.position, kitro.prev_position);
-      println("settin drive_state");
       kitro.drive_state =
           toMove(kitro.position, kitro.prev_position, kitro.orientation);
+      print("drive_state: ");
+      print_int(kitro.drive_state);
       run_state = RUN;
     } else {
       // what to do when in center
@@ -228,6 +220,17 @@ static void handle_search_forward(void)
     kitro.prev_position = kitro.position;
     kitro.position = updateCoordinates(kitro.position, kitro.orientation);
     break;
+  }
+
+  if (BTN1_PRESSED) {
+    kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
+    handle_state_transition(&BTN1_PRESSED);
+    println("!!!!resetting!!!!!");
+    for (int i = 0; i < ROWS; i++) {
+      for (int j = 0; j < COLUMNS; j++) {
+        floodfill[i][j] = floodfillconst[i][j]; // No walls, no accessibility
+      }
+    }
   }
   //
   // if (BTN1_PRESSED) {

@@ -23,6 +23,7 @@ extern "C" {
 // #define SOUTH_ACCESS (1 << 0)
 
 extern uint8_t floodfill[ROWS][COLUMNS];
+extern const uint8_t floodfillconst[ROWS][COLUMNS];
 // extern int backFlood[ROWS][COLUMNS];
 extern int8_t cells[ROWS][COLUMNS];
 

@@ -96,27 +96,36 @@ void screen_iteration(void)
     screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
     break;
   case (MOUSE_STATE_SEARCH_FORWARD):
+    if (RIGH_WALL) {
+      ssd1306_FillRectangle(46, 14, 50, 50, White);
+    }
+    if (LEFT_WALL) {
+      ssd1306_FillRectangle(14, 14, 18, 50, White);
+    }
+    if (FRON_WALL) {
+      ssd1306_FillRectangle(14, 14, 50, 18, White);
+    }
+    screen_writeint(kitro.position.x, 24, 24, SMALL);
+    screen_writeint(kitro.position.y, 32, 24, SMALL);
     screen_writestr("SRCH_FORW", 38, 0, SMALL);
     if (run_state == RUN) {
       if (kitro.drive_state == FW) {
-        screen_writestr("FWD", 40, 20, LARGE);
+        ssd1306_Line(96, 16, 96, 48, White);
+        ssd1306_Line(96, 16, 80, 32, White);
+        ssd1306_Line(96, 16, 112, 32, White);
       } else if (kitro.drive_state == TR) {
-        screen_writestr("TRI", 40, 20, LARGE);
-      } else if (kitro.drive_state == TL) {
-        screen_writestr("TLF", 40, 20, LARGE);
-      } else if (kitro.drive_state == FW) {
-        screen_writestr("BCK", 40, 20, LARGE);
+        ssd1306_Line(80, 32, 112, 32, White); // Top diagonal line
+        ssd1306_Line(96, 16, 112, 32, White); // Bottom diagonal line
+        ssd1306_Line(96, 48, 112, 32, White); // Bottom diagonal line
       }
-    } else if (run_state == DECIDE) {
-      screen_writestr("DEC", 40, 20, LARGE);
-    } else if (kitro.drive_state == START) {
-      screen_writestr("STR", 40, 20, LARGE);
+    } else if (kitro.drive_state == TL) {
+      ssd1306_Line(80, 32, 112, 32, White); // Top diagonal line
+      ssd1306_Line(96, 16, 80, 32, White);  // Bottom diagonal line
+      ssd1306_Line(96, 48, 80, 32, White);  // Bottom diagonal line
+    } else if (kitro.drive_state == BK) {
+      screen_writestr("BCK", 40, 20, LARGE);
     }
-    screen_writeint(kitro.position.x, 0, 50, SMALL);
-    screen_writeint(kitro.position.y, 64, 50, SMALL);
-    screen_writeint(floodfill[kitro.position.y][kitro.position.x], 80, 50,
-                    SMALL);
-    screen_writeint(kitro.orientation, 80, 50, SMALL);
+    screen_writeint(kitro.orientation, 90, 50, SMALL);
     break;
   case (MOUSE_STATE_SEARCH_BACK):
     screen_writestr("SRCH_BACK", 38, 0, SMALL);

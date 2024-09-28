@@ -3,7 +3,7 @@
 const uint8_t ADC_THRESHOLD0 = 50;
 const uint8_t ADC_THRESHOLD1 = 50;
 const uint8_t ADC_THRESHOLD2 = 65;
-const uint8_t ADC_THRESHOLD3 = 65;
+const uint8_t ADC_THRESHOLD3 = 100;
 
 // int reflectionRate = REFLECTION_RATE_;
 volatile uint8_t SHARP_FR_VAL = 0;
@@ -221,13 +221,13 @@ void determine_walls()
   // } else {
   //   FRON_WALL = false;
   // }
-  if (SHARP_AR_VAL > ADC_THRESHOLD0 && SHARP_FR_VAL < ADC_THRESHOLD1) {
+  if (SHARP_AR_VAL > ADC_THRESHOLD0) {
     RIGH_WALL = true;
   } else {
     RIGH_WALL = false;
   }
 
-  if (SHARP_AL_VAL > ADC_THRESHOLD1 && SHARP_FL_VAL < ADC_THRESHOLD1) {
+  if (SHARP_AL_VAL > ADC_THRESHOLD1) {
     LEFT_WALL = true;
   } else {
     LEFT_WALL = false;
