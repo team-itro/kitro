@@ -26,8 +26,10 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 	// Front wall avoidance check
 	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
 		// Obstacle detected in front, slow down or stop
-		left_motor_speed = 0;
-		right_motor_speed = 0;
+		float left_motor_speed = 0;
+		float right_motor_speed = 0;
+		setWheelsSpeed(left_motor_speed, right_motor_speed);
+
 	}else if (RIGH_WALL & LEFT_WALL){
 		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (RIGH_WALL){
@@ -79,13 +81,6 @@ void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_
 	float left_motor_speed = 0.7 + control_signal;
 	float right_motor_speed = 0.7 - control_signal;
 
-	// Front wall avoidance check
-	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
-		// Obstacle detected in front, slow down or stop
-		left_motor_speed = 0;
-		right_motor_speed = 0;
-	}
-
 	// Ensure motor speeds stay within limits
 	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
 	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
@@ -110,12 +105,6 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP
 	float left_motor_speed = 0.7 + control_signal;
 	float right_motor_speed = 0.7 - control_signal;
 
-	// Front wall avoidance check
-	if (SHARP_FL_VAL > 40 || SHARP_FR_VAL > 40) {
-		// Obstacle detected in front, slow down or stop
-		left_motor_speed = 0;
-		right_motor_speed = 0;
-	}
 
 	// Ensure motor speeds stay within limits
 	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
