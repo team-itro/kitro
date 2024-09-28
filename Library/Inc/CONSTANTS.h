@@ -63,9 +63,6 @@ typedef enum {
   HUGE    // 16x24
 } FONT_Size;
 
-// buzzer
-// #define BUZZ_LOUDNESS_ .2
-
 // state machine
 typedef enum {
   MOUSE_STATE_INIT_IDLE,
@@ -83,11 +80,19 @@ typedef void (*StateHandler)(void);
 typedef enum { NORTH, EAST, SOUTH, WEST } Compass;
 
 typedef enum {
+  START,
+  DECIDE,
+  RUN,
+} RunState;
+
+typedef enum {
+  IDLE,
   FW,
   BK,
   TR,
   TL,
 } DriveState;
+
 typedef void (*DriveHandler)(void);
 
 typedef struct {
@@ -98,8 +103,6 @@ typedef struct {
   Compass orientation;
 } Mouse;
 
-// typedef enum { WIN_TONE = 0, TONE1, TONE2, TONE3, TONE4 } BUZZ_Tones;
-
 typedef enum {
   INIT,
   // GYRO_CALIB,
@@ -107,10 +110,6 @@ typedef enum {
   // LOW_BAT,
   // SPEED_ADJ,
 } ConfigStates;
-
-// typedef enum { IDLE, STRAIGHT_RUN, POINT_TURN, FRONT_ALIGN } MV_Type;
-
-// typedef enum { SPEED1, SPEED2, SPEED3, ROT_SPEED } SPEED_TYPE;
 
 typedef enum { ONB } LEDS;
 

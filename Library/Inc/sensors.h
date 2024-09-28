@@ -5,6 +5,10 @@
 #include "api.h"
 #include <math.h>
 
+#define ADC_RESOLUTION 256 // Assuming an 8-bit ADC (values from 0 to 255)
+#define MIN_DISTANCE 2.0f
+#define MAX_DISTANCE 15.0f
+
 // extern float voltage;
 extern volatile uint8_t SHARP_FR_VAL;
 extern volatile uint8_t SHARP_FL_VAL;
