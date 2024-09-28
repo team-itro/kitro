@@ -8,11 +8,6 @@
 #include <stdbool.h>
 #include <string>
 
-// configurable start and destination
-uint8_t start_row = 0, start_col = 0;
-uint8_t destination_row = 7, destination_col = 7;
-uint8_t dest_size = 2; // destination area size (in terms of cells)
-
 // maze: each cell is 8 bits
 uint8_t floodfill[ROWS][COLUMNS] = {
     {14, 13, 12, 11, 10, 9, 8, 7, 7, 8, 9, 10, 11, 12, 13, 14},

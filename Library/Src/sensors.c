@@ -134,7 +134,7 @@ bool sharp_front_gesture()
   update_buffer(fl_buffer, SHARP_FL_VAL);
   update_buffer(fr_buffer, SHARP_FR_VAL);
 
-  return buffer_check(fl_buffer, ADC_THRESHOLD3) ||
+  return buffer_check(fl_buffer, ADC_THRESHOLD3) &&
          buffer_check(fr_buffer, ADC_THRESHOLD3);
 }
 

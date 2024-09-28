@@ -33,6 +33,7 @@ struct surroundCoor {
   Coordinate E;
 };
 
+void initialize_maze(void);
 void update_maze(Coordinate point, Compass orient, bool L, bool R, bool F);
 bool is_accessible(Coordinate p, Coordinate p1);
 DriveState toMove(Coordinate p, Coordinate prevPos, Compass orient);
