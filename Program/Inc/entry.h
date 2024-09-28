@@ -1,10 +1,3 @@
-/*
- * entry.h
- *
- *  Created on: Sep 14, 2024
- *      Author: thuvasooriya
- */
-
 #ifndef INC_ENTRY_H_
 #define INC_ENTRY_H_
 
@@ -17,32 +10,19 @@ extern "C" {
 #include <string.h>
 
 #include "CONSTANTS.h"
+#include "PD.h"
 #include "algo.h"
 #include "api.h"
-#include "main.h"
+#include "encoder.h"
+#include "motor.h"
 #include "screen.h"
 #include "sensors.h"
-#include "stm32f4xx_hal.h"
-#include "PD.h"
-#include "motor.h"
-#include "encoder.h"
 
 extern volatile bool BTN1_PRESSED;
 extern volatile bool BTN0_PRESSED;
 extern Mouse kitro;
 extern ConfigStates config_state;
-
-// extern int runState;
-// extern int ORIENT;
-// extern char direction;
-//
-//
-// extern char back_path[ROWS*COLUMNS];
-// extern char fwd_path[ROWS*COLUMNS];
-// extern int ptr;
-//
-// extern int backPtr;
-// extern int fwdPtr;
+extern DriveState drive_state;
 
 // INFO: KITRO MAIN FUNCTION
 int greymatter(void);

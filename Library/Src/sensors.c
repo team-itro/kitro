@@ -20,29 +20,6 @@ bool LEFT_WALL = false;
 bool RIGH_WALL = false;
 bool FRON_WALL = false;
 
-float sharp_readv(AdcChannels sharp_id)
-{
-  return (((float)adc_read(sharp_id, 1) * (3.3f / 255.0f)));
-}
-
-float sharp_readdist(AdcChannels sharp_id)
-{
-  float distance =
-      SHARP_CONST_A * exp(SHARP_CONST_B *
-                          ((float)adc_read(sharp_id, 1) * (3.3f / 255.0f))) +
-      SHARP_CONST_C;
-  if (distance < 2.0f)
-    distance = 2.0f;
-  if (distance > 15.0f)
-    distance = 15.0f;
-  return distance;
-}
-
-#define ADC_RESOLUTION 256 // Assuming an 8-bit ADC (values from 0 to 255)
-#define MIN_DISTANCE 2.0f
-#define MAX_DISTANCE 15.0f
-
-// Lookup table for distances corresponding to ADC values
 float sharp_lookup_table[ADC_RESOLUTION] = {
     15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f,
     15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f, 15.00f,
@@ -74,6 +51,24 @@ float sharp_lookup_table[ADC_RESOLUTION] = {
     2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,  2.00f,
     2.00f,  2.00f,  2.00f,  2.00f,
 };
+
+float sharp_readv(AdcChannels sharp_id)
+{
+  return (((float)adc_read(sharp_id, 1) * (3.3f / 255.0f)));
+}
+
+float sharp_readdist(AdcChannels sharp_id)
+{
+  float distance =
+      SHARP_CONST_A * exp(SHARP_CONST_B *
+                          ((float)adc_read(sharp_id, 1) * (3.3f / 255.0f))) +
+      SHARP_CONST_C;
+  if (distance < 2.0f)
+    distance = 2.0f;
+  if (distance > 15.0f)
+    distance = 15.0f;
+  return distance;
+}
 
 float sharp_raw2dist_lut(uint8_t raw)
 {

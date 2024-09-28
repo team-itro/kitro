@@ -60,14 +60,14 @@ void screen_iteration(void)
       break;
     case (SENSOR_READ):
       screen_writestr("SHAP_READ", 38, 0, SMALL);
-      screen_writefl(sharp_raw2dist_lut(SHARP_FR_VAL), 80, 16, SMALL);
-      screen_writestr("cm", 104, 16, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_FR_VAL), 88, 16, SMALL);
+      screen_writestr("cm", 112, 16, SMALL);
       screen_writeint(SHARP_FR_VAL, 108, 24, SMALL);
       screen_writefl(sharp_raw2dist_lut(SHARP_FL_VAL), 0, 16, SMALL);
       screen_writestr("cm", 24, 16, SMALL);
       screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
-      screen_writefl(sharp_raw2dist_lut(SHARP_AR_VAL), 80, 40, SMALL);
-      screen_writestr("cm", 104, 40, SMALL);
+      screen_writefl(sharp_raw2dist_lut(SHARP_AR_VAL), 88, 40, SMALL);
+      screen_writestr("cm", 112, 40, SMALL);
       screen_writeint(SHARP_AR_VAL, 108, 48, SMALL);
       screen_writefl(sharp_raw2dist_lut(SHARP_AL_VAL), 0, 40, SMALL);
       screen_writestr("cm", 24, 40, SMALL);
