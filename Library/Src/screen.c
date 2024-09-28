@@ -1,4 +1,6 @@
 #include "screen.h"
+#include "CONSTANTS.h"
+#include "entry.h"
 
 void screen_init(void) { ssd1306_Init(); }
 
@@ -90,9 +92,31 @@ void screen_iteration(void)
     break;
   case (MOUSE_STATE_SEARCH_IDLE):
     screen_writestr("SRCH_IDLE", 38, 0, SMALL);
+    screen_writeint(SHARP_FR_VAL, 108, 24, SMALL);
+    screen_writeint(SHARP_FL_VAL, 0, 24, SMALL);
     break;
   case (MOUSE_STATE_SEARCH_FORWARD):
     screen_writestr("SRCH_FORW", 38, 0, SMALL);
+    if (run_state == RUN) {
+      if (kitro.drive_state == FW) {
+        screen_writestr("FWD", 40, 20, LARGE);
+      } else if (kitro.drive_state == TR) {
+        screen_writestr("TRI", 40, 20, LARGE);
+      } else if (kitro.drive_state == TL) {
+        screen_writestr("TLF", 40, 20, LARGE);
+      } else if (kitro.drive_state == FW) {
+        screen_writestr("BCK", 40, 20, LARGE);
+      }
+    } else if (run_state == DECIDE) {
+      screen_writestr("DEC", 40, 20, LARGE);
+    } else if (kitro.drive_state == START) {
+      screen_writestr("STR", 40, 20, LARGE);
+    }
+    screen_writeint(kitro.position.x, 0, 50, SMALL);
+    screen_writeint(kitro.position.y, 64, 50, SMALL);
+    screen_writeint(floodfill[kitro.position.y][kitro.position.x], 80, 50,
+                    SMALL);
+    screen_writeint(kitro.orientation, 80, 50, SMALL);
     break;
   case (MOUSE_STATE_SEARCH_BACK):
     screen_writestr("SRCH_BACK", 38, 0, SMALL);
@@ -146,20 +170,3 @@ void screen_iteration(void)
 
   screen_update();
 }
-
-void print(char *str)
-{
-#if defined(UART_DEBUG) && UART_DEBUG == 1
-  printf("%s", str);
-#endif
-  // screen_writestr(str, 0, 0, SMALL);
-}
-
-void print_int(int num)
-{
-#if defined(UART_DEBUG) && UART_DEBUG == 1
-  printf("%d", num);
-#endif
-  // screen_writestr(str, 0, 0, SMALL);
-}
-

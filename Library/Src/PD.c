@@ -1,5 +1,5 @@
 #include "PD.h"
-#include "sensors.h"  // Assuming this is where sharp sensor reading functions are located
+#include "sensors.h" // Assuming this is where sharp sensor reading functions are located
 
 // Define PD constants (These values may need to be tuned)
 float Kp = 0.01f;
@@ -45,9 +45,9 @@ volatile int left_prev_encoder = 1000, right_prev_encoder = 1000;
 // Function to compute the PD control output
 float compute_pd_control(float error, float previous_error, float Kp, float Kd)
 {
-    float derivative = error - previous_error;
-    float output = (Kp * error) + (Kd * derivative);
-    return output;
+  float derivative = error - previous_error;
+  float output = (Kp * error) + (Kd * derivative);
+  return output;
 }
 
 void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
@@ -71,93 +71,112 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 	}
 }
 
-void wall_follow_control2(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
-	determine_walls();
+void wall_follow_control2(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
+                          uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
+{
+  determine_walls();
 
-	if (RIGH_WALL & LEFT_WALL){
-		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
-	}else if (RIGH_WALL){
-		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
-	}else if (LEFT_WALL){
-		left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
-	}else{
-		drive_fw(18);
-	}
+  if (RIGH_WALL & LEFT_WALL) {
+    wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+  } else if (RIGH_WALL) {
+    right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+  } else if (LEFT_WALL) {
+    left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+  } else {
+    drive_fw(18);
+  }
 }
 
 // Function to follow the wall and maintain the robot at the center
-void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
+void wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
+                 uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL)
 {
-    // Compute error between the left and right walls
-    float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - sharp_raw2dist_lut(SHARP_AR_VAL));
+  // Compute error between the left and right walls
+  float error =
+      (sharp_raw2dist_lut(SHARP_AL_VAL) - sharp_raw2dist_lut(SHARP_AR_VAL));
 
-    // Compute the PD control output
-    float control_signal = compute_pd_control(error, previous_error, Kp, Kd);
+  // Compute the PD control output
+  float control_signal = compute_pd_control(error, previous_error, Kp, Kd);
 
-    // Update previous error for the next cycle
-    previous_error = error;
+  // Update previous error for the next cycle
+  previous_error = error;
 
-    // Set motor speeds based on the control signal
-    float left_motor_speed = 0.7 + control_signal;
-    float right_motor_speed = 0.7 - control_signal;
+  // Set motor speeds based on the control signal
+  float left_motor_speed = 0.7 + control_signal;
+  float right_motor_speed = 0.7 - control_signal;
 
-    // Ensure motor speeds stay within limits
-    if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
-    if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
-    if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
-    if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+  // Ensure motor speeds stay within limits
+  if (left_motor_speed > MAX_SPEED)
+    left_motor_speed = MAX_SPEED;
+  if (left_motor_speed < MIN_SPEED)
+    left_motor_speed = MIN_SPEED;
+  if (right_motor_speed > MAX_SPEED)
+    right_motor_speed = MAX_SPEED;
+  if (right_motor_speed < MIN_SPEED)
+    right_motor_speed = MIN_SPEED;
 
-    // Set the motor speeds
-    setWheelsSpeed(left_motor_speed, right_motor_speed);
+  // Set the motor speeds
+  setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
-void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
-	// Compute error between the left and right walls
-	float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - REF);
+void left_wall_follow(uint8_t SHARP_AL_VAL, uint8_t SHARP_FL_VAL,
+                      uint8_t SHARP_FR_VAL)
+{
+  // Compute error between the left and right walls
+  float error = (sharp_raw2dist_lut(SHARP_AL_VAL) - REF);
 
-	// Compute the PD control output
-	float control_signal = compute_pd_control(error, previous_error,Kp, Kd);
+  // Compute the PD control output
+  float control_signal = compute_pd_control(error, previous_error, Kp, Kd);
 
-	// Update previous error for the next cycle
-	previous_error = error;
+  // Update previous error for the next cycle
+  previous_error = error;
 
-	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 + control_signal;
-	float right_motor_speed = 0.7 - control_signal;
+  // Set motor speeds based on the control signal
+  float left_motor_speed = 0.7 + control_signal;
+  float right_motor_speed = 0.7 - control_signal;
 
-	// Ensure motor speeds stay within limits
-	if (left_motor_speed > MAX_SPEED) left_motor_speed = MAX_SPEED;
-	if (left_motor_speed < MIN_SPEED) left_motor_speed = MIN_SPEED;
-	if (right_motor_speed > MAX_SPEED) right_motor_speed = MAX_SPEED;
-	if (right_motor_speed < MIN_SPEED) right_motor_speed = MIN_SPEED;
+  // Ensure motor speeds stay within limits
+  if (left_motor_speed > MAX_SPEED)
+    left_motor_speed = MAX_SPEED;
+  if (left_motor_speed < MIN_SPEED)
+    left_motor_speed = MIN_SPEED;
+  if (right_motor_speed > MAX_SPEED)
+    right_motor_speed = MAX_SPEED;
+  if (right_motor_speed < MIN_SPEED)
+    right_motor_speed = MIN_SPEED;
 
-	// Set the motor speeds
-	setWheelsSpeed(left_motor_speed, right_motor_speed);
+  // Set the motor speeds
+  setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
-void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
-	// Compute error between the left and right walls
-	float error = (sharp_raw2dist_lut(SHARP_AR_VAL) - REF);
+void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL,
+                       uint8_t SHARP_FR_VAL)
+{
+  // Compute error between the left and right walls
+  float error = (sharp_raw2dist_lut(SHARP_AR_VAL) - REF);
 
-	// Compute the PD control output
-	float control_signal = compute_pd_control(error, previous_error,Kp, Kd);
+  // Compute the PD control output
+  float control_signal = compute_pd_control(error, previous_error, Kp, Kd);
 
-	// Update previous error for the next cycle
-	previous_error = error;
+  // Update previous error for the next cycle
+  previous_error = error;
 
-	// Set motor speeds based on the control signal
-	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 +  control_signal;
+  // Set motor speeds based on the control signal
+  float left_motor_speed = 0.7 - control_signal;
+  float right_motor_speed = 0.7 + control_signal;
 
+  // Ensure motor speeds stay within limits
+  if (left_motor_speed > MAX_SPEED1)
+    left_motor_speed = MAX_SPEED1;
+  if (left_motor_speed < MIN_SPEED1)
+    left_motor_speed = MIN_SPEED1;
+  if (right_motor_speed > MAX_SPEED1)
+    right_motor_speed = MAX_SPEED1;
+  if (right_motor_speed < MIN_SPEED1)
+    right_motor_speed = MIN_SPEED1;
 
-	// Ensure motor speeds stay within limits
-	if (left_motor_speed > MAX_SPEED1) left_motor_speed = MAX_SPEED1;
-	if (left_motor_speed < MIN_SPEED1) left_motor_speed = MIN_SPEED1;
-	if (right_motor_speed > MAX_SPEED1) right_motor_speed = MAX_SPEED1;
-	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
-
-	// Set the motor speeds
-	setWheelsSpeed(left_motor_speed, right_motor_speed);
+  // Set the motor speeds
+  setWheelsSpeed(left_motor_speed, right_motor_speed);
 }
 
 void drive_fw_encoder(uint8_t distance)
@@ -170,13 +189,17 @@ void drive_fw_encoder(uint8_t distance)
 	float control_signal = compute_pd_control(error, previous_error, Kp_enc, Kd_enc);
 	previous_error = error;
 
-	float left_motor_speed = 0.7 - control_signal;
-	float right_motor_speed = 0.7 + control_signal;
+    float left_motor_speed = 0.7 - control_signal;
+    float right_motor_speed = 0.7 + control_signal;
 
-	if (left_motor_speed > MAX_SPEED1) left_motor_speed = MAX_SPEED1;
-	if (left_motor_speed < MIN_SPEED1) left_motor_speed = MIN_SPEED1;
-	if (right_motor_speed > MAX_SPEED1) right_motor_speed = MAX_SPEED1;
-	if (right_motor_speed < MIN_SPEED1) right_motor_speed = MIN_SPEED1;
+    if (left_motor_speed > MAX_SPEED1)
+      left_motor_speed = MAX_SPEED1;
+    if (left_motor_speed < MIN_SPEED1)
+      left_motor_speed = MIN_SPEED1;
+    if (right_motor_speed > MAX_SPEED1)
+      right_motor_speed = MAX_SPEED1;
+    if (right_motor_speed < MIN_SPEED1)
+      right_motor_speed = MIN_SPEED1;
 
 	setWheelsSpeed(left_motor_speed, right_motor_speed);
 //	print("speed set\n");

@@ -96,12 +96,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == BTN1) {
     BTN1_PRESSED = true;
-    print("btn1_pressed\n\r");
-    screen_writestr("d", 0, 0, SMALL);
-//  } else if (GPIO_Pin == BTN0) {
-//    BTN0_PRESSED = true;
-//    print("btn0_pressed\n\r");
-//    screen_writestr("d", 0, 0, SMALL);
+    println("btn1_pressed");
+    // } else if (GPIO_Pin == BTN0) {
+    //   BTN0_PRESSED = true;
+    //   println("btn0_pressed");
   } else {
     __NOP();
   }
@@ -131,6 +129,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //      }
 //  }
 }
+
+#if defined(UART_DEBUG) && UART_DEBUG == 1
+void print(const char *str) { printf("%s", str); }
+void println(const char *str) { printf("%s\n", str); }
+void print_int(int num) { printf("%d", num); }
+#endif
 
 // void stop_it_all(void){
 // disp_state=LOW_BAT;
