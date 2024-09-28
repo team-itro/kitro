@@ -4,6 +4,7 @@ static const uint8_t ADC_CHANNELS[ADC_NUM_CHANNELS] = {
     SHARP_FR_CH, SHARP_FL_CH, SHARP_AR_CH, SHARP_AL_CH};
 
 static uint16_t adc_values[ADC_BUFFER_SIZE];
+uint32_t old_tick;
 // 12 bit resolution adc sampling
 uint16_t adc_read(AdcChannels channel, uint8_t timeout)
 {
@@ -108,18 +109,27 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim == &htim10)
+  if (htim == &htim10){
     // gyroUpdate();
     sharps_update();
+    if (HAL_GetTick() - old_tick > 1000) {
+        old_tick = HAL_GetTick();
+		  if (pid){
+			  updatePID();
+		  }
+    }
+  }
   else if (htim == &htim11)
     screen_iteration();
-  else if  (htim == &htim5){
-      if (HAL_GetTick() > nextPID) {
-    	  if (pid)
-    		  updatePID();
-          nextPID += PID_INTERVAL;
-      }
-  }
+//  else if  (htim == &htim5){
+//      if (HAL_GetTick() - old_tick > 1000) {
+//          old_tick = HAL_GetTick();
+//          setWheelsSpeed(.8,.8);
+//    	  if (pid){
+//    		  updatePID();
+//    	  }
+//      }
+//  }
 }
 
 // void stop_it_all(void){

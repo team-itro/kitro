@@ -112,7 +112,7 @@ void drive_tr(void)
 void drive_tl(void)
 {
   resetEncoder();
-  while (l_position < TURN_COUNT_90) {
+  while (r_position < TURN_COUNT_90) {
     setWheelsSpeed(-st_speed, st_speed);
   }
   setWheelsSpeed(0, 0);

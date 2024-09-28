@@ -28,11 +28,12 @@ static const StateHandler state_handlers[] = {
 int greymatter(void)
 {
   wakeup();
+  delay(2000);
+  drive(20,20);
   while (1) {
     state_handlers[kitro.current_state]();
     //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
-    drive_fw_encoder(18);
-    delay(1000);
+    delay(100);
   }
 }
 

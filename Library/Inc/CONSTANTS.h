@@ -13,7 +13,8 @@
 // connections
 #define BTN1 BTN1_Pin
 
-#define PID_RATE 3 // Hz
+// PID
+#define PID_RATE 30 // Hz
 #define PID_INTERVAL 1000 / PID_RATE
 
 // sharp ir n battery
