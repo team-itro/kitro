@@ -1,9 +1,9 @@
 #include "sensors.h"
 
-const uint8_t ADC_THRESHOLD0 = 20;
-const uint8_t ADC_THRESHOLD1 = 40;
-const uint8_t ADC_THRESHOLD2 = 80;
-const uint8_t ADC_THRESHOLD3 = 150;
+const uint8_t ADC_THRESHOLD0 = 50;
+const uint8_t ADC_THRESHOLD1 = 50;
+const uint8_t ADC_THRESHOLD2 = 65;
+const uint8_t ADC_THRESHOLD3 = 65;
 
 // int reflectionRate = REFLECTION_RATE_;
 volatile uint8_t SHARP_FR_VAL = 0;

@@ -2,8 +2,8 @@
 #include "sensors.h"  // Assuming this is where sharp sensor reading functions are located
 
 // Define PD constants (These values may need to be tuned)
-float Kp = 0.25f;
-float Kd = 0.05f;
+float Kp = 0.01f;
+float Kd = 0.0f;
 
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
@@ -31,6 +31,20 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHA
 		setWheelsSpeed(left_motor_speed, right_motor_speed);
 
 	}else if (RIGH_WALL & LEFT_WALL){
+		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+	}else if (RIGH_WALL){
+		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+	}else if (LEFT_WALL){
+		left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+	}else{
+		drive_fw(18);
+	}
+}
+
+void wall_follow_control2(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL, uint8_t SHARP_FR_VAL){
+	determine_walls();
+
+	if (RIGH_WALL & LEFT_WALL){
 		wall_follow(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
 	}else if (RIGH_WALL){
 		right_wall_follow(SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
