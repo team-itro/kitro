@@ -1,7 +1,7 @@
 #include "entry.h"
 
 volatile bool BTN1_PRESSED = false;
-volatile bool BTN0_PRESSED = false;
+// volatile bool BTN0_PRESSED = false;
 
 RunState run_state;
 ConfigStates config_state;
@@ -31,7 +31,7 @@ int greymatter(void)
   while (1) {
     state_handlers[kitro.current_state]();
     //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
-    drive_fw_encoder(18);
+    // drive_fw_encoder(18);
     delay(1000);
   }
 }
@@ -54,16 +54,13 @@ void wakeup(void)
   config_state = SENSOR_READ;
   motorInit();
   encoderInit();
-  //	gyroInit();
-  //	buzzerInit();
-  //	gyroCalibration();
 }
 
-void handle_state_transition(bool trigger)
+void handle_state_transition(volatile bool *trigger)
 {
   // STOP_ROBOT;
   led_blink(ONB, 100);
-  trigger = false;
+  *trigger = false;
   // encoder reset
   // l_start = 0;
 }
@@ -73,11 +70,10 @@ static void handle_init_idle(void)
   // INFO:
   // a1 : INIT_CONFIG
   // a2 : NaN
-
-  print("INIT_IDLE\n\r");
+  println("INIT_IDLE");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_CONFIG;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
   // if (BTN0_PRESSED) {
   //   kitro.current_state = MOUSE_STATE_INIT_CONFIG;
@@ -95,7 +91,7 @@ static void handle_init_config(void)
   // ir calibration
   // gyro calibration
 
-  print("INIT_CONFIG\n\r");
+  println("INIT_CONF");
   // config_state = INIT;
   config_state = SENSOR_READ;
   // if (sharp_front_gesture()) {
@@ -109,7 +105,7 @@ static void handle_init_config(void)
 
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
 };
 
@@ -122,9 +118,10 @@ static void handle_init_reset(void)
   // TODO:
   // orientation and cells configure
   // encoder reset?
+  println("INIT_RESET");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_IDLE;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
 };
 
@@ -138,10 +135,10 @@ static void handle_search_idle(void)
   // search forward on ir gesture
   // orientation confirmations?
 
-  print("SEARCH_IDLE\n\r");
+  println("SEARCH_IDLE");
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
 };
 
@@ -154,7 +151,7 @@ static void handle_search_forward(void)
   // a3 : SEARCH_IDLE
   // TODO:
   // ignore everything and run like hell
-
+  println("SEARCH_IDLE");
   switch (run_state) {
   case START:
     // reset motors, encoders
@@ -174,7 +171,7 @@ static void handle_search_forward(void)
       run_state = RUN;
     } else {
       // what to do when in center
-      print("DECIDE case todo\n\r");
+      println("DECIDE case todo");
     }
     // done search_forward?
     // set drive mode
@@ -182,16 +179,16 @@ static void handle_search_forward(void)
   case RUN:
     // drive mode
     if (kitro.drive_state == TL) {
-      print("RUN LEFT\n\r");
+      println("RUN LEFT");
       // do point turn
     } else if (kitro.drive_state == TR) {
-      print("RUN RIGHT\n\r");
+      println("RUN RIGHT");
       // do point turn
     } else if (kitro.drive_state == BK) {
-      print("RUN BACK\n\r");
+      println("RUN BACK");
       // do point turn
     } else if (kitro.drive_state == FW) {
-      print("RUN FORWARD\n\r");
+      println("RUN FORWARD");
       // do point turn
     }
 
@@ -210,10 +207,9 @@ static void handle_search_forward(void)
 
 static void handle_search_back(void)
 {
-
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_FAST_IDLE;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
 };
 
@@ -221,7 +217,7 @@ static void handle_fast_idle(void)
 {
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_INIT_IDLE;
-    handle_state_transition(BTN1_PRESSED);
+    handle_state_transition(&BTN1_PRESSED);
   }
 };
 

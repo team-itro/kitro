@@ -32,9 +32,6 @@ void screen_update();
 void screen_writestr(const char *str, int x, int y, FONT_Size font_size);
 void screen_writeint(int INT, int x, int y, FONT_Size font_size);
 void screen_writefl(float FLOAT, int x, int y, FONT_Size font_size);
-
 void screen_iteration(void);
-void print(char *str);
-void print_int(int num);
 
 #endif /* INC_SCREEN_H_ */

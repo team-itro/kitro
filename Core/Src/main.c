@@ -72,9 +72,9 @@ static void MX_USART1_UART_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM10_Init(void);
-static void MX_TIM11_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM11_Init(void);
 /* USER CODE BEGIN PFP */
 //#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 /* USER CODE END PFP */
@@ -137,9 +137,9 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM10_Init();
-  MX_TIM11_Init();
   MX_TIM1_Init();
   MX_TIM5_Init();
+  MX_TIM11_Init();
   /* USER CODE BEGIN 2 */
   /* USER CODE END 2 */
 
@@ -714,10 +714,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
-
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

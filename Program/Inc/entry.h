@@ -19,7 +19,7 @@ extern "C" {
 #include "sensors.h"
 
 extern volatile bool BTN1_PRESSED;
-extern volatile bool BTN0_PRESSED;
+// extern volatile bool BTN0_PRESSED;
 extern Mouse kitro;
 extern ConfigStates config_state;
 

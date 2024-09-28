@@ -25,6 +25,10 @@ void led_blink(LEDS led, uint8_t duration);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
+void print(const char *str);
+void println(const char *str);
+void print_int(int num);
+
 extern ADC_HandleTypeDef hadc1;
 
 extern TIM_HandleTypeDef htim1;
