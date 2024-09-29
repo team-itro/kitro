@@ -104,6 +104,8 @@ extern volatile int left_prev_input, right_prev_input;
 extern volatile float left_ITerm, right_ITerm;
 extern volatile int left_prev_encoder, right_prev_encoder;
 
+extern bool FLAG;
+
 // Function to compute the PD control output based on sharp sensor readings
 float compute_pd_control(float error, float previous_error, float Kd, float Kp);
 
