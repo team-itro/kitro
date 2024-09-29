@@ -147,7 +147,7 @@ bool sharp_fr_gesture()
   update_buffer(fl_buffer, SHARP_AR_VAL);
   update_buffer(fr_buffer, SHARP_FR_VAL);
 
-  return buffer_check(fr_buffer, ADC_THRESHOLD3);
+  return buffer_check(fr_buffer, 150);
 }
 
 bool sharp_fl_gesture()
@@ -205,6 +205,7 @@ bool left_swipe()
 
 // TODO: implement with average sharp ir values and dma
 // FIX: angle sharp ir consideration and paramatrizing
+//
 void determine_walls()
 {
   if (SHARP_AR_VAL > ADC_THRESHOLD0) {
@@ -266,3 +267,97 @@ void determine_walls()
   //   L = false;
   // }
 }
+
+// Define hysteresis values to avoid toggling at threshold edges
+#define HYSTERESIS_MARGIN 3
+
+// Filter to smooth sensor readings (simple moving average)
+#define NUM_SAMPLES 5
+uint16_t sharp_ar_val_filtered = 0;
+uint16_t sharp_al_val_filtered = 0;
+uint16_t sharp_fr_val_filtered = 0;
+uint16_t sharp_fl_val_filtered = 0;
+
+// Function to calculate a moving average (simple implementation)
+uint16_t calculate_moving_average(uint16_t *samples, uint16_t new_sample)
+{
+  static uint8_t index = 0;
+  static uint16_t sum = 0;
+
+  sum -= samples[index];
+  samples[index] = new_sample;
+  sum += samples[index];
+
+  index = (index + 1) % NUM_SAMPLES;
+
+  return sum / NUM_SAMPLES;
+}
+
+// Update sensor values (this should be called regularly)
+void update_sensor_values()
+{
+  static uint16_t sharp_ar_samples[NUM_SAMPLES] = {0};
+  static uint16_t sharp_al_samples[NUM_SAMPLES] = {0};
+  static uint16_t sharp_fr_samples[NUM_SAMPLES] = {0};
+  static uint16_t sharp_fl_samples[NUM_SAMPLES] = {0};
+
+  sharp_ar_val_filtered =
+      calculate_moving_average(sharp_ar_samples, SHARP_AR_VAL);
+  sharp_al_val_filtered =
+      calculate_moving_average(sharp_al_samples, SHARP_AL_VAL);
+  sharp_fr_val_filtered =
+      calculate_moving_average(sharp_fr_samples, SHARP_FR_VAL);
+  sharp_fl_val_filtered =
+      calculate_moving_average(sharp_fl_samples, SHARP_FL_VAL);
+}
+
+// Determine if a wall exists based on filtered sensor data and hysteresis
+bool detect_wall(uint16_t sensor_value, uint16_t threshold)
+{
+  if (sensor_value > (threshold + HYSTERESIS_MARGIN)) {
+    return true; // Wall detected
+  } else if (sensor_value < (threshold - HYSTERESIS_MARGIN)) {
+    return false; // No wall detected
+  }
+  // Maintain previous state if within hysteresis margin (avoid toggling)
+  return false;
+}
+
+// More robust function to determine walls
+// void determine_walls()
+// {
+//   // Update filtered sensor values
+//   update_sensor_values();
+//
+//   // Right wall detection
+//   if (detect_wall(sharp_ar_val_filtered, ADC_THRESHOLD0)) {
+//     if (sharp_fr_val_filtered < ADC_THRESHOLD2 ||
+//         sharp_fl_val_filtered < ADC_THRESHOLD2) {
+//       RIGH_WALL = true;
+//     } else {
+//       RIGH_WALL = false;
+//     }
+//   } else {
+//     RIGH_WALL = false;
+//   }
+//
+//   // Left wall detection
+//   if (detect_wall(sharp_al_val_filtered, ADC_THRESHOLD0)) {
+//     if (sharp_fr_val_filtered < ADC_THRESHOLD2 ||
+//         sharp_fl_val_filtered < ADC_THRESHOLD2) {
+//       LEFT_WALL = true;
+//     } else {
+//       LEFT_WALL = false;
+//     }
+//   } else {
+//     LEFT_WALL = false;
+//   }
+//
+//   // Front wall detection
+//   if (detect_wall(sharp_fr_val_filtered, ADC_THRESHOLD1) &&
+//       detect_wall(sharp_fl_val_filtered, ADC_THRESHOLD1)) {
+//     FRON_WALL = true;
+//   } else {
+//     FRON_WALL = false;
+//   }
+// }
