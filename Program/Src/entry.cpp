@@ -122,7 +122,7 @@ static void handle_init_config(void)
       config_state = INIT;
       break;
     }
-    delay(1000);
+    delay(100);
   }
 
   if (BTN1_PRESSED) {
@@ -185,11 +185,14 @@ static void handle_search_forward(void)
   case DECIDE:
     println("deciding");
     determine_walls();
+    printf("detected walls %d %d %d\n", LEFT_WALL, FRON_WALL, RIGH_WALL);
     update_maze(kitro.position, kitro.orientation, LEFT_WALL, RIGH_WALL,
                 FRON_WALL);
     if (floodfill[kitro.position.y][kitro.position.x] >= 1) {
       println("running floodfill");
       floodFill(kitro.position, kitro.prev_position);
+      printf("now in %d %d\n", kitro.position.x, kitro.position.y);
+      printf("from %d %d\n", kitro.prev_position.x, kitro.prev_position.y);
       kitro.drive_state =
           toMove(kitro.position, kitro.prev_position, kitro.orientation);
       if (kitro.drive_state == TL) {
@@ -208,13 +211,13 @@ static void handle_search_forward(void)
       // what to do when in center
       println("!!!unreachable: in center!!!");
     }
-    println("!!!!mazeeee!!!!!");
-    for (int i = 0; i < 16; i++) {
-      for (int j = 0; j < 16; j++) {
-        printf("%d ", cells[i][j]);
-      }
-      printf("\n");
-    }
+    // println("!!!!mazeeee!!!!!");
+    // for (int i = 0; i < 16; i++) {
+    //   for (int j = 0; j < 16; j++) {
+    //     printf("%d ", cells[i][j]);
+    //   }
+    //   printf("\n");
+    // }
     // println("!!!!floodfill!!!!!");
     // for (int i = 0; i < 16; i++) {
     //   for (int j = 0; j < 16; j++) {
@@ -222,7 +225,6 @@ static void handle_search_forward(void)
     //   }
     //   printf("\n");
     // }
-    delay(500);
     // done search_forward?
     // set drive mode
     break;
@@ -254,27 +256,27 @@ static void handle_search_forward(void)
   if (BTN1_PRESSED) {
     kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
     handle_state_transition(&BTN1_PRESSED);
-    println("!!!!resetting!!!!!");
-    println("!!!!prev maze!!!!!");
-    for (int i = 0; i < 16; i++) {
-      for (int j = 0; j < 16; j++) {
-        printf("%d ", cells[i][j]);
-      }
-      printf("\n");
-    }
-    initialize_maze();
-    for (int i = 0; i < ROWS; i++) {
-      for (int j = 0; j < COLUMNS; j++) {
-        floodfill[i][j] = floodfillconst[i][j]; // No walls, no accessibility
-      }
-    }
-    println("!!!!reset ff!!!!!");
-    for (int i = 0; i < 16; i++) {
-      for (int j = 0; j < 16; j++) {
-        printf("%d ", floodfill[i][j]);
-      }
-      printf("\n");
-    }
+    println("!!!!resetting not implemented!!!!!");
+    // println("!!!!prev maze!!!!!");
+    // for (int i = 0; i < 16; i++) {
+    //   for (int j = 0; j < 16; j++) {
+    //     printf("%d ", cells[i][j]);
+    //   }
+    //   printf("\n");
+    // }
+    // initialize_maze();
+    // for (int i = 0; i < ROWS; i++) {
+    //   for (int j = 0; j < COLUMNS; j++) {
+    //     floodfill[i][j] = floodfillconst[i][j]; // No walls, no accessibility
+    //   }
+    // }
+    // println("!!!!reset ff!!!!!");
+    // for (int i = 0; i < 16; i++) {
+    //   for (int j = 0; j < 16; j++) {
+    //     printf("%d ", floodfill[i][j]);
+    //   }
+    //   printf("\n");
+    // }
   }
 };
 
