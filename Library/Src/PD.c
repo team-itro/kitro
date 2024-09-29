@@ -241,12 +241,11 @@ void resetPID()
   targetTicksPerFrame2 = 0;
 }
 
-void doPID(int pid_output, long encoder_count, int target_ticks_per_frame,
-           int prev_encoder, int prev_input, int ITerm, int Kp, int Kd, int Ki)
+void doPID(int pid_output, long encoder_count, int target_ticks_per_frame, int prev_encoder, int prev_input, int ITerm, int Kp, int Kd, int Ki)
 {
     long Perror;
     float output;
-    int input = encoder_count - *prev_encoder;
+    int input = encoder_count - prev_encoder;
 
   Perror = target_ticks_per_frame - input;
 

@@ -121,7 +121,7 @@ void right_wall_follow(uint8_t SHARP_AR_VAL, uint8_t SHARP_FL_VAL,
 void drive_fw_encoder(uint8_t distance);
 
 void updatePID(void);
-void doPID(volatile int *pid_output, long encoder_count, int target_ticks_per_frame, volatile int *prev_encoder, volatile int *prev_input, volatile int *ITerm, int Kp, int Kd, int Ki);
+void doPID(int pid_output, long encoder_count, int target_ticks_per_frame, int prev_encoder, int prev_input, int ITerm, int Kp, int Kd, int Ki);
 void resetPID(void);
 void doPID1(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, float Ki);
 void doPID2(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, float Ki);
