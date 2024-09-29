@@ -79,12 +79,12 @@ void drive_fw(uint8_t distance)
   resetEncoder();
   while (l_position < (count + _ENCODER_START)) {
     wall_follow_control(SHARP_AL_VAL, SHARP_AR_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
+    if (FLAG){
+    	FLAG = false;
+    	break;
+    }
   }
   setWheelsSpeed(0, 0);
-  print_int(l_position);
-  print(" ");
-  print_int(r_position);
-  print("\n");
   resetEncoder();
 }
 
@@ -119,6 +119,12 @@ void drive_tl(void)
   resetEncoder();
 }
 
+void about_turn(void){
+	drive_tr();
+	drive_tr();
+	delay(1000);
+//	drive_bw();
+}
 // void drive_fw(uint8_t distance_cm) {
 //      // Read encoder values
 //	 uint16_t target_encoder_count = (uint16_t) distance_cm *

@@ -34,7 +34,9 @@ uint8_t sharp_readraw(AdcChannels sharp_id);
 // float sharp_readdist(AdcChannels sharp_id);
 // float sharp_raw2dist(uint8_t raw);
 float sharp_raw2dist_lut(uint8_t raw);
-bool sharp_front_gesture();
+// bool sharp_front_gesture();
+// bool sharp_front_gesture(volatile uint8_t sharp_id1,
+//                          volatile uint8_t sharp_id2);
 bool sharp_fr_gesture();
 bool sharp_fl_gesture();
 bool left_swipe();

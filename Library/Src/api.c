@@ -107,27 +107,27 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim == &htim10){
+  if (htim == &htim10) {
     // gyroUpdate();
     sharps_update();
-    if (HAL_GetTick() - old_tick > 1000) {
-        old_tick = HAL_GetTick();
-		  if (pid){
-			  updatePID();
-		  }
-    }
+    // if (HAL_GetTick() - old_tick > 1000) {
+    //   old_tick = HAL_GetTick();
+    //   if (pid) {
+    //     // updatePID();
+    //   }
+    // }
   }
-  else if (htim == &htim11)
+  if (htim == &htim11)
     screen_iteration();
-//  else if  (htim == &htim5){
-//      if (HAL_GetTick() - old_tick > 1000) {
-//          old_tick = HAL_GetTick();
-//          setWheelsSpeed(.8,.8);
-//    	  if (pid){
-//    		  updatePID();
-//    	  }
-//      }
-//  }
+  //  else if  (htim == &htim5){
+  //      if (HAL_GetTick() - old_tick > 1000) {
+  //          old_tick = HAL_GetTick();
+  //          setWheelsSpeed(.8,.8);
+  //    	  if (pid){
+  //    		  updatePID();
+  //    	  }
+  //      }
+  //  }
 }
 
 #if defined(UART_DEBUG) && UART_DEBUG == 1

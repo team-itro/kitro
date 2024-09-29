@@ -1,9 +1,9 @@
 #include "sensors.h"
 
-const uint8_t ADC_THRESHOLD0 = 50;
+const uint8_t ADC_THRESHOLD0 = 40;
 const uint8_t ADC_THRESHOLD1 = 50;
 const uint8_t ADC_THRESHOLD2 = 65;
-const uint8_t ADC_THRESHOLD3 = 65;
+const uint8_t ADC_THRESHOLD3 = 100;
 
 // int reflectionRate = REFLECTION_RATE_;
 volatile uint8_t SHARP_FR_VAL = 0;
@@ -126,22 +126,25 @@ void update_buffer(int buffer[], int new_value)
   buffer[BUFFER_SIZE - 1] = new_value;
 }
 
-bool sharp_front_gesture()
+// bool sharp_front_gesture(volatile uint8_t sharp_id1, volatile uint8_t
+// sharp_id2)
+// {
+//   static int fl_buffer[BUFFER_SIZE] = {0};
+//   static int fr_buffer[BUFFER_SIZE] = {0};
+//
+//   update_buffer(fl_buffer, sharp_id1);
+//   update_buffer(fr_buffer, sharp_id2);
+//
+//   return buffer_check(fl_buffer, ADC_THRESHOLD3) &&
+//          buffer_check(fr_buffer, ADC_THRESHOLD3);
+// }
+
+bool sharp_fr_gesture()
 {
   static int fl_buffer[BUFFER_SIZE] = {0};
   static int fr_buffer[BUFFER_SIZE] = {0};
 
-  update_buffer(fl_buffer, SHARP_FL_VAL);
-  update_buffer(fr_buffer, SHARP_FR_VAL);
-
-  return buffer_check(fl_buffer, ADC_THRESHOLD3) &&
-         buffer_check(fr_buffer, ADC_THRESHOLD3);
-}
-
-bool sharp_fr_gesture()
-{
-  static int fr_buffer[BUFFER_SIZE] = {0};
-
+  update_buffer(fl_buffer, SHARP_AR_VAL);
   update_buffer(fr_buffer, SHARP_FR_VAL);
 
   return buffer_check(fr_buffer, ADC_THRESHOLD3);
@@ -204,36 +207,27 @@ bool left_swipe()
 // FIX: angle sharp ir consideration and paramatrizing
 void determine_walls()
 {
-  // if (SHARP_AR_AVG > ADC_THRESHOLD1) {
-  //   RIGH_WALL = true;
-  // } else {
-  //   RIGH_WALL = false;
-  // }
-  //
-  // if (SHARP_AL_AVG > ADC_THRESHOLD1) {
-  //   LEFT_WALL = true;
-  // } else {
-  //   LEFT_WALL = false;
-  // }
-  //
-  // if ((SHARP_FR_AVG + SHARP_FL_AVG) / 2 > ADC_THRESHOLD1) {
-  //   FRON_WALL = true;
-  // } else {
-  //   FRON_WALL = false;
-  // }
-  if (SHARP_AR_VAL > ADC_THRESHOLD0 && SHARP_FR_VAL < ADC_THRESHOLD1) {
-    RIGH_WALL = true;
+  if (SHARP_AR_VAL > ADC_THRESHOLD0) {
+    if (SHARP_FR_VAL < ADC_THRESHOLD2 || SHARP_FL_VAL < ADC_THRESHOLD2) {
+      RIGH_WALL = true;
+    } else {
+      RIGH_WALL = false;
+    }
   } else {
     RIGH_WALL = false;
   }
 
-  if (SHARP_AL_VAL > ADC_THRESHOLD1 && SHARP_FL_VAL < ADC_THRESHOLD1) {
-    LEFT_WALL = true;
+  if (SHARP_AL_VAL > ADC_THRESHOLD0) {
+    if (SHARP_FR_VAL < ADC_THRESHOLD2 || SHARP_FL_VAL < ADC_THRESHOLD2) {
+      LEFT_WALL = true;
+    } else {
+      LEFT_WALL = false;
+    }
   } else {
     LEFT_WALL = false;
   }
 
-  if ((SHARP_FR_VAL + SHARP_FL_VAL) / 2 > ADC_THRESHOLD1) {
+  if ((SHARP_FR_VAL > ADC_THRESHOLD1) && (SHARP_FL_VAL > ADC_THRESHOLD1)) {
     FRON_WALL = true;
   } else {
     FRON_WALL = false;

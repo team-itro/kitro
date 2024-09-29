@@ -37,8 +37,8 @@
 // #define ADC_THRESHOLD3
 
 #define SHARP_FR_CH ADC_CHANNEL_2
-#define SHARP_AR_CH ADC_CHANNEL_3
-#define SHARP_AL_CH ADC_CHANNEL_4
+#define SHARP_AL_CH ADC_CHANNEL_3
+#define SHARP_AR_CH ADC_CHANNEL_4
 #define SHARP_FL_CH ADC_CHANNEL_5
 
 typedef enum {
@@ -50,8 +50,8 @@ typedef enum {
 } AdcChannels;
 
 // encoder gyro
-#define ENC_COUNT_PER_CM 35
-#define TURN_COUNT_90 1250
+#define ENC_COUNT_PER_CM 34
+#define TURN_COUNT_90 1240
 
 #define SPEED_THRESHOLD_ 0.8
 
@@ -100,8 +100,8 @@ typedef enum {
 typedef void (*DriveHandler)(void);
 
 typedef struct {
-  int8_t x;
   int8_t y;
+  int8_t x;
 } Coordinate;
 
 typedef struct {
