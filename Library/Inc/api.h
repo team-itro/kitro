@@ -27,7 +27,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 void print(const char *str);
 void println(const char *str);
-void print_int(int num);
+void print_int(float num);
 
 extern ADC_HandleTypeDef hadc1;
 

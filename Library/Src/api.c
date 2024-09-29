@@ -110,12 +110,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim == &htim10) {
     // gyroUpdate();
     sharps_update();
-    // if (HAL_GetTick() - old_tick > 1000) {
-    //   old_tick = HAL_GetTick();
-    //   if (pid) {
-    //     // updatePID();
-    //   }
-    // }
+     if (HAL_GetTick() - old_tick > 1000) {
+       old_tick = HAL_GetTick();
+       if (pid) {
+          updatePID();
+       }
+     }
   }
   if (htim == &htim11)
     screen_iteration();
@@ -133,7 +133,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 #if defined(UART_DEBUG) && UART_DEBUG == 1
 void print(const char *str) { printf("%s", str); }
 void println(const char *str) { printf("%s\n", str); }
-void print_int(int num) { printf("%d", num); }
+void print_int(float num) { printf("%f", num); }
 #endif
 
 // void stop_it_all(void){

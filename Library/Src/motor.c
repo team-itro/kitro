@@ -102,7 +102,7 @@ void drive_bw(int8_t distance)
 void drive_tr(void)
 {
   resetEncoder();
-  while (l_position < TURN_COUNT_90) {
+  while (l_position < TURN_COUNT_90_RIGHT) {
     setWheelsSpeed(st_speed, -st_speed);
   }
   setWheelsSpeed(0, 0);
@@ -120,9 +120,12 @@ void drive_tl(void)
 }
 
 void about_turn(void){
-	drive_tr();
-	drive_tr();
-	delay(1000);
+  resetEncoder();
+  while (r_position < TURN_COUNT_180) {
+	setWheelsSpeed(-st_speed, st_speed);
+  }
+  setWheelsSpeed(0, 0);
+  resetEncoder();
 //	drive_bw();
 }
 // void drive_fw(uint8_t distance_cm) {

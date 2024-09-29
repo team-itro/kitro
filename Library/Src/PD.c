@@ -10,6 +10,7 @@ float Kd_enc = 0.0f;
 
 // Set motor speed limits
 const float MAX_SPEED = 0.8;
+const float MAX_SPEED0 = 1;
 const float MIN_SPEED = 0.5;
 const float MAX_SPEED1 = 0.75;
 const float MIN_SPEED1 = 0.65;
@@ -25,24 +26,23 @@ volatile long targetTicksPerFrame2 = 0;
 volatile unsigned long timer2_millis = 0;
 
 volatile unsigned long nextPID = PID_INTERVAL;
-volatile unsigned long lastMotorCommand =
-    0;                       // Timer to track last motor command
+volatile unsigned long lastMotorCommand = 0;                       // Timer to track last motor command
 volatile uint8_t moving = 0; // Flag to indicate if the motors are moving
 
 // PID parameters and variables
-float Kp1 = 0.03;
+float Kp1 = 0.00012;
 float Kd1 = 0;
 float Ki1 = 0;
 int Ko = 1;
 
-float Kp2 = 0.03;
+float Kp2 = 0.00015;
 float Kd2 = 0;
 float Ki2 = 0;
 
 int pid = 0;
 
 volatile long encoder1 = 0, encoder2 = 0;
-volatile float leftPID_Output = 0, rightPID_Output = 0;
+volatile float leftPID_Output = 0.5, rightPID_Output = 0.5;
 volatile int left_prev_input = 0, right_prev_input = 0;
 volatile float left_ITerm = 0, right_ITerm = 0;
 volatile int left_prev_encoder = 1000, right_prev_encoder = 1000;
@@ -272,14 +272,14 @@ void doPID1(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, 
 
     Perror = target_ticks_per_frame - input;
 
-    output = (Kp * Perror - Kd * (input - left_prev_input) + left_ITerm) / Ko;
+    output = ((Kp * Perror) - Kd * (input - left_prev_input) + left_ITerm) / Ko;
     left_prev_encoder = encoder_count;
 
     output += leftPID_Output;
-    if (output >= MAX_SPEED)
-        output = MAX_SPEED;
-    else if (output <= -MAX_SPEED)
-        output = -MAX_SPEED;
+    if (output >= MAX_SPEED0)
+        output = MAX_SPEED0;
+    else if (output <= -MAX_SPEED0)
+        output = -MAX_SPEED0;
     else
     	left_ITerm += Ki * Perror;
 
@@ -290,8 +290,6 @@ void doPID1(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, 
     print(" ");
     print_int(Perror);
     print(" ");
-    print_int(Kp);
-    print(" \n");
 }
 
 void doPID2(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, float Ki)
@@ -302,19 +300,24 @@ void doPID2(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, 
 
     Perror = target_ticks_per_frame - input;
 
-    output = (Kp * Perror - Kd * (input - right_prev_input) + right_ITerm) / Ko;
+    output = ((Kp * Perror) - Kd * (input - right_prev_input) + right_ITerm) / Ko;
     right_prev_encoder = encoder_count;
 
     output += rightPID_Output;
-    if (output >= MAX_SPEED)
-        output = MAX_SPEED;
-    else if (output <= -MAX_SPEED)
-        output = -MAX_SPEED;
+    if (output >= MAX_SPEED0)
+        output = MAX_SPEED0;
+    else if (output <= -MAX_SPEED0)
+        output = -MAX_SPEED0;
     else
     	right_ITerm += Ki * Perror;
 
     rightPID_Output = output;
     right_prev_input = input;
+
+    print_int(output);
+    print(" ");
+    print_int(Perror);
+    print("\n");
 }
 
 
@@ -332,7 +335,7 @@ void updatePID(void)
 
 
     // Set the motor speeds based on PID outputs
-//    setWheelsSpeed(leftPID_Output,rightPID_Output);
+    setWheelsSpeed(leftPID_Output,rightPID_Output);
 //    print_int(encoder1);
 //    print(" ");
 //    print_int(leftPID_Output);

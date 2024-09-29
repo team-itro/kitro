@@ -34,9 +34,10 @@ int greymatter(void)
 {
   wakeup();
   delay(2000);
+//  drive(500,500);
   while (1) {
     state_handlers[kitro.current_state]();
-    delay(10);
+    delay(50);
   }
 }
 

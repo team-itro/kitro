@@ -2,7 +2,7 @@
 
 const uint8_t ADC_THRESHOLD0 = 40;
 const uint8_t ADC_THRESHOLD1 = 50;
-const uint8_t ADC_THRESHOLD2 = 65;
+const uint8_t ADC_THRESHOLD2 = 90;
 const uint8_t ADC_THRESHOLD3 = 100;
 
 // int reflectionRate = REFLECTION_RATE_;
