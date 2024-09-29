@@ -75,9 +75,9 @@ void wall_follow_control(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
   } else if (LEFT_WALL) {
     left_wall_follow(SHARP_AL_VAL, SHARP_FL_VAL, SHARP_FR_VAL);
   }
-  //	}else{
-  //		drive_fw(18);
-  //	}
+  	else{
+  		setWheelsSpeed(0.7,0.7);
+  	}
 }
 
 // void wall_follow_control2(uint8_t SHARP_AL_VAL, uint8_t SHARP_AR_VAL,
