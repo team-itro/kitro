@@ -25,21 +25,21 @@ volatile unsigned long nextPID = PID_INTERVAL;
 volatile uint8_t moving = 0;                 // Flag to indicate if the motors are moving
 
 // PID parameters and variables
-int Kp1 = 1;
-int Kd1 = 0;
-int Ki1 = 0;
+float Kp1 = 0.03;
+float Kd1 = 0;
+float Ki1 = 0;
 int Ko = 1;
 
-int Kp2 = 1;
-int Kd2 = 0;
-int Ki2 = 0;
+float Kp2 = 0.03;
+float Kd2 = 0;
+float Ki2 = 0;
 
 int pid = 0;
 
 volatile long encoder1 = 0, encoder2 = 0;
-volatile int leftPID_Output = 0, rightPID_Output = 0;
+volatile float leftPID_Output = 0, rightPID_Output = 0;
 volatile int left_prev_input = 0, right_prev_input = 0;
-volatile int left_ITerm = 0, right_ITerm = 0;
+volatile float left_ITerm = 0, right_ITerm = 0;
 volatile int left_prev_encoder = 1000, right_prev_encoder = 1000;
 
 // Function to compute the PD control output
@@ -236,7 +236,7 @@ void resetPID(void)
 void doPID(volatile int *pid_output, long encoder_count, int target_ticks_per_frame, volatile int *prev_encoder, volatile int *prev_input, volatile int *ITerm, int Kp, int Kd, int Ki)
 {
     long Perror;
-    long output;
+    float output;
     int input = encoder_count - *prev_encoder;
 
     Perror = target_ticks_per_frame - input;
@@ -258,10 +258,10 @@ void doPID(volatile int *pid_output, long encoder_count, int target_ticks_per_fr
     print_int(Perror);
 }
 
-void doPID1(long encoder_count, int target_ticks_per_frame, int Kp, int Kd, int Ki)
+void doPID1(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, float Ki)
 {
     long Perror;
-    long output;
+    float output;
     int input = encoder_count - left_prev_encoder;
 
     Perror = target_ticks_per_frame - input;
@@ -279,12 +279,19 @@ void doPID1(long encoder_count, int target_ticks_per_frame, int Kp, int Kd, int 
 
     leftPID_Output = output;
     left_prev_input = input;
+
+    print_int(output);
+    print(" ");
+    print_int(Perror);
+    print(" ");
+    print_int(Kp);
+    print(" \n");
 }
 
-void doPID2(long encoder_count, int target_ticks_per_frame, int Kp, int Kd, int Ki)
+void doPID2(long encoder_count, int target_ticks_per_frame, float Kp, float Kd, float Ki)
 {
     long Perror;
-    long output;
+    float output;
     int input = encoder_count - right_prev_encoder;
 
     Perror = target_ticks_per_frame - input;
@@ -314,21 +321,20 @@ void updatePID(void)
     // Calculate PID based on the difference between current and target positions
 //    doPID(&leftPID_Output, encoder1, targetTicksPerFrame1, &left_prev_encoder, &left_prev_input, &left_ITerm, Kp1, Kd1, Ki1);
 //    doPID(&rightPID_Output, encoder2, targetTicksPerFrame2, &right_prev_encoder, &right_prev_input, &right_ITerm, Kp2, Kd2, Ki2);
-//
     doPID1(encoder1, targetTicksPerFrame1,Kp1, Kd1, Ki1);
-    doPID2(encoder2, targetTicksPerFrame1,Kp2, Kd2, Ki2);
+    doPID2(encoder2, targetTicksPerFrame2,Kp2, Kd2, Ki2);
 
 
     // Set the motor speeds based on PID outputs
-    setWheelsSpeed(leftPID_Output,rightPID_Output);
-    print_int(encoder1);
-    print(" ");
-    print_int(encoder2);
-    print(" ");
-    print_int(leftPID_Output);
-    print(" ");
-    print_int(left_prev_encoder);
-    print(" \n");
+//    setWheelsSpeed(leftPID_Output,rightPID_Output);
+//    print_int(encoder1);
+//    print(" ");
+//    print_int(leftPID_Output);
+//    print(" ");
+//    print_int(left_prev_encoder);
+//    print(" ");
+//    print_int(left_prev_input);
+//    print(" \n");
 
 //    if (!moving)
 //    {

@@ -37,7 +37,7 @@ int greymatter(void)
     state_handlers[kitro.current_state]();
     //    wall_follow_control(SHARP_AL_VAL,SHARP_AR_VAL,SHARP_FL_VAL,SHARP_FR_VAL);
     // drive_fw_encoder(18);
-    delay(10);
+    delay(100);
   }
 }
 
