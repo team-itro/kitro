@@ -34,7 +34,7 @@ int greymatter(void)
 {
   wakeup();
   delay(2000);
-//  drive(500,500);
+  //  drive(500,500);
   while (1) {
     state_handlers[kitro.current_state]();
     delay(50);
@@ -189,10 +189,11 @@ static void handle_search_forward(void)
     update_maze(kitro.position, kitro.orientation, LEFT_WALL, RIGH_WALL,
                 FRON_WALL);
     if (floodfill[kitro.position.y][kitro.position.x] >= 1) {
-      println("running floodfill");
+      // println("running floodfill");
       floodFill(kitro.position, kitro.prev_position);
-      printf("now in %d %d\n", kitro.position.x, kitro.position.y);
-      printf("from %d %d\n", kitro.prev_position.x, kitro.prev_position.y);
+      printf("going to move from %d %d\n", kitro.prev_position.x,
+             kitro.prev_position.y);
+      printf("to %d %d\n", kitro.position.x, kitro.position.y);
       kitro.drive_state =
           toMove(kitro.position, kitro.prev_position, kitro.orientation);
       if (kitro.drive_state == TL) {
@@ -210,6 +211,7 @@ static void handle_search_forward(void)
     } else {
       // what to do when in center
       println("!!!unreachable: in center!!!");
+      kitro.current_state = MOUSE_STATE_SEARCH_IDLE;
     }
     // println("!!!!mazeeee!!!!!");
     // for (int i = 0; i < 16; i++) {
@@ -240,13 +242,16 @@ static void handle_search_forward(void)
       kitro.orientation = orientation(kitro.orientation, kitro.drive_state);
     } else if (kitro.drive_state == BK) {
       // println("RUN BACK");
-      drive_tr();
-      drive_tr();
+      // drive_tr();
+      // drive_tr();
+      about_turn();
+      kitro.orientation = orientation(kitro.orientation, kitro.drive_state);
     } else if (kitro.drive_state == FW) {
       // println("RUN FORWARD");
       drive_fw(17);
     }
     // edge handling
+    delay(500);
     run_state = DECIDE;
     kitro.prev_position = kitro.position;
     kitro.position = updateCoordinates(kitro.position, kitro.orientation);
